@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const tiers = [
+  {
+    name: "Starter",
+    price: "Starting from $697/month",
+    description: "The essential foundation for restaurants ready to take control of their Google presence.",
+    features: [
+      "Google Business Profile optimization",
+      "Review management (generate, monitor, respond)",
+      "Basic social media — 4 posts/month",
+      "Monthly performance reporting",
+      "Review generation system setup",
+    ],
+    cta: "Book a Free Audit",
+    highlight: false,
+  },
+  {
+    name: "Growth",
+    price: "Starting from $997/month",
+    description: "Everything in Starter, plus a full digital presence built to drive consistent foot traffic.",
+    features: [
+      "Everything in Starter",
+      "Restaurant website design",
+      "Local SEO (Google Maps + organic)",
+      "8 social media posts/month",
+      "Google Ads management",
+      "Competitor gap analysis",
+    ],
+    cta: "Book a Free Audit",
+    highlight: true,
+  },
+  {
+    name: "Scale",
+    price: "Starting from $1,497/month",
+    description: "Full-service for restaurants serious about market dominance and brand building.",
+    features: [
+      "Everything in Growth",
+      "Content creation (photo + video)",
+      "Email campaigns",
+      "Influencer seeding",
+      "Dedicated account manager",
+      "Multi-location support",
+    ],
+    cta: "Book a Free Audit",
+    highlight: false,
+  },
+];
+
+const faqs = [
+  {
+    q: "Is the pricing really month-to-month?",
+    a: "Yes. No annual contracts, no lock-in periods. We earn your business each month by showing you results. If you're not happy with what we're doing, you can cancel with 30 days notice. We operate this way because it keeps us accountable — and because we're confident enough in our work that we don't need to trap clients into contracts.",
+  },
+  {
+    q: "What's included in the setup fee?",
+    a: "The one-time setup fee covers the work we do before your first month begins: a full audit of your digital presence, Google Business Profile optimization, review system setup, website onboarding, and creation of your custom growth strategy. It's foundational work that pays dividends for years. We don't charge setup fees to pad our revenue — we charge them because the upfront work is real and intensive.",
+  },
+  {
+    q: "Can I switch tiers?",
+    a: "Yes. You can upgrade or downgrade at the start of any billing month. Most clients start on Starter or Growth and scale up as they see results. We'll always recommend the tier that makes sense for your restaurant's current stage — not the most expensive option.",
+  },
+];
+---
+
+<BaseLayout
+  title="Pricing — Simple, Transparent Restaurant Marketing | Toronto Restaurant Growth"
+  description="No hidden fees. No long contracts. Month-to-month restaurant marketing packages starting from $697/month. See our Starter, Growth, and Scale tiers."
+>
+  <Navbar />
+
+  <main style="padding-top: 80px;">
+
+    <!-- HERO -->
+    <section style="background: #1A1A1A; padding: 80px 24px; text-align: center;">
+      <div style="max-width: 720px; margin: 0 auto;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 6px 16px; margin-bottom: 24px;">
+          <span style="width: 8px; height: 8px; background: #E85D04; border-radius: 50;"></span>
+          <span style="font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 500;">Month-to-month. No contracts.</span>
+        </div>
+        <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 5vw, 3.25rem); color: #fff; margin-bottom: 16px; line-height: 1.15;">
+          Simple, Transparent Pricing
+        </h1>
+        <p style="font-size: clamp(1rem, 2vw, 1.2rem); color: #ccc; max-width: 540px; margin: 0 auto 12px; line-height: 1.7;">
+          No hidden fees. No long contracts. Month-to-month.
+        </p>
+        <p style="font-size: 1.1rem; color: #E85D04; font-weight: 700; letter-spacing: 0.02em;">
+          Pause or cancel anytime.
+        </p>
+      </div>
+    </section>
+
+    <!-- PRICING TIERS -->
+    <section style="background: #F5F5F0; padding: 80px 24px;">
+      <div style="max-width: 1100px; margin: 0 auto;">
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start;">
+          {tiers.map(tier => (
+            <div style={`background: ${tier.highlight ? '#1A1A1A' : '#fff'}; border: ${tier.highlight ? '2px solid #E85D04' : '1px solid #E8E8E0'}; border-radius: 16px; padding: 36px; position: relative; ${tier.highlight ? 'box-shadow: 0 8px 40px rgba(232,93,4,0.2);' : ''}`}>
+              {tier.highlight && (
+                <div style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #E85D04; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 16px; border-radius: 20px; white-space: nowrap;">
+                  Most Popular
+                </div>
+              )}
+
+              <h2 style={`font-family: 'DM Serif Display', Georgia, serif; font-size: 1.75rem; margin-bottom: 8px; color: ${tier.highlight ? '#fff' : '#1A1A1A'};`}>
+                {tier.name}
+              </h2>
+
+              <div style="margin-bottom: 16px;">
+                <span style={`font-size: 1.35rem; font-weight: 700; color: #E85D04;`}>{tier.price}</span>
+              </div>
+
+              <p style={`font-size: 0.95rem; margin-bottom: 28px; line-height: 1.6; color: ${tier.highlight ? '#ccc' : '#555'};`}>
+                {tier.description}
+              </p>
+
+              <ul style="list-style: none; margin-bottom: 32px;">
+                {tier.features.map(f => (
+                  <li style={`display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid ${tier.highlight ? 'rgba(255,255,255,0.08)' : '#f0f0ea'}; font-size: 0.925rem; color: ${tier.highlight ? '#ddd' : '#333'};`}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E85D04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="/contact/"
+                style={`display: block; text-align: center; font-weight: 700; font-size: 0.95rem; padding: 14px 20px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s; ${tier.highlight ? 'background: #E85D04; color: #fff;' : 'background: #1A1A1A; color: #fff;'}`}
+              >
+                {tier.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <!-- Setup fee note -->
+        <p style="text-align: center; margin-top: 28px; font-size: 0.875rem; color: #555;">
+          One-time setup from <strong style="color: #1A1A1A;">$3,997</strong> — covers full audit, GBP optimization, review system setup, and custom growth strategy.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- WHAT'S INCLUDED CALLOUT -->
+    <section style="background: #1A1A1A; padding: 72px 24px;">
+      <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.75rem, 4vw, 2.5rem); color: #fff; margin-bottom: 16px;">
+          Every plan. Every month. No hidden extras.
+        </h2>
+        <p style="color: #999; font-size: 1.05rem; max-width: 580px; margin: 0 auto 48px; line-height: 1.7;">
+          We don't lock core features behind premium tiers. Every plan includes the fundamentals restaurants need to compete on Google.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; text-align: left;">
+          <div>
+            <div style="color: #E85D04; margin-bottom: 12px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </div>
+            <h3 style="font-family: 'DM Serif Display', Georgia, serif; color: #fff; font-size: 1.15rem; margin-bottom: 8px;">Google Visibility</h3>
+            <p style="color: #999; font-size: 0.9rem; line-height: 1.65;">Optimized Google Business Profile and local search signals — the foundation of restaurant discovery in the GTA.</p>
+          </div>
+          <div>
+            <div style="color: #E85D04; margin-bottom: 12px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3 style="font-family: 'DM Serif Display', Georgia, serif; color: #fff; font-size: 1.15rem; margin-bottom: 8px;">Review Management</h3>
+            <p style="color: #999; font-size: 0.9rem; line-height: 1.65;">Systems to generate, monitor, and respond to reviews across Google, Yelp, and TripAdvisor — the trust layer that converts searches into visits.</p>
+          </div>
+          <div>
+            <div style="color: #E85D04; margin-bottom: 12px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            </div>
+            <h3 style="font-family: 'DM Serif Display', Georgia, serif; color: #fff; font-size: 1.15rem; margin-bottom: 8px;">Monthly Reporting</h3>
+            <p style="color: #999; font-size: 0.9rem; line-height: 1.65;">Clear, jargon-free reports every month: how many people found you, what they did, and what we're doing next. No black boxes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="background: #F5F5F0; padding: 80px 24px;">
+      <div style="max-width: 720px; margin: 0 auto;">
+        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.75rem, 4vw, 2.5rem); color: #1A1A1A; margin-bottom: 48px; text-align: center;">
+          Pricing Questions
+        </h2>
+
+        {faqs.map(faq => (
+          <div style="border-bottom: 1px solid #E8E8E0; padding: 28px 0;">
+            <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.2rem; font-weight: 400; color: #1A1A1A; margin-bottom: 12px;">{faq.q}</h3>
+            <p style="color: #555; font-size: 0.975rem; line-height: 1.75; margin: 0;">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background: #E85D04; padding: 80px 24px; text-align: center;">
+      <div style="max-width: 680px; margin: 0 auto;">
+        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.75rem, 4vw, 2.75rem); color: #fff; margin-bottom: 16px; line-height: 1.2;">
+          Not sure which plan is right for you?
+        </h2>
+        <p style="color: rgba(255,255,255,0.85); font-size: 1.05rem; max-width: 520px; margin: 0 auto 32px; line-height: 1.7;">
+          Start with a free Google Audit. We'll look at your current visibility and tell you exactly what level of support your restaurant needs. No commitment.
+        </p>
+        <a
+          href="/contact/"
+          style="display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #E85D04; font-weight: 700; font-size: 1rem; padding: 16px 36px; border-radius: 8px; text-decoration: none;"
+        >
+          Book a Free Google Audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <p style="color: rgba(255,255,255,0.87); font-size: 0.875rem; margin-top: 16px;">
+          Pause or cancel anytime. No contracts. No pressure.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  @media (max-width: 900px) {
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+  @media (max-width: 640px) {
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

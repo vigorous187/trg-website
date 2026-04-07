@@ -1,0 +1,507 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const blogPosts = [
+  {
+    title: "How Toronto Restaurants Can Rank #1 on Google Maps in 2024",
+    excerpt: "Google Maps is the number one discovery channel for local restaurants. Here's exactly how to claim your spot at the top.",
+    slug: "toronto-restaurants-rank-google-maps",
+    date: "March 28, 2026",
+    category: "Google SEO",
+  },
+  {
+    title: "Why Your Restaurant's TikTok Isn't Growing (And How to Fix It)",
+    excerpt: "Most restaurants post on TikTok and get nothing. The restaurants that go viral do one thing differently — and it's not what you think.",
+    slug: "restaurant-tiktok-growth-strategy",
+    date: "March 14, 2026",
+    category: "Social Media",
+  },
+  {
+    title: "The Complete Guide to Halal Restaurant Marketing in the GTA",
+    excerpt: "Halal dining is one of the fastest-growing segments in Toronto. Here's how to reach your community effectively and build lasting loyalty.",
+    slug: "halal-restaurant-marketing-gta",
+    date: "February 28, 2026",
+    category: "Niche Marketing",
+  },
+];
+
+const locations = [
+  { city: "Scarborough", hook: "High-density halal & South Asian restaurant scene", href: "/locations/scarborough/" },
+  { city: "Brampton", hook: "One of the GTA's fastest-growing dining communities", href: "/locations/brampton/" },
+  { city: "Mississauga", hook: "Diverse dining corridor along Hurontario & Dixie", href: "/locations/mississauga/" },
+  { city: "North York", hook: "Yonge Street corridor and Finch food district", href: "/locations/north-york/" },
+  { city: "Etobicoke", hook: "Emerging restaurant strip with loyal local clientele", href: "/locations/etobicoke/" },
+  { city: "Hamilton", hook: "Growing culinary scene hungry for digital visibility", href: "/locations/hamilton/" },
+  { city: "Vaughan", hook: "Upscale dining meets diverse community taste", href: "/locations/vaughan/" },
+  { city: "Markham", hook: "Vibrant East Asian and multicultural food hub", href: "/locations/markham/" },
+];
+
+const services = [
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`,
+    title: "Restaurant Website Design",
+    description: "Fast, mobile-first websites that turn visitors into reservations. Built for restaurants, not generic businesses.",
+    href: "/services/restaurant-website-design/",
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+    title: "Social Media Management",
+    description: "Content that earns views, not just followers. Real reach on TikTok, Instagram, and Facebook — proven with our clients.",
+    href: "/services/social-media-management/",
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
+    title: "Google Maps & SEO",
+    description: "Show up when hungry customers search nearby. We optimize your Google Business Profile and local search presence.",
+    href: "/services/google-maps-seo/",
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    title: "Review Management",
+    description: "More 5-star reviews, fewer headaches. We help you collect, respond to, and leverage your customer reviews.",
+    href: "/services/review-management/",
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>`,
+    title: "Grand Opening Marketing",
+    description: "Launch with a lineup out the door. We run the full digital campaign — from buzz-building to opening day coverage.",
+    href: "/services/grand-opening-marketing/",
+  },
+];
+---
+
+<BaseLayout
+  title="Toronto Restaurant Growth | More Covers. Better Reviews. All From Google."
+  description="Toronto's only marketing agency built exclusively for independent restaurants. We handle your website, social media, Google Maps, and reviews — so you can focus on running your kitchen."
+>
+  <Navbar />
+
+  <main>
+
+<section
+      class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20"
+      style="background: linear-gradient(135deg, #111111 0%, #1A1A1A 40%, #1F1208 70%, #2A1500 100%);"
+    >
+      <!-- Atmospheric overlay -->
+      <div
+        class="absolute inset-0 opacity-30 pointer-events-none"
+        style="background-image: radial-gradient(ellipse at 70% 50%, rgba(232,93,4,0.15) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(27,67,50,0.1) 0%, transparent 50%);"
+      ></div>
+
+      <!-- Subtle grid -->
+      <div
+        class="absolute inset-0 opacity-5 pointer-events-none"
+        style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"
+      ></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+        <div class="max-w-4xl">
+
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-8">
+            <span class="w-2 h-2 rounded-full bg-[#E85D04]"></span>
+            <span class="text-white/80 text-sm font-medium">Toronto's Restaurant-Only Marketing Agency</span>
+          </div>
+
+          <!-- H1 -->
+          <h1
+            class="text-white mb-6 leading-tight"
+            style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1;"
+          >
+            More Covers.<br />
+            Better Reviews.<br />
+            <span style="color: #E85D04;">All From Google.</span>
+          </h1>
+
+          <!-- Subheadline -->
+          <p
+            class="text-[#cccccc] mb-10 max-w-2xl"
+            style="font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.7;"
+          >
+            Toronto's only marketing agency built exclusively for independent restaurants. We handle your website, social media, Google Maps, and reviews — so you can focus on running your kitchen.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-4 mb-14">
+            <a
+              href="/contact/"
+              class="inline-flex items-center justify-center gap-2 bg-[#E85D04] text-white font-semibold px-8 py-4 rounded-md hover:bg-[#D04E00] transition-colors duration-200 no-underline text-base"
+            >
+              Book a Free Google Audit
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a
+              href="/case-studies/"
+              class="inline-flex items-center justify-center border border-white/40 text-white font-semibold px-8 py-4 rounded-md hover:bg-white/10 transition-colors duration-200 no-underline text-base"
+            >
+              See Our Results
+            </a>
+          </div>
+
+          <!-- Trust strip -->
+          <div class="flex items-center gap-3 border-t border-white/10 pt-8">
+            <div class="flex -space-x-2">
+              {[1,2,3,4,5].map(() => (
+                <div class="w-8 h-8 rounded-full bg-[#E85D04]/20 border-2 border-[#E85D04]/40 flex items-center justify-center">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="#E85D04" aria-hidden="true"><path d="M7 2v11m0 4v5M7 13a4 4 0 0 0 4-4V2M17 2v5a2 2 0 0 1-2 2h0a2 2 0 0 1-2-2V2m2 9v11"/></svg>
+                </div>
+              ))}
+            </div>
+            <p class="text-[#999999] text-sm">
+              <strong class="text-white">Trusted by Toronto restaurants</strong> — 500M+ combined impressions delivered
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="bg-[#E85D04] py-5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-center gap-4 sm:gap-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0 opacity-70">
+            <path d="M7 2v11m0 4v5M7 13a4 4 0 0 0 4-4V2M17 2v5a2 2 0 0 1-2 2h0a2 2 0 0 1-2-2V2m2 9v11"/>
+          </svg>
+          <p
+            class="text-white text-center font-semibold"
+            style="font-size: clamp(0.875rem, 2.5vw, 1.125rem);"
+          >
+            We only work with restaurants. Not gyms. Not dentists.&nbsp;<span style="font-family: 'DM Serif Display', Georgia, serif; font-style: italic;">Restaurants.</span>
+          </p>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0 opacity-70">
+            <path d="M7 2v11m0 4v5M7 13a4 4 0 0 0 4-4V2M17 2v5a2 2 0 0 1-2 2h0a2 2 0 0 1-2-2V2m2 9v11"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+<section class="bg-[#111111] py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-14">
+          <h2
+            class="text-white mb-4"
+            style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 4vw, 3rem);"
+          >
+            Real numbers. Real restaurants.
+          </h2>
+          <p class="text-[#999999] max-w-2xl mx-auto" style="font-size: 1.0625rem; line-height: 1.7;">
+            These aren't agency-inflated impressions. These are the actual results we've driven for Toronto restaurants just like yours.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div class="bg-[#1A1A1A] border border-white/10 rounded-xl p-8 text-center hover:border-[#E85D04]/40 transition-colors duration-300">
+            <div class="mb-3" style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.5rem, 5vw, 3.75rem); color: #E85D04; line-height: 1;">500M+</div>
+            <div class="text-white text-sm font-medium mb-1">Combined Impressions</div>
+            <div class="text-[#999999] text-xs">Crab Boil + Jayden</div>
+          </div>
+
+          <div class="bg-[#1A1A1A] border border-white/10 rounded-xl p-8 text-center hover:border-[#E85D04]/40 transition-colors duration-300">
+            <div class="mb-3" style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.5rem, 5vw, 3.75rem); color: #E85D04; line-height: 1;">113K</div>
+            <div class="text-white text-sm font-medium mb-1">TikTok Followers</div>
+            <div class="text-[#999999] text-xs">@crabboil.ca</div>
+          </div>
+
+          <div class="bg-[#1A1A1A] border border-white/10 rounded-xl p-8 text-center hover:border-[#E85D04]/40 transition-colors duration-300">
+            <div class="mb-3" style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.5rem, 5vw, 3.75rem); color: #E85D04; line-height: 1;">598K</div>
+            <div class="text-white text-sm font-medium mb-1">Average Views</div>
+            <div class="text-[#999999] text-xs">Jayden content</div>
+          </div>
+
+          <div class="bg-[#1A1A1A] border border-white/10 rounded-xl p-8 text-center hover:border-[#E85D04]/40 transition-colors duration-300">
+            <div class="mb-3" style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 4vw, 3rem); color: #E85D04; line-height: 1;">$2K&#8594;$4K</div>
+            <div class="text-white text-sm font-medium mb-1">Monthly Revenue Growth</div>
+            <div class="text-[#999999] text-xs">Crab Boil</div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a
+            href="/case-studies/crab-boil/"
+            class="inline-flex items-center gap-2 text-[#E85D04] font-semibold hover:text-[#FF7020] transition-colors duration-200 no-underline"
+          >
+            Read the Crab Boil Case Study
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+<section class="bg-[#F5F5F0] py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-14">
+          <h2
+            class="text-[#1A1A1A] mb-4"
+            style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 4vw, 3rem);"
+          >
+            Everything your restaurant needs.<br />
+            <span style="color: #E85D04;">Nothing you don't.</span>
+          </h2>
+          <p class="text-[#555555] max-w-xl mx-auto" style="font-size: 1.0625rem; line-height: 1.7;">
+            One agency. One focus. Five services designed specifically for how restaurants grow.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.slice(0, 3).map(service => (
+            <a
+              href={service.href}
+              class="group bg-white rounded-xl p-8 border border-[#E8E8E0] hover:border-[#E85D04]/40 hover:shadow-lg transition-all duration-300 no-underline block"
+            >
+              <div class="text-[#E85D04] mb-4" set:html={service.icon} />
+              <h3 class="text-[#1A1A1A] font-semibold mb-3 text-lg group-hover:text-[#E85D04] transition-colors duration-200">
+                {service.title}
+              </h3>
+              <p class="text-[#555555] text-sm leading-relaxed mb-4">{service.description}</p>
+              <span class="text-[#E85D04] text-sm font-semibold inline-flex items-center gap-1">
+                Learn more
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 lg:max-w-2xl lg:mx-auto">
+          {services.slice(3).map(service => (
+            <a
+              href={service.href}
+              class="group bg-white rounded-xl p-8 border border-[#E8E8E0] hover:border-[#E85D04]/40 hover:shadow-lg transition-all duration-300 no-underline block"
+            >
+              <div class="text-[#E85D04] mb-4" set:html={service.icon} />
+              <h3 class="text-[#1A1A1A] font-semibold mb-3 text-lg group-hover:text-[#E85D04] transition-colors duration-200">
+                {service.title}
+              </h3>
+              <p class="text-[#555555] text-sm leading-relaxed mb-4">{service.description}</p>
+              <span class="text-[#E85D04] text-sm font-semibold inline-flex items-center gap-1">
+                Learn more
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+<section class="bg-[#1A1A1A] py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="rounded-2xl p-10 lg:p-16"
+          style="background: linear-gradient(135deg, #1B4332 0%, #0F2A20 100%); border-left: 4px solid #2D6A4F; box-shadow: 0 0 60px rgba(27,67,50,0.3);"
+        >
+          <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 mb-6">
+              <span class="text-white/80 text-sm font-medium">Halal-Certified Dining Community</span>
+            </div>
+
+            <h2
+              class="text-white mb-6"
+              style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.75rem, 3.5vw, 2.75rem); line-height: 1.2;"
+            >
+              Serving the GTA's Halal Restaurant Community
+            </h2>
+
+            <p class="text-[#cccccc] mb-8 max-w-2xl" style="font-size: 1.0625rem; line-height: 1.75;">
+              The Greater Toronto Area has one of the largest halal dining scenes in North America. We understand halal certification marketing, community-driven discovery, and the platforms your customers actually use. From Brampton to Scarborough, we help halal restaurants get found — and stay full.
+            </p>
+
+            <a
+              href="/niche/halal-restaurant-marketing-toronto/"
+              class="inline-flex items-center gap-2 bg-white text-[#1B4332] font-semibold px-6 py-3 rounded-md hover:bg-[#F5F5F0] transition-colors duration-200 no-underline text-sm"
+            >
+              Learn About Halal Restaurant Marketing
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="bg-[#111111] py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-14">
+          <h2
+            class="text-white mb-4"
+            style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 4vw, 3rem);"
+          >
+            We serve restaurants across the GTA
+          </h2>
+          <p class="text-[#999999] max-w-xl mx-auto" style="font-size: 1.0625rem;">
+            Hyperlocal expertise in every neighbourhood. We know your market.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {locations.map(location => (
+            <a
+              href={location.href}
+              class="group bg-[#1A1A1A] border border-white/10 rounded-xl p-6 hover:border-[#E85D04]/50 hover:bg-[#1E1E1E] transition-all duration-300 no-underline block"
+            >
+              <div class="text-[#E85D04] mb-2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <h3 class="text-white font-semibold mb-1 text-base group-hover:text-[#E85D04] transition-colors duration-200">
+                {location.city}
+              </h3>
+              <p class="text-[#999999] text-xs leading-relaxed">{location.hook}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+<section class="bg-[#F5F5F0] py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-14">
+          <h2
+            class="text-[#1A1A1A] mb-4"
+            style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 4vw, 3rem);"
+          >
+            From invisible to fully booked —<br class="hidden sm:block" /> here's how
+          </h2>
+          <p class="text-[#555555] max-w-xl mx-auto" style="font-size: 1.0625rem; line-height: 1.7;">
+            No long contracts. No agency runaround. Just a clear plan and the team to execute it.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+          <div>
+            <div class="flex items-center gap-4 mb-5">
+              <div
+                class="w-12 h-12 rounded-full bg-[#E85D04] flex items-center justify-center shrink-0 text-white font-bold text-lg"
+                style="font-family: 'DM Serif Display', Georgia, serif;"
+              >1</div>
+              <div class="hidden md:block h-0.5 flex-1 bg-[#E8E8E0]"></div>
+            </div>
+            <h3 class="text-[#1A1A1A] font-semibold text-xl mb-3">Free Google Audit</h3>
+            <p class="text-[#555555] leading-relaxed">
+              We audit your Google Business Profile, local search rankings, website, and competitor landscape — free, no strings attached. You'll know exactly where you stand.
+            </p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-4 mb-5">
+              <div
+                class="w-12 h-12 rounded-full bg-[#E85D04] flex items-center justify-center shrink-0 text-white font-bold text-lg"
+                style="font-family: 'DM Serif Display', Georgia, serif;"
+              >2</div>
+              <div class="hidden md:block h-0.5 flex-1 bg-[#E8E8E0]"></div>
+            </div>
+            <h3 class="text-[#1A1A1A] font-semibold text-xl mb-3">Custom Growth Plan</h3>
+            <p class="text-[#555555] leading-relaxed">
+              We build a tailored strategy based on your restaurant, your neighbourhood, and your goals. No templates. No generic playbooks. Just what works for you.
+            </p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-4 mb-5">
+              <div
+                class="w-12 h-12 rounded-full bg-[#E85D04] flex items-center justify-center shrink-0 text-white font-bold text-lg"
+                style="font-family: 'DM Serif Display', Georgia, serif;"
+              >3</div>
+            </div>
+            <h3 class="text-[#1A1A1A] font-semibold text-xl mb-3">We Execute</h3>
+            <p class="text-[#555555] leading-relaxed">
+              Our team handles your website, social content, Google optimization, and reviews. You focus on the kitchen. We handle everything else.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="/contact/"
+            class="inline-flex items-center gap-2 bg-[#E85D04] text-white font-semibold px-8 py-4 rounded-md hover:bg-[#D04E00] transition-colors duration-200 no-underline text-base"
+          >
+            Start With a Free Audit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+<section class="bg-[#1A1A1A] py-20 lg:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="flex items-end justify-between mb-12 flex-wrap gap-4">
+          <div>
+            <h2
+              class="text-white"
+              style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 4vw, 3rem);"
+            >From the blog</h2>
+            <p class="text-[#999999] mt-2">Restaurant marketing insights for Toronto operators.</p>
+          </div>
+          <a
+            href="/blog/"
+            class="inline-flex items-center gap-2 text-[#E85D04] font-semibold hover:text-[#FF7020] transition-colors duration-200 no-underline text-sm"
+          >
+            Read the blog
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {blogPosts.map(post => (
+            <a
+              href={`/blog/${post.slug}/`}
+              class="group bg-[#111111] border border-white/10 rounded-xl overflow-hidden hover:border-[#E85D04]/40 transition-all duration-300 no-underline block"
+            >
+              <div
+                class="h-44 flex items-center justify-center"
+                style="background: linear-gradient(135deg, #2A1500 0%, #1A1A1A 100%);"
+              >
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E85D04" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" aria-hidden="true">
+                  <path d="M7 2v11m0 4v5M7 13a4 4 0 0 0 4-4V2M17 2v5a2 2 0 0 1-2 2h0a2 2 0 0 1-2-2V2m2 9v11"/>
+                </svg>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-[#E85D04] text-xs font-semibold uppercase tracking-wider">{post.category}</span>
+                  <span class="text-[#555555] text-xs">{post.date}</span>
+                </div>
+                <h3 class="text-white font-semibold text-lg mb-3 leading-snug group-hover:text-[#E85D04] transition-colors duration-200">
+                  {post.title}
+                </h3>
+                <p class="text-[#999999] text-sm leading-relaxed">{post.excerpt}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+<section class="bg-[#E85D04] py-20 lg:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2
+          class="text-white mb-6"
+          style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.875rem, 4.5vw, 3.25rem); line-height: 1.15;"
+        >
+          Your competitors are already on Google.<br class="hidden sm:block" />
+          Are you?
+        </h2>
+
+        <p class="text-white/85 mb-10 max-w-xl mx-auto" style="font-size: 1.0625rem; line-height: 1.7;">
+          Every day you're not on the first page of Google Maps is a day a customer chooses a competitor. Let's fix that — starting with a free audit.
+        </p>
+
+        <a
+          href="/contact/"
+          class="inline-flex items-center gap-2 bg-white text-[#E85D04] font-bold px-10 py-4 rounded-md hover:bg-[#F5F5F0] transition-colors duration-200 no-underline text-base"
+        >
+          Book a Free Google Audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <p class="text-white/85 text-sm mt-6">
+          No commitment. No sales pressure. Just honest insights about your restaurant's visibility.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
