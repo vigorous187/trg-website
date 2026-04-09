@@ -5,13 +5,29 @@ export interface Props {
   title?: string;
   description?: string;
   canonicalURL?: string;
+  ogImage?: string;
+  schema?: object | object[];
 }
 
 const {
   title = "Toronto Restaurant Growth | Restaurant Marketing Agency",
   description = "Toronto's only marketing agency built exclusively for independent restaurants. We handle your website, social media, Google Maps, and reviews — so you can focus on running your kitchen.",
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  ogImage = "/og-default.png",
+  schema,
 } = Astro.props;
+
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') || 'https://torontorestaurantgrowth.ca';
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Toronto Restaurant Growth',
+  url: siteUrl,
+  description,
+  areaServed: { '@type': 'City', name: 'Toronto' },
+  serviceType: 'Restaurant Marketing',
+}];
 ---
 
 <!doctype html>
@@ -21,13 +37,32 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="en-CA" href={canonicalURL} />
     <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- JSON-LD Schema -->
+    {schemas.map(s => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
 
     <!-- Self-hosted fonts -->
     <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/dm-serif-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Favicon placeholder -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body style="margin:0; padding:0; background-color:#1A1A1A; color:#FFFFFF; font-family: 'Inter', system-ui, sans-serif;">
