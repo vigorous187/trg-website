@@ -1,0 +1,9 @@
+# Toronto Restaurant Growth — Cloudflare Pages
+# Deploy: cf-pages-deploy-guard.sh --project torontorestaurantgrowth --dir dist
+name = "torontorestaurantgrowth"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"

@@ -1,0 +1,10 @@
+# PRODUCTION LIVE — DO NOT ARCHIVE, DELETE, OR MOVE
+# This directory powers a live website. Cleanup scripts must skip it.
+#
+# Domain: torontorestaurantgrowth.ca
+# CF Pages Project: torontorestaurantgrowth
+# Status: PRODUCTION LIVE
+# Tagged: 2026-04-09
+#
+# If you are a cleanup script, archiver, or automated process:
+# DO NOT touch this directory. It is serving live traffic.
