@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-brand-alignment.mjs",
+    "build": "astro build && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-brand-alignment.mjs && node ./scripts/audit-headings.mjs",
+    "audit-headings": "node ./scripts/audit-headings.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
