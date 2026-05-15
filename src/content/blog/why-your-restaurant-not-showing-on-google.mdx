@@ -10,82 +10,64 @@ draft: false
 howCreated: editorial
 ---
 
-## What operators miss
+## The seven things almost always at fault
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+When a Toronto operator tells us their restaurant "doesn't show up on Google," it's almost never one obscure technical issue. It's one or two of seven specific gaps. The fixes range from 15-minute admin tasks to multi-week projects, but the diagnosis is fast. Walk through these in order.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+## 1. Duplicate or unclaimed Google Business Profile listings
 
-## A practical 30-day plan
+The most common single cause. Either you've never claimed your GBP — so the listing exists with whatever Google scraped from Yelp years ago — or there are two of you, one claimed, one orphaned, both showing up in search. A duplicate listing splits review counts, splits photos, and confuses ranking.
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+**The fix:** Search your business name on Google Maps. Sign in to your Google account and look for the "claim this business" or "you manage this business" indicators. If you see two listings, file a duplicate report through the Google Business Profile help console. If the duplicate has reviews you want to keep, request a merge instead of a deletion. The merge takes Google 5-15 business days. Until it's done, do not create new content on either listing — you'll waste it.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+## 2. Inconsistent NAP across Yelp, TripAdvisor, Apple Maps, and Foursquare
 
-## Measurement that matters
+Name, Address, Phone — the NAP triad. Google cross-references your business across the broader web to confirm the listing is real and stable. If your Yelp page says "Mario's Trattoria, 1455 Yonge Street, Suite 2," your Apple Maps listing says "Marios Trattoria, 1455 Yonge St," and your website footer says "Mario's, 1455 Yonge Street #2," that's three different versions of the same business. Google's confidence in any one listing drops.
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+**The fix:** Pick one canonical version of your name, address, and phone. The exact format matters — "St." vs. "Street," "Suite 2" vs. "#2," with or without "Inc." Update the Yelp listing, the TripAdvisor listing, the Apple Business Connect listing, the Foursquare listing, and your own website footer to match. Aggregators like Yellow Pages and BBB can be left for a later sweep — the major ones move the needle most.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+## 3. Thin website with no service or location pages indexed
 
-## When to hire help
+Google can only rank pages it has indexed, and it indexes pages it can read. A common failure mode in restaurant websites: the menu is a PDF, the address is inside an image, the only text on the homepage is in a slideshow, and the booking widget loads via JavaScript. From Google's perspective, your site has roughly four readable sentences.
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+**The fix:** Add real text. A menu page with the dish names and one-line descriptions written in HTML, not embedded in a PDF. A locations page (or a per-location page if you have multiple sites) with the address, hours, neighbourhood, and a paragraph about parking and transit. A contact page with reservation policies. None of this needs to be long-form — 300-500 words per page is enough. The point is that your pages should answer the questions a searcher is asking.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+## 4. Missing schema markup for Restaurant and Menu
 
-## Website and GBP alignment
+Schema is the structured data that helps Google display your information in rich result formats — the menu carousel, the price range badge, the hours block on the right side of search results. Without schema, you appear in plainer formats and lose visibility on devices that surface rich results prominently.
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+**The fix:** Implement Restaurant schema on your homepage and Menu schema on your menu page. The two together cover most of what Google uses for restaurant rich results. The required fields are modest: name, address, telephone, opening hours, accepted payment methods, price range, and at minimum a few menu sections with item names and prices. If your site is on Squarespace or Wix, there are basic plugins; on a custom Astro or Next.js site, the schema goes inline as JSON-LD. Test the implementation with Google's Rich Results Test before you assume it's working.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+## 5. Review velocity stuck under one per month
 
-## Review cadence that lasts
+Total review count matters less than the rate at which new ones arrive. A restaurant with 320 reviews growing by zero per week looks dormant next to a competitor with 60 reviews growing by two per week. Google's local algorithm appears to weight recency.
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+**The fix:** Build an ask system that fits your service style. For most casual restaurants in Toronto, the highest-converting format is a small printed card with a QR code, dropped on the bill at the end of a meal that clearly went well. The server's job is to read the room — never push a review when the meal was rocky. A second channel: an opt-in follow-up via your booking platform if you're on OpenTable, Resy, or Tock. Aim for one new review per 30-50 covers. Respond to every review within 48 hours, including the four-stars and the rougher ones.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+## 6. GBP suspended or pending verification
 
+A surprisingly common situation, especially for newer restaurants and ones that recently changed address. Your profile might be live to you when you log in, but invisible to outside searchers because Google has flagged it for verification — usually due to a category change, a hours update, or a perceived inconsistency. Suspensions can be silent.
 
+**The fix:** Sign into your Google Business Profile and look for any banners about verification or suspension. If suspended, file a reinstatement request through the help console with documentation: utility bill, lease, business licence, photos of signage. The reinstatement takes 5-21 business days in our experience. If you've recently moved within Toronto — say, from Yorkville to Liberty Village — Google will often re-verify by mail to the new address before the new location appears in search.
+
+## 7. Your brand-name search loses to an aggregator
+
+Search your own restaurant by name. If the top three results are an Uber Eats listing, a DoorDash subdomain, and a SkipTheDishes page — and your own website is fourth or lower — you have a brand-defence problem. Aggregator pages are heavily optimized and outrank thin restaurant websites for the restaurant's own name.
+
+**The fix:** Strengthen the on-site signals for your own name. The page title on your homepage should include your full restaurant name and primary neighbourhood ("Marios Trattoria — Italian Restaurant in Yorkville, Toronto"). The H1 on the homepage should match. Add internal links from every page back to the homepage with the restaurant name as the anchor text. Get your own website cited in local press, neighbourhood blogs, and BlogTO-style coverage — those backlinks reset the authority balance against the aggregators over a few months. Listing on Google Knowledge Graph through schema and a Wikidata entry helps for restaurants with any press history.
+
+## Triage order
+
+Do these in order, not in parallel. Each one builds the foundation for the next.
+
+1. Claim or unify your GBP first. Nothing else moves the needle until you control the listing.
+2. Fix NAP across Yelp, Apple, and TripAdvisor.
+3. Resolve any suspension or verification issues on GBP.
+4. Build out website pages with real text — menu, locations, contact, about.
+5. Add Restaurant and Menu schema.
+6. Start the review velocity work.
+7. Defend against aggregators last — by the time you reach this step, your own site will rank better.
+
+Skipping ahead to schema and site SEO before claiming your GBP is the most common waste of time in this category.
+
+Want a structured visibility audit on your specific restaurant? See our [pricing](/pricing/) and reach out via [contact](/contact/).

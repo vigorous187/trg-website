@@ -10,82 +10,61 @@ draft: false
 howCreated: editorial
 ---
 
-## What operators miss
+## The catering page is not a menu page
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+Most independent restaurants in Toronto bury catering under "Menu > Catering" or, worse, leave it as a PDF link in the footer. That works against you on two fronts. A purchasing assistant at a North York law firm searching "halal lunch catering Yonge corridor" lands on a page about your dining room hours, scans for tray pricing, doesn't see it, and leaves. Google never figures out that your business actually serves catering, because the URL, the title, and the headings all describe a sit-down menu.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+A separate `/catering` page changes the search problem. The title becomes something like "Catering for Offices and Events — [Neighbourhood] | [Brand]". The H1 names the service. The body answers the three questions a B2B buyer actually has: what minimum order, what delivery radius, and how soon can you confirm. Those three answers are also what an LLM-driven assistant or a Maps "catering" filter wants to surface.
 
-## A practical 30-day plan
+## Who is actually searching, and what they want
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+The catering buyer in the GTA is not a dinner guest. They tend to fall into four buckets, and the page should read for all of them without contradiction:
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+- Office admins ordering Monday lunch for 12–40 staff. Halal, vegan, and nut-free options matter more than menu poetry.
+- Corporate event planners for client lunches and small board meetings, typically 25–75 people. They want a printable quote and a clear cancellation window.
+- Wedding and engagement planners — often family-led — looking for South Asian, Filipino, Persian, or Italian set menus for 80–250 guests.
+- School and daycare staff lunches, often recurring weekly orders with strict allergen labelling.
 
-## Measurement that matters
+A single catering page does not have to serve every bucket, but it should be honest about which ones you take. "We do office lunches in Etobicoke, Yonge & Eglinton, and Liberty Village; we do not do full-service weddings" is a better page than a vague "We cater all occasions."
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+## Service-area pages without the spam smell
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+Google has lost patience with thin "[service] in [city]" doorway pages. If you stamp out twenty pages — Mississauga, Etobicoke, North York, Vaughan, Markham, Scarborough — that swap a city name and nothing else, you will lose the catering rankings you already have.
 
-## When to hire help
+The honest version is to pick three or four areas you genuinely deliver to and write a real paragraph for each: typical drop-off route, average drive time during lunch traffic, parking notes at common office towers, whether you can do hot trays at that distance or whether you switch to cold platters past a certain radius. Yonge & Eglinton and Liberty Village are not the same delivery problem, and a buyer reading both pages should feel that.
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+## Schema basics that actually move catering queries
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+Two structured-data types do most of the work for catering pages, and almost nobody implements them.
 
-## Website and GBP alignment
+- `LocalBusiness` with `serviceArea` listing the GTA municipalities or neighbourhoods you serve, plus the `priceRange` and a `telephone`. Filling `areaServed` with a list of city names is mundane and effective.
+- `Menu` or `MenuSection` for the catering menu itself, with `MenuItem` entries that carry `suitableForDiet` where relevant (vegetarian, halal, vegan). It is the same schema your à la carte menu uses, but tied to the catering URL.
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+There is no rich-result snippet for catering specifically, but the schema helps Google and AI assistants connect the dots between "halal catering Etobicoke" and your page. It also feeds Maps' attribute system. Skip the made-up types — if it is not on schema.org, it is just noise.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+## Contact form versus PDF menu
 
-## Review cadence that lasts
+A PDF menu is a habit from the email era. It looks professional and is exactly what a planner forwards to their boss, so keep one — but make the live HTML version the page Google indexes, and make the form the conversion point. PDF-only catering pages cost you both rankings and lead data.
 
-Independent restaurants in Toronto compete for attention across Google Maps, social
-platforms, and repeat visits. Practical marketing means tying every page to
-reservations, catering inquiries, or walk-in traffic—not vanity metrics. When you
-clarify your offer and neighbourhood focus, you help both customers and search engines
-understand why you exist. For a structured review of your funnel, see our
-[pricing](/pricing/) page and reach out via [contact](/contact/).
+The form itself can be short. Five fields is enough: name, company, event date, headcount range, and pickup or delivery. Anything beyond that should be the follow-up call. Asking for budget on the first form filters out 30% of viable corporate inquiries.
 
-- Audit your Google Business Profile weekly.
-- Align website NAP with GBP.
-- Track covers or leads, not only impressions.
+## Response time is the lead source
 
+Operators reliably underestimate how much catering revenue evaporates in the first two hours after a form submission. A buyer comparing three caterers will book the one that answers first about 60% of the time, and almost always the one who answers within 30 minutes during business hours.
 
+A workable SLA for an independent: under 30 minutes Monday–Friday 9am–4pm, under two hours outside that window, an autoresponder for weekends that names the next business-day reply time. Put the human owner of that inbox in one place — a phone watching email is fine — and assign a backup. If the SLA quietly slips to "we got to it the next morning," your catering SEO is paying for leads your competitor closes.
+
+## A simple nurture flow for corporate accounts
+
+Most catering inquiries that do not close on the first order will close on the third quote over six to nine months. A heavy CRM is not required:
+
+1. Lead comes in — reply with quote and a one-line note about pickup logistics.
+2. Two days after the event, if it happens — short check-in email asking what worked.
+3. Quarter mark — a "what's new this season" email with two or three set menus.
+4. Annual mark — a planning email aimed at the same headcount range, sent in the second week of November for holiday booking and second week of August for back-to-office programs.
+
+That is four touches a year. Pair it with an internal note on whether the account is religious-school recurring, corporate one-off, or seasonal, and a single owner can hold 40–60 active relationships without it feeling like sales.
+
+## A reasonable next step
+
+If you already have a busy dining room and catering is the next channel, start with one honest catering page, two service-area variants you can defend, and a response SLA you can keep on a normal week. We offer a free 30-minute audit of an existing catering page if you'd like a second set of eyes — see the [contact](/contact/) page to book.

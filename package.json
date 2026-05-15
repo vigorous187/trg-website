@@ -7,8 +7,9 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node ./scripts/check-blog-baseline.mjs && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-brand-alignment.mjs && node ./scripts/audit-headings.mjs",
+    "build": "astro build && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-blog-chrome.mjs && node ./scripts/audit-headings.mjs && node ./scripts/check-blog-uniqueness.mjs && node ./scripts/blog-opposing-review.mjs && node ./scripts/check-blog-quality.mjs && node ./scripts/check-geo-lite.mjs && node ./scripts/check-brand-alignment.mjs",
     "blog:inventory": "node ./scripts/blog-inventory.mjs",
+    "blog:opposing-review": "node ./scripts/blog-opposing-review.mjs",
     "seo:guidelines:init": "node ./scripts/seo-init-guideline-baseline.mjs",
     "seo:guidelines:check": "node ./scripts/seo-check-guideline-baseline.mjs",
     "audit-headings": "node ./scripts/audit-headings.mjs",
@@ -24,5 +25,8 @@
     "astro": "^6.1.4",
     "gray-matter": "^4.0.3",
     "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19"
   }
 }

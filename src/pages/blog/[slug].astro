@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navbar from '../../components/Navbar.astro';
-import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -26,8 +24,6 @@ const formatted = new Date(post.data.publishDate).toLocaleDateString('en-CA', {
   title={`${post.data.title} | Toronto Restaurant Growth`}
   description={post.data.description}
 >
-  <Navbar />
-
   <main>
     <section style="background: #1A1A1A; padding: 100px 24px 72px; text-align: center;">
       <p style="color: rgba(255,255,255,0.55); font-size: 13px; margin-bottom: 12px;">
@@ -42,12 +38,15 @@ const formatted = new Date(post.data.publishDate).toLocaleDateString('en-CA', {
 
     <section style="background: #fff; padding: 64px 24px 96px;">
       <article
-        style="font-family: Inter, system-ui, sans-serif; color: #1a1a1a; max-width: 720px; margin: 0 auto; line-height: 1.75; font-size: 17px;"
+        class="prose prose-lg mx-auto max-w-3xl
+          prose-headings:font-[family-name:var(--font-display)] prose-headings:text-[#1A1A1A]
+          prose-p:text-[#555] prose-p:leading-relaxed
+          prose-a:text-[#E85D04] prose-a:font-medium hover:prose-a:underline
+          prose-strong:text-[#1A1A1A]
+          prose-li:text-[#555] prose-li:marker:text-[#E85D04]"
       >
         <Content />
       </article>
     </section>
   </main>
-
-  <Footer />
 </BaseLayout>

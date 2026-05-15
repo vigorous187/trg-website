@@ -1,0 +1,34 @@
+{
+  "blogQuality": {
+    "blogDir": "src/content/blog",
+    "minWords": 450,
+    "minH2": 3,
+    "conversionLink": null,
+    "requireBodyLinkAny": ["/pricing/", "/contact/"],
+    "prohibitedPatterns": [
+      "\\bguaranteed\\s+rankings?\\b",
+      "\\bguaranteed\\s+to\\s+rank\\b",
+      "\\binstant\\s+rankings?\\b",
+      "\\b#1\\s+on\\s+google\\b"
+    ]
+  },
+  "brand": {
+    "scanDirs": ["pages", "components", "layouts"],
+    "skipPathSubstrings": ["/blog/"],
+    "forbiddenPatterns": [
+      "\\brestaurants?\\s+and\\s+local\\s+business(es)?\\b",
+      "\\blocal\\s+business(es)?\\b",
+      "\\bgeneric\\s+business(es)?\\b",
+      "\\bhome\\s+service(s)?\\b",
+      "\\bcontractor(s)?\\b"
+    ]
+  },
+  "geo": {
+    "mode": "blog",
+    "blogDir": "src/content/blog",
+    "requireAnyDateField": ["publishDate", "reviewedDate", "updatedDate"],
+    "minSources": 0,
+    "requireListOrTable": true,
+    "requireExternalCitation": false
+  }
+}
