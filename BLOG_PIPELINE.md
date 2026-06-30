@@ -8,18 +8,36 @@ Blog posts live in `src/content/blog/*.mdx` (Astro Content Collections). Listing
 
 ## Automation
 
-- Weekly `blog-automation.yml` (topic queue + PR)
+- Weekly `blog-automation.yml` — AI-drafted posts from `automation/topic-queue.json`
+- **API key:** GitHub Actions uses repo secret `ANTHROPIC_API_KEY` (set from cc-vault `api-anthropic`). Local runs:
+
+```bash
+ANTHROPIC_API_KEY=$(cc-vault get api-anthropic) npm run blog:open-slot
+```
+
+- `scripts/blog-generate-body.mjs` — Anthropic body generation with TRG quality gates
+- `scripts/blog-open-slot.mjs` — opens PR; set `BLOG_AUTO_GENERATE=0` for outline-only drafts
 - Weekly `seo-build-health.yml`
 - Monthly `seo-guideline-drift.yml`
 
-## Gates
+## Mystic SEO dashboard (public)
 
-`scripts/check-blog-baseline.mjs` enforces word count, H2 depth, and `/pricing/` or `/contact/` links.
+- `scripts/sync-mystic-seo-report.mjs` — pulls rankings from Mystic repo → `src/data/mystic-seo-report.ts`
+- Public page: `/client-results/mystic-caribbean/` (prospect-facing rankings report)
+- Full client dashboard: `https://dashboard.forge-co.ca/client/mystic-caribbean`
+
+```bash
+npm run seo:sync-mystic
+```
+
+Run after Mystic weekly rankings update, before deploy.
 
 ## Commands
 
 ```bash
 npm run blog:inventory -- --days=90
+npm run blog:open-slot          # local; needs ANTHROPIC_API_KEY for AI body
+npm run seo:sync-mystic
 ```
 
 ## Proof inventory (90-day window)

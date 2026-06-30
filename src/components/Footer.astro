@@ -1,148 +1,92 @@
 ---
-const services = [
-  { label: "Restaurant Website Design", href: "/services/restaurant-website-design/" },
-  { label: "Social Media Management", href: "/services/social-media-management/" },
-  { label: "Google Maps & SEO", href: "/services/google-maps-seo/" },
-  { label: "Review Management", href: "/services/review-management/" },
-  { label: "Grand Opening Marketing", href: "/services/grand-opening-marketing/" },
-];
-
-const locations = [
-  { label: "Scarborough", href: "/locations/scarborough/" },
-  { label: "Brampton", href: "/locations/brampton/" },
-  { label: "Mississauga", href: "/locations/mississauga/" },
-  { label: "North York", href: "/locations/north-york/" },
-  { label: "Etobicoke", href: "/locations/etobicoke/" },
-  { label: "Hamilton", href: "/locations/hamilton/" },
-  { label: "Vaughan", href: "/locations/vaughan/" },
-  { label: "Markham", href: "/locations/markham/" },
-];
-
-const resources = [
-  { label: "Blog", href: "/blog/" },
-  { label: "Case Studies", href: "/case-studies/" },
-  { label: "Free Google Audit", href: "/contact/" },
-  { label: "Restaurant Marketing Guide", href: "/resources/restaurant-marketing-guide/" },
-  { label: "Halal Restaurant Marketing", href: "/niche/halal-restaurant-marketing-toronto/" },
-];
-
-const contact = [
-  { label: "Book a Free Audit", href: "/contact/" },
-  { label: "hello@torontorestaurantgrowth.ca", href: "mailto:hello@torontorestaurantgrowth.ca" },
-];
+import SiteLogo from './SiteLogo.astro';
+import {
+  footerContact,
+  footerLocations,
+  footerResources,
+  footerServices,
+  ctaNav,
+} from '../data/navigation';
 ---
 
-<footer class="bg-[#111111] border-t border-white/10">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<footer class="border-t border-white/10 bg-[#1C1C1C] text-white">
+  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
     <h2 class="sr-only">Site footer</h2>
 
-    <!-- Logo -->
-    <div class="mb-10">
-      <a href="/" class="inline-flex items-center gap-3 no-underline">
-        <img src="/trg-logo.png" alt="Toronto Restaurant Growth" class="h-8 w-auto" loading="lazy" />
-        <span class="text-white/50 text-xs font-light">Toronto Restaurant Growth</span>
-      </a>
-    </div>
-
-    <!-- Tagline row -->
-    <div class="flex items-center gap-3 mb-12">
-      <!-- Fork SVG -->
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M7 2v11m0 4v5M7 13a4 4 0 0 0 4-4V2M17 2v5a2 2 0 0 1-2 2v0a2 2 0 0 1-2-2V2m2 9v11"/>
-      </svg>
-      <p class="text-[#999999] text-sm italic" style="font-family: 'DM Serif Display', Georgia, serif;">
-        We only work with restaurants.
-      </p>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E85D04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M7 2v11m0 4v5M7 13a4 4 0 0 0 4-4V2M17 2v5a2 2 0 0 1-2 2v0a2 2 0 0 1-2-2V2m2 9v11"/>
-      </svg>
-    </div>
-
-    <!-- 4-column grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-
-      <!-- Services -->
-      <div>
-        <h3 class="text-white text-sm font-semibold uppercase tracking-widest mb-4">Services</h3>
-        <ul class="space-y-2.5 list-none p-0 m-0">
-          {services.map(item => (
-            <li>
-              <a href={item.href} class="text-[#999999] text-sm hover:text-white transition-colors duration-200 no-underline">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-4">
+        <a href="/" class="inline-flex no-underline" aria-label="Toronto Restaurant Growth home">
+          <SiteLogo variant="horizontalLight" loading="lazy" />
+        </a>
+        <p class="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
+          Website development, Google visibility, and review systems for independent Toronto restaurants. One plan. One focus. Restaurants only.
+        </p>
+        <p class="mt-4 font-heading text-base italic text-[#E85D04]">
+          We only work with restaurants.
+        </p>
       </div>
 
-      <!-- Locations -->
-      <div>
-        <h3 class="text-white text-sm font-semibold uppercase tracking-widest mb-4">Locations</h3>
-        <ul class="space-y-2.5 list-none p-0 m-0">
-          {locations.map(item => (
-            <li>
-              <a href={item.href} class="text-[#999999] text-sm hover:text-white transition-colors duration-200 no-underline">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8">
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-white/90">Services</h3>
+          <ul class="mt-4 space-y-2.5">
+            {footerServices.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-white/60 no-underline transition-colors hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <!-- Resources -->
-      <div>
-        <h3 class="text-white text-sm font-semibold uppercase tracking-widest mb-4">Resources</h3>
-        <ul class="space-y-2.5 list-none p-0 m-0">
-          {resources.map(item => (
-            <li>
-              <a href={item.href} class="text-[#999999] text-sm hover:text-white transition-colors duration-200 no-underline">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-white/90">Locations</h3>
+          <ul class="mt-4 space-y-2.5">
+            {footerLocations.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-white/60 no-underline transition-colors hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <!-- Contact -->
-      <div>
-        <h3 class="text-white text-sm font-semibold uppercase tracking-widest mb-4">Contact</h3>
-        <ul class="space-y-2.5 list-none p-0 m-0">
-          {contact.map(item => (
-            <li>
-              <a href={item.href} class="text-[#999999] text-sm hover:text-white transition-colors duration-200 no-underline">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div class="mt-6">
-          <a
-            href="/contact/"
-            class="inline-block bg-[#B84500] text-white text-sm font-semibold px-4 py-2.5 rounded-md hover:bg-[#963A00] transition-colors duration-200 no-underline"
-          >
-            Book a Free Audit
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-white/90">Company</h3>
+          <ul class="mt-4 space-y-2.5">
+            {footerResources.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-white/60 no-underline transition-colors hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            {footerContact.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-white/60 no-underline transition-colors hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a href={ctaNav.href} class="btn-cta mt-6 text-sm">
+            {ctaNav.label}
           </a>
         </div>
       </div>
     </div>
 
-    <!-- Bottom bar -->
-    <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <p class="text-white font-medium mb-1" style="font-family: 'DM Serif Display', Georgia, serif;">
-          Toronto Restaurant Growth
-        </p>
-        <p class="text-[#999999] text-xs">
-          &copy; {new Date().getFullYear()} Toronto Restaurant Growth. All rights reserved.
-        </p>
-        <div class="flex flex-wrap gap-x-5 gap-y-1 mt-3 text-xs">
-          <a href="/privacy/" class="text-[#999999] hover:text-white transition-colors duration-200 no-underline">Privacy Policy</a>
-          <a href="/terms/" class="text-[#999999] hover:text-white transition-colors duration-200 no-underline">Terms of Use</a>
+        <p class="font-heading text-white">&copy; {new Date().getFullYear()} Toronto Restaurant Growth</p>
+        <div class="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-white/50">
+          <a href="/privacy/" class="no-underline hover:text-white">Privacy Policy</a>
+          <a href="/terms/" class="no-underline hover:text-white">Terms of Use</a>
         </div>
       </div>
-      <p class="text-[#999999] text-xs">
-        Built for Toronto's independent restaurant community.
-      </p>
+      <p class="text-xs text-white/50">Built for Toronto's independent restaurant community.</p>
     </div>
   </div>
 </footer>

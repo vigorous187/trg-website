@@ -1,0 +1,37 @@
+---
+import type { MysticSeoReport } from '../data/mystic-seo-report';
+
+interface Props {
+  baseline: MysticSeoReport['baseline'];
+  current: MysticSeoReport['current'];
+}
+
+const { baseline, current } = Astro.props;
+---
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="rounded-xl border border-stone-border bg-white p-6">
+    <p class="text-xs font-semibold uppercase tracking-widest text-ink-muted">SEO score</p>
+    <p class="mt-2 font-heading text-4xl text-accent">
+      {current.total ?? '—'}<span class="text-lg text-ink-muted">/100</span>
+    </p>
+    <p class="mt-2 text-sm text-ink-muted">
+      Was {baseline.total}/100 ({baseline.label})
+    </p>
+  </div>
+  <div class="rounded-xl border border-stone-border bg-white p-6">
+    <p class="text-xs font-semibold uppercase tracking-widest text-ink-muted">Technical</p>
+    <p class="mt-2 font-heading text-4xl text-ink">{current.technical ?? '—'}<span class="text-lg text-ink-muted">/50</span></p>
+    <p class="mt-2 text-sm text-ink-muted">Schema, sitemap, site health</p>
+  </div>
+  <div class="rounded-xl border border-stone-border bg-white p-6">
+    <p class="text-xs font-semibold uppercase tracking-widest text-ink-muted">Visibility</p>
+    <p class="mt-2 font-heading text-4xl text-ink">{current.visibility ?? '—'}<span class="text-lg text-ink-muted">/50</span></p>
+    <p class="mt-2 text-sm text-ink-muted">Local keyword rankings</p>
+  </div>
+  <div class="rounded-xl border border-stone-border bg-white p-6">
+    <p class="text-xs font-semibold uppercase tracking-widest text-ink-muted">Page 1 keywords</p>
+    <p class="mt-2 font-heading text-4xl text-accent">{current.inTop10 ?? '—'}</p>
+    <p class="mt-2 text-sm text-ink-muted">In top 10 of {current.keywordCount} tracked</p>
+  </div>
+</div>

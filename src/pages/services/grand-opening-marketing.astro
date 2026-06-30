@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { servicePricingFaqs } from '../../data/pricing';
+import PageIntro from '../../components/PageIntro.astro';
 ---
 
 <BaseLayout
@@ -7,148 +9,131 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="Grand opening marketing for Toronto and GTA restaurants. Launch with a lineup out the door — from pre-opening buzz to packed opening week. TRG runs the full digital campaign."
 >
 
-  <main style="padding-top: 80px;">
+  <main>
 
     <!-- HERO -->
-    <section style="background: #1a1a1a; color: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; text-align: center;">
-        <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 20px; color: #fff;">
-          Restaurant Grand Opening Marketing Toronto
-        </h1>
-        <p style="font-size: 1.25rem; color: #ccc; max-width: 640px; margin: 0 auto 32px;">
-          Your first 90 days set the trajectory for everything that follows. A packed opening builds reviews, social proof, and word-of-mouth that compounds for years. A quiet one is an uphill battle you don't want to fight. We run the full digital campaign to launch your restaurant right.
-        </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: 6px;">
-          Book a Free Consultation
-        </a>
-      </div>
-    </section>
+    <PageIntro title="Restaurant Grand Opening Marketing Toronto" description="Your first 90 days set the trajectory for everything that follows. A packed opening builds reviews, social proof, and word-of-mouth that compounds for years. A quiet one is an uphill battle you don't want to fight. We run the full digital campaign to launch your restaurant right."  ctaLabel="Book a Free Google Audit" ctaHref="/contact/" />
 
     <!-- THE STAKES -->
-    <section style="background: #fff; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px; text-align: center;">
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>
           Why Grand Opening Marketing Matters More Than You Think
         </h2>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0;">
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">60%</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">of restaurants fail within the first year — most were never found online</div>
+        <div class="trg-stat-grid">
+          <div class="trg-stat-card">
+            <div class="value">60%</div>
+            <div class="label">of restaurants fail within the first year — most were never found online</div>
           </div>
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">Week 1</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">reviews and social sharing from opening week drive discovery for months</div>
+          <div class="trg-stat-card">
+            <div class="value">Week 1</div>
+            <div class="label">reviews and social sharing from opening week drive discovery for months</div>
           </div>
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">8 weeks</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">is when pre-opening buzz campaigns should begin — not opening week</div>
+          <div class="trg-stat-card">
+            <div class="value">8 weeks</div>
+            <div class="label">is when pre-opening buzz campaigns should begin — not opening week</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- WHAT WE DO -->
-    <section style="background: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">The Full Grand Opening Campaign</h2>
-        <p style="color: #4a4a4a; margin-bottom: 24px;">
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>The Full Grand Opening Campaign</h2>
+        <p>
           We run grand opening campaigns in three phases. Each phase builds on the last — by opening day, you already have an audience that's been waiting to come in.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Phase 1: Pre-Opening Buzz (8–4 Weeks Before)</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Phase 1: Pre-Opening Buzz (8–4 Weeks Before)</h3>
+        <p>
           We build anticipation before a single table is set. This is when your social media presence is established, your Google Business Profile is live and optimized, and the local food community starts talking.
         </p>
-        <ul style="margin: 16px 0 24px 20px; color: #4a4a4a;">
-          <li style="margin-bottom: 10px;"><strong>Google Business Profile setup</strong> — live before opening day so you start building search presence immediately</li>
-          <li style="margin-bottom: 10px;"><strong>Social media launch</strong> — behind-the-scenes content showing the build-out, menu development, and team prep</li>
-          <li style="margin-bottom: 10px;"><strong>Local food creator outreach</strong> — we connect you with GTA food influencers and content creators for opening coverage</li>
-          <li style="margin-bottom: 10px;"><strong>Community group seeding</strong> — strategic placement in the neighbourhood Facebook groups, WhatsApp communities, and food forums where your target customers live</li>
-          <li style="margin-bottom: 10px;"><strong>Press kit development</strong> — for local media and food blogs</li>
+        <ul>
+          <li><strong>Google Business Profile setup</strong> — live before opening day so you start building search presence immediately</li>
+          <li><strong>Social media launch</strong> — behind-the-scenes content showing the build-out, menu development, and team prep</li>
+          <li><strong>Local food creator outreach</strong> — we connect you with GTA food influencers and content creators for opening coverage</li>
+          <li><strong>Community group seeding</strong> — strategic placement in the neighbourhood Facebook groups, WhatsApp communities, and food forums where your target customers live</li>
+          <li><strong>Press kit development</strong> — for local media and food blogs</li>
         </ul>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Phase 2: Opening Week (Launch Day)</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Phase 2: Opening Week (Launch Day)</h3>
+        <p>
           The opening week is your highest-traffic content opportunity. We capture and publish in real time — turning your opening day into a social media event.
         </p>
-        <ul style="margin: 16px 0 24px 20px; color: #4a4a4a;">
-          <li style="margin-bottom: 10px;"><strong>Opening day content production</strong> — video and photo content shot and published same-day</li>
-          <li style="margin-bottom: 10px;"><strong>Review generation activation</strong> — QR codes and staff protocols live from day one to capture every happy early customer</li>
-          <li style="margin-bottom: 10px;"><strong>Influencer and press coordination</strong> — pre-arranged visits from local food creators during opening week</li>
-          <li style="margin-bottom: 10px;"><strong>Real-time social coverage</strong> — stories, posts, and reels published throughout the opening to build FOMO</li>
+        <ul>
+          <li><strong>Opening day content production</strong> — video and photo content shot and published same-day</li>
+          <li><strong>Review generation activation</strong> — QR codes and staff protocols live from day one to capture every happy early customer</li>
+          <li><strong>Influencer and press coordination</strong> — pre-arranged visits from local food creators during opening week</li>
+          <li><strong>Real-time social coverage</strong> — stories, posts, and reels published throughout the opening to build FOMO</li>
         </ul>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Phase 3: Post-Opening Momentum (Weeks 2–12)</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Phase 3: Post-Opening Momentum (Weeks 2–12)</h3>
+        <p>
           The opening buzz fades fast without a follow-up strategy. We lock in the momentum and convert opening week traffic into long-term regulars.
         </p>
-        <ul style="margin: 16px 0 24px 20px; color: #4a4a4a;">
-          <li style="margin-bottom: 10px;"><strong>Ongoing social content calendar</strong> — 4–6 posts per week maintaining the energy from opening week</li>
-          <li style="margin-bottom: 10px;"><strong>Google Maps ranking acceleration</strong> — review velocity and GBP optimization to climb local rankings while your new competition hasn't had time to build</li>
-          <li style="margin-bottom: 10px;"><strong>Promotion strategy</strong> — first-month specials, loyalty hooks, and community events to drive repeat visits</li>
-          <li style="margin-bottom: 10px;"><strong>Performance reporting</strong> — weekly reports in the first month showing reach, reviews, website traffic, and reservation trends</li>
+        <ul>
+          <li><strong>Ongoing social content calendar</strong> — 4–6 posts per week maintaining the energy from opening week</li>
+          <li><strong>Google Maps ranking acceleration</strong> — review velocity and GBP optimization to climb local rankings while your new competition hasn't had time to build</li>
+          <li><strong>Promotion strategy</strong> — first-month specials, loyalty hooks, and community events to drive repeat visits</li>
+          <li><strong>Performance reporting</strong> — weekly reports in the first month showing reach, reviews, website traffic, and reservation trends</li>
         </ul>
       </div>
     </section>
 
     <!-- HOW IT WORKS -->
-    <section style="background: #fff; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">How to Work With Us</h2>
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>How to Work With Us</h2>
 
         <div style="margin-bottom: 32px;">
-          <p><span style="display: inline-block; background: #E85D04; color: #fff; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: 700; margin-right: 12px;">1</span><strong>Strategy Call</strong></p>
-          <p style="color: #4a4a4a; margin-top: 8px;">We learn your concept, your neighbourhood, your target customer, and your opening timeline. We build a custom campaign calendar with specific milestones and deliverables.</p>
+          <p><span>1</span><strong>Strategy Call</strong></p>
+          <p>We learn your concept, your neighbourhood, your target customer, and your opening timeline. We build a custom campaign calendar with specific milestones and deliverables.</p>
         </div>
 
         <div style="margin-bottom: 32px;">
-          <p><span style="display: inline-block; background: #E85D04; color: #fff; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: 700; margin-right: 12px;">2</span><strong>Pre-Opening Phase</strong></p>
-          <p style="color: #4a4a4a; margin-top: 8px;">We start 8 weeks out. Digital infrastructure goes live, content begins publishing, and outreach to local food communities and creators begins.</p>
+          <p><span>2</span><strong>Pre-Opening Phase</strong></p>
+          <p>We start 8 weeks out. Digital infrastructure goes live, content begins publishing, and outreach to local food communities and creators begins.</p>
         </div>
 
         <div style="margin-bottom: 32px;">
-          <p><span style="display: inline-block; background: #E85D04; color: #fff; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: 700; margin-right: 12px;">3</span><strong>Opening & Beyond</strong></p>
-          <p style="color: #4a4a4a; margin-top: 8px;">We're on-site (or on-call) for opening day. Post-opening, we transition into ongoing monthly management to maintain momentum.</p>
+          <p><span>3</span><strong>Opening & Beyond</strong></p>
+          <p>We're on-site (or on-call) for opening day. Post-opening, we transition into ongoing monthly management to maintain momentum.</p>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section style="background: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">Frequently Asked Questions</h2>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>Frequently Asked Questions</h2>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How much does grand opening marketing cost?</h3>
-          <p style="color: #4a4a4a;">Grand opening campaigns are priced based on scope and timeline. A full 12-week campaign (8 weeks pre-opening + 4 weeks post) typically runs $3,500–$6,500 depending on content production requirements. Standalone opening week coverage starts at $1,500. Most clients transition to ongoing monthly marketing after the opening phase.</p>
+        <div class="trg-faq-item">
+          <h3>How much does grand opening marketing cost?</h3>
+          <p>{servicePricingFaqs.grandOpening}</p>
         </div>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How early should we start?</h3>
-          <p style="color: #4a4a4a;">8 weeks before opening is ideal. This gives us enough time to build social media presence, get your GBP live and indexed, build pre-opening buzz, and coordinate food creator visits for opening week. If your opening is sooner, we can work with a compressed timeline — but results improve significantly with more lead time.</p>
+        <div class="trg-faq-item">
+          <h3>How early should we start?</h3>
+          <p>8 weeks before opening is ideal. This gives us enough time to build social media presence, get your GBP live and indexed, build pre-opening buzz, and coordinate food creator visits for opening week. If your opening is sooner, we can work with a compressed timeline — but results improve significantly with more lead time.</p>
         </div>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">We already have our opening date set. Is it too late?</h3>
-          <p style="color: #4a4a4a;">No. We've launched campaigns with as little as 2 weeks of lead time. A compressed campaign won't achieve everything a full 8-week build can, but we'll maximize what's possible in your window. Reach out immediately — every day matters.</p>
+        <div class="trg-faq-item">
+          <h3>We already have our opening date set. Is it too late?</h3>
+          <p>No. We've launched campaigns with as little as 2 weeks of lead time. A compressed campaign won't achieve everything a full 8-week build can, but we'll maximize what's possible in your window. Reach out immediately — every day matters.</p>
         </div>
 
-        <div style="padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">Do you work with franchise openings or only independents?</h3>
-          <p style="color: #4a4a4a;">We work primarily with independent restaurants and first-time operators. If you're opening a franchise with existing brand standards, we can still help with the local launch campaign — but check with your franchisor on co-op marketing requirements first.</p>
+        <div class="trg-faq-item">
+          <h3>Do you work with franchise openings or only independents?</h3>
+          <p>We work primarily with independent restaurants and first-time operators. If you're opening a franchise with existing brand standards, we can still help with the local launch campaign — but check with your franchisor on co-op marketing requirements first.</p>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section style="background: #1a1a1a; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 60px 24px; text-align: center;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); color: #fff; margin-bottom: 20px;">Your Opening Day Only Happens Once</h2>
-        <p style="font-size: 1.15rem; color: #ccc; max-width: 580px; margin: 0 auto 28px;">
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <h2>Your Opening Day Only Happens Once</h2>
+        <p>
           The restaurants that open to lineups didn't get lucky. They built anticipation, got in front of the right people, and activated their community before the doors ever opened. Let's build that campaign for your restaurant.
         </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: 6px;">
+        <a href="/contact/">
           Book a Free Consultation
         </a>
       </div>

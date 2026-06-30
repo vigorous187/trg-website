@@ -1,0 +1,57 @@
+---
+import { trgContactEmail } from '../data/tally';
+
+interface Props {
+  embedUrl: string;
+  title: string;
+  minHeight?: string;
+  class?: string;
+}
+
+const { embedUrl, title, minHeight = '640px', class: className = '' } = Astro.props;
+const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Google Audit request')}`;
+---
+
+{embedUrl ? (
+  <div class={`relative w-full overflow-hidden rounded-xl border border-stone-border bg-white ${className}`} style={`min-height: ${minHeight}`}>
+    <div
+      id={`tally-loading-${title.replace(/\s+/g, '-').toLowerCase()}`}
+      class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-cream/90 backdrop-blur-sm"
+      aria-hidden="true"
+    >
+      <div class="h-10 w-10 animate-spin rounded-full border-2 border-stone-border border-t-accent"></div>
+      <p class="mt-4 text-xs font-semibold uppercase tracking-widest text-ink-muted">Loading form…</p>
+    </div>
+    <iframe
+      src={embedUrl}
+      width="100%"
+      height="100%"
+      title={title}
+      class="relative z-0 block w-full border-0"
+      style={`min-height: ${minHeight}`}
+      loading="lazy"
+      allow="fullscreen"
+      data-tally-embed
+    />
+  </div>
+  <script>
+    document.querySelectorAll('[data-tally-embed]').forEach((frame) => {
+      if (!(frame instanceof HTMLIFrameElement)) return;
+      const panel = frame.parentElement?.querySelector('[aria-hidden="true"]');
+      const hide = () => panel?.classList.add('hidden');
+      frame.addEventListener('load', hide, { once: true });
+      window.setTimeout(hide, 8000);
+    });
+  </script>
+) : (
+  <div class="rounded-xl border border-dashed border-stone-border bg-surface p-8 text-center">
+    <p class="font-heading text-lg text-ink">Form not configured</p>
+    <p class="mt-2 text-sm text-ink-muted">
+      Email us directly at{' '}
+      <a href={mailto} class="font-semibold text-cta no-underline hover:text-cta-hover">
+        {trgContactEmail}
+      </a>
+      .
+    </p>
+  </div>
+)}

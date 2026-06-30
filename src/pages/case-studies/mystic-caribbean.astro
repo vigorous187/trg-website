@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import PageCta from '../../components/PageCta.astro';
+import MetricStrip from '../../components/MetricStrip.astro';
+import { mysticProof } from '../../data/client-proof';
+import { mysticSeoReport } from '../../data/mystic-seo-report';
+
+const report = mysticSeoReport;
+---
+
+<BaseLayout
+  title="How TRG Helped Mystic Caribbean Rank #1 on Kennedy Road | Toronto Restaurant Growth"
+  description="From a 32/100 SpotHopper template to #1 for Kennedy Rd restaurant searches and 15 keywords in the top 10. Google Maps SEO case study for a Brampton restaurant."
+>
+  <main>
+    <PageIntro
+      eyebrow="Case Study — Mystic Caribbean"
+      title="#1 on Kennedy Road. 15 Keywords in the Top 10."
+      description="How Toronto Restaurant Growth rebuilt Mystic Caribbean's digital foundation — and turned a SpotHopper template into a restaurant that wins Google."
+      ctaLabel="Book a Free Google Audit"
+      ctaHref="/contact/"
+    />
+
+    <MetricStrip
+      metrics={[
+        { value: '#1', label: 'Kennedy Rd Restaurant' },
+        { value: '73/100', label: 'SEO Score (was 32)' },
+        { value: '15', label: 'Keywords Top 10' },
+        { value: '305', label: 'Google Reviews' },
+      ]}
+    />
+
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <section class="border-b border-stone-border py-16 sm:py-20 trg-prose">
+        <p class="section-label mb-4">01 — The Challenge</p>
+        <h2>A Great Restaurant With a Broken Digital Foundation</h2>
+        <p>
+          Mystic Caribbean Resto &amp; Bar on Kennedy Road had the food, the events business, and the reviews momentum operators dream about. What they didn't have was a website or SEO setup that could compete on Google.
+        </p>
+        <p>
+          Before the Forge rebuild, their SpotHopper template scored 32/100 on our technical audit — no Restaurant schema, broken heading structure, and no path to rank for the searches that actually drive covers in Brampton.
+        </p>
+      </section>
+
+      <section class="border-b border-stone-border py-16 sm:py-20 trg-prose">
+        <p class="section-label mb-4">02 — What TRG Did</p>
+        <h2>Site Migration + Local SEO Systems</h2>
+        <ul>
+          {mysticProof.outcomes.map((item) => (
+            <li>
+              <span>→</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p>
+          We migrated Mystic to a purpose-built site with proper schema, event pages, and local landing content — then layered review response automation and weekly ranking tracking through our SEO dashboard.
+        </p>
+      </section>
+
+      <section class="border-b border-stone-border py-16 sm:py-20 trg-prose">
+        <p class="section-label mb-4">03 — The Results</p>
+        <h2>Rankings That Show Up on the Audit Call</h2>
+        <p>
+          As of {report.reportDate}, Mystic holds position #1 for "restaurant Brampton Kennedy Road" and "Caribbean bar Brampton," with {report.current.inTop10} tracked keywords in the top 10 and a {report.current.total}/100 SEO score.
+        </p>
+        <p>
+          <a href="/client-results/mystic-caribbean/">View the live SEO results dashboard</a> — the same report we share with prospects to prove what restaurant SEO actually looks like when it's done right.
+        </p>
+      </section>
+    </div>
+
+    <PageCta
+      title="Want Kennedy Road-level visibility for your restaurant?"
+      description="Start with a free 15-minute Google audit. We'll show you exactly where you rank and what's fixable this week."
+    />
+  </main>
+</BaseLayout>

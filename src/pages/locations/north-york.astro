@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import PageCta from '../../components/PageCta.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 ---
 
 <BaseLayout
@@ -7,111 +10,87 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="North York restaurant marketing — Yonge Street corridor, Finch Ave food district, and Korean Village. We help North York restaurants rank on Google and fill tables."
 >
 
-  <main style="padding-top: 80px;">
+  <main>
 
-    <nav style="padding: 16px 24px; background: #f5f5f0; font-size: 0.85rem;" aria-label="Breadcrumb">
-      <a href="/" style="color: #E85D04; text-decoration: none;">Home</a>
-      <span style="color: #666; margin: 0 8px;">›</span>
-      <a href="/locations/" style="color: #E85D04; text-decoration: none;">Locations</a>
-      <span style="color: #666; margin: 0 8px;">›</span>
-      Restaurant Marketing North York
-    </nav>
+    <!-- BREADCRUMB -->
+    <Breadcrumb items={[
+    { label: "Home", href: "/" },
+    { label: "Locations", href: "/locations/" },
+    { label: "Restaurant Marketing North York" }
+    ]} />
 
-    <section style="background: #1a1a1a; color: #fff; padding: 100px 24px 80px; text-align: center;">
-      <div style="max-width: 860px; margin: 0 auto;">
-        <p style="text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; color: #E85D04; font-weight: 600; margin-bottom: 12px;">North York, Toronto</p>
-        <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.4rem, 6vw, 4rem); color: #fff; margin-bottom: 20px;">Restaurant Marketing in North York</h1>
-        <p style="font-size: 1.2rem; color: #ccc; max-width: 620px; margin: 0 auto 36px;">
-          North York's Yonge-Finch corridor and Korean Village are among Toronto's most food-dense neighbourhoods. The competition is intense. The customers are there. Are they finding you?
-        </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 36px; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: 1rem;">Book a Free Google Audit</a>
-      </div>
-    </section>
+        <PageIntro eyebrow="North York, Toronto" title="Restaurant Marketing in North York" description="North York's Yonge-Finch corridor and Korean Village are among Toronto's most food-dense neighbourhoods. The competition is intense. The customers are there. Are they finding you?" ctaLabel="Book a Free Google Audit" ctaHref="/contact/" />
 
-    <section style="background: #fff; padding: 72px 24px;">
-      <div style="max-width: 860px; margin: 0 auto;">
-        <p style="text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; color: #E85D04; font-weight: 600; margin-bottom: 12px;">The Local Food Scene</p>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 20px;">North York: Toronto's Most Competitive Dining Corridor</h2>
-        <p style="margin-bottom: 16px; color: #333;">
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <p class="section-label">The Local Food Scene</p><h2>North York: Toronto's Most Competitive Dining Corridor</h2>
+        <p>
           The stretch of Yonge Street from Sheppard to Finch is one of the most restaurant-dense corridors in all of Toronto. Korean BBQ, Chinese hot pot, Persian cuisine, Middle Eastern grills, Japanese ramen — North York has it all, packed into a relatively compact stretch that serves one of the highest-density populations in the city.
         </p>
-        <p style="margin-bottom: 16px; color: #333;">
+        <p>
           The Finch and Bathurst area has its own distinct character — a strong Persian and Israeli dining community that supports everything from casual falafel spots to upscale Persian restaurants with full mezze spreads. The Don Mills corridor serves the Sheppard corridor office workers and the surrounding residential density that eats out multiple times per week.
         </p>
-        <p style="margin-bottom: 16px; color: #333;">
+        <p>
           Competing in North York requires digital visibility that matches the physical competition. When someone on Yonge Street searches "Korean BBQ near me" and there are 12 options within 500 meters, the ones in the top 3 on Google Maps capture the vast majority of new customers.
         </p>
       </div>
     </section>
 
-    <section style="background: #f5f5f0; padding: 72px 24px;">
-      <div style="max-width: 860px; margin: 0 auto;">
-        <p style="text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; color: #E85D04; font-weight: 600; margin-bottom: 12px;">What We Do</p>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 20px;">What We Do For North York Restaurants</h2>
-        <ul style="list-style: none; margin-top: 28px;">
-          <li style="padding: 14px 0; border-bottom: 1px solid #e0e0d8; display: flex; align-items: flex-start; gap: 12px;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 2px;">→</span>
-            <span style="color: #333;"><strong>Competitive Google Maps Strategy:</strong> In North York's dense market, we don't just optimize — we reverse-engineer your top competitors' ranking signals and build a strategy to outperform them specifically.</span>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <p class="section-label">What We Do</p><h2>What We Do For North York Restaurants</h2>
+        <ul>
+          <li>
+            <span>→</span>
+            <span><strong>Competitive Google Maps Strategy:</strong> In North York's dense market, we don't just optimize — we reverse-engineer your top competitors' ranking signals and build a strategy to outperform them specifically.</span>
           </li>
-          <li style="padding: 14px 0; border-bottom: 1px solid #e0e0d8; display: flex; align-items: flex-start; gap: 12px;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 2px;">→</span>
-            <span style="color: #333;"><strong>Corridor-Specific SEO:</strong> Yonge & Sheppard, Yonge & Finch, Bathurst & Finch — searches in North York are hyper-local. We target the exact intersection searches your customers make.</span>
+          <li>
+            <span>→</span>
+            <span><strong>Corridor-Specific SEO:</strong> Yonge & Sheppard, Yonge & Finch, Bathurst & Finch — searches in North York are hyper-local. We target the exact intersection searches your customers make.</span>
           </li>
-          <li style="padding: 14px 0; border-bottom: 1px solid #e0e0d8; display: flex; align-items: flex-start; gap: 12px;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 2px;">→</span>
-            <span style="color: #333;"><strong>Review Velocity Building:</strong> In a market with hundreds of reviews per competitor, we build systems that generate consistent review flow to maintain and improve your ranking position.</span>
+          <li>
+            <span>→</span>
+            <span><strong>Review Velocity Building:</strong> In a market with hundreds of reviews per competitor, we build systems that generate consistent review flow to maintain and improve your ranking position.</span>
           </li>
-          <li style="padding: 14px 0; border-bottom: 1px solid #e0e0d8; display: flex; align-items: flex-start; gap: 12px;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 2px;">→</span>
-            <span style="color: #333;"><strong>Social Media for North York Communities:</strong> Korean, Persian, Chinese, and Middle Eastern dining communities all have distinct social media behavior. We know which platforms and content formats work for each.</span>
+          <li>
+            <span>→</span>
+            <span><strong>Social Media for North York Communities:</strong> Korean, Persian, Chinese, and Middle Eastern dining communities all have distinct social media behavior. We know which platforms and content formats work for each.</span>
           </li>
-          <li style="padding: 14px 0; display: flex; align-items: flex-start; gap: 12px;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 2px;">→</span>
-            <span style="color: #333;"><strong>Website Optimization:</strong> Fast sites that rank. In a market this competitive, your website's local SEO signals are the difference between showing up and being buried.</span>
+          <li>
+            <span>→</span>
+            <span><strong>Website Optimization:</strong> Fast sites that rank. In a market this competitive, your website's local SEO signals are the difference between showing up and being buried.</span>
           </li>
         </ul>
       </div>
     </section>
 
-    <section style="background: #fff; padding: 72px 24px;">
-      <div style="max-width: 860px; margin: 0 auto;">
-        <p style="text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; color: #E85D04; font-weight: 600; margin-bottom: 12px;">Questions</p>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 20px;">Frequently Asked Questions</h2>
-        <div style="border-bottom: 1px solid #e0e0d8; padding: 24px 0;">
-          <p style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How competitive is North York for restaurant Google rankings?</p>
-          <p style="color: #444;">Very. North York has some of the highest restaurant density in Toronto, which means Google Maps competition is intense. That said, most restaurants in this market are not actively optimizing their digital presence — which creates opportunity for the ones that are. We've helped restaurants go from position 8 to position 2 in markets as competitive as Yonge & Finch.</p>
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <p class="section-label">Questions</p><h2>Frequently Asked Questions</h2>
+        <div class="trg-faq-item">
+          <p>How competitive is North York for restaurant Google rankings?</p>
+          <p>Very. North York has some of the highest restaurant density in Toronto, which means Google Maps competition is intense. That said, most restaurants in this market are not actively optimizing their digital presence — which creates opportunity for the ones that are. We've helped restaurants go from position 8 to position 2 in markets as competitive as Yonge & Finch.</p>
         </div>
-        <div style="padding: 24px 0;">
-          <p style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">Do you work with Korean restaurants specifically?</p>
-          <p style="color: #444;">Yes. We have experience marketing Korean BBQ, Korean fried chicken, and Korean fusion restaurants in the North York and Koreatown corridors. The Korean dining community has specific social media habits and review platforms (Naver, Kakao) that require specialist understanding.</p>
+        <div class="trg-faq-item">
+          <p>Do you work with Korean restaurants specifically?</p>
+          <p>Yes. We have experience marketing Korean BBQ, Korean fried chicken, and Korean fusion restaurants in the North York and Koreatown corridors. The Korean dining community has specific social media habits and review platforms (Naver, Kakao) that require specialist understanding.</p>
         </div>
       </div>
     </section>
 
-    <section style="background: #f5f5f0; padding: 72px 24px;">
-      <div style="max-width: 860px; margin: 0 auto;">
-        <p style="text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; color: #E85D04; font-weight: 600; margin-bottom: 12px;">Also Serving</p>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 24px;">Restaurant Marketing Across the GTA</h2>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <p class="section-label">Also Serving</p><h2>Restaurant Marketing Across the GTA</h2>
         <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;">
-          <a href="/locations/scarborough/" style="background: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; color: #1a1a1a; font-size: 0.9rem; font-weight: 500;">Scarborough</a>
-          <a href="/locations/brampton/" style="background: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; color: #1a1a1a; font-size: 0.9rem; font-weight: 500;">Brampton</a>
-          <a href="/locations/mississauga/" style="background: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; color: #1a1a1a; font-size: 0.9rem; font-weight: 500;">Mississauga</a>
-          <a href="/locations/etobicoke/" style="background: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; color: #1a1a1a; font-size: 0.9rem; font-weight: 500;">Etobicoke</a>
-          <a href="/locations/vaughan/" style="background: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; color: #1a1a1a; font-size: 0.9rem; font-weight: 500;">Vaughan</a>
-          <a href="/locations/markham/" style="background: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; color: #1a1a1a; font-size: 0.9rem; font-weight: 500;">Markham</a>
-          <a href="/locations/hamilton/" style="background: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; color: #1a1a1a; font-size: 0.9rem; font-weight: 500;">Hamilton</a>
+          <a href="/locations/scarborough/">Scarborough</a>
+          <a href="/locations/brampton/">Brampton</a>
+          <a href="/locations/mississauga/">Mississauga</a>
+          <a href="/locations/etobicoke/">Etobicoke</a>
+          <a href="/locations/vaughan/">Vaughan</a>
+          <a href="/locations/markham/">Markham</a>
+          <a href="/locations/hamilton/">Hamilton</a>
         </div>
       </div>
     </section>
 
-    <section style="background: #E85D04; color: #fff; text-align: center; padding: 80px 24px;">
-      <div style="max-width: 860px; margin: 0 auto;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; margin-bottom: 28px;">
-          Your North York restaurant deserves to be found. Let's make it happen.
-        </h2>
-        <a href="/contact/" style="display: inline-block; background: #fff; color: #E85D04; padding: 16px 36px; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: 1rem;">Book a Free Google Audit</a>
-      </div>
-    </section>
+    <!-- CTA -->
+    <PageCta title="Your North York restaurant deserves to be found. Let's make it happen." />
 
   </main>
 </BaseLayout>

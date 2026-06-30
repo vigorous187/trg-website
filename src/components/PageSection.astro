@@ -1,0 +1,35 @@
+---
+interface Props {
+  tone?: 'white' | 'surface' | 'halal';
+  width?: 'narrow' | 'wide';
+  eyebrow?: string;
+  title?: string;
+  class?: string;
+}
+
+const { tone = 'white', width = 'narrow', eyebrow, title, class: className = '' } = Astro.props;
+
+const toneClass = {
+  white: 'bg-white',
+  surface: 'bg-surface',
+  halal: 'bg-halal-green text-white',
+}[tone];
+
+const widthClass = width === 'wide' ? 'max-w-5xl' : 'max-w-3xl';
+---
+
+<section class={`py-16 sm:py-20 lg:py-24 ${toneClass} ${className}`}>
+  <div class={`mx-auto px-4 sm:px-6 lg:px-8 ${widthClass}`}>
+    {eyebrow && (
+      <p class={`section-label mb-3 ${tone === 'halal' ? 'text-white/70' : ''}`}>{eyebrow}</p>
+    )}
+    {title && (
+      <h2 class={`font-heading text-3xl text-ink sm:text-4xl ${tone === 'halal' ? 'text-white' : ''}`}>
+        {title}
+      </h2>
+    )}
+    <div class={`${title || eyebrow ? 'mt-6' : ''} ${tone === 'halal' ? 'trg-prose-invert' : ''} trg-prose`}>
+      <slot />
+    </div>
+  </div>
+</section>

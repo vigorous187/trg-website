@@ -1,0 +1,8 @@
+{
+  "brand": "Toronto Restaurant Growth",
+  "domain": "torontorestaurantgrowth.ca",
+  "conversionPath": "/contact/",
+  "audience": "Independent Toronto and GTA restaurant owners",
+  "vertical": "trg-restaurant-agency",
+  "queueSource": "automation/topic-queue.json"
+}

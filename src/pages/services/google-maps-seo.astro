@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { servicePricingFaqs } from '../../data/pricing';
+import PageIntro from '../../components/PageIntro.astro';
 ---
 
 <BaseLayout
@@ -7,152 +9,135 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="Google Maps SEO for Toronto and GTA restaurants. Rank in the top 3 for your cuisine and neighbourhood. More searches, more calls, more covers — without ad spend."
 >
 
-  <main style="padding-top: 80px;">
+  <main>
 
     <!-- HERO -->
-    <section style="background: #1a1a1a; color: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; text-align: center;">
-        <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 20px; color: #fff;">
-          Google Maps SEO for Restaurants Toronto
-        </h1>
-        <p style="font-size: 1.25rem; color: #ccc; max-width: 640px; margin: 0 auto 32px;">
-          When someone searches "best halal restaurant near me" or "seafood Scarborough," the top 3 results on Google Maps get 70% of the clicks. We get Toronto restaurants into those top 3 spots — and keep them there.
-        </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: 6px;">
-          Book a Free Google Audit
-        </a>
-      </div>
-    </section>
+    <PageIntro title="Google Maps SEO for Restaurants Toronto" description={'When someone searches "best halal restaurant near me" or "seafood Scarborough," the top 3 results on Google Maps get 70% of the clicks. We get Toronto restaurants into those top 3 spots — and keep them there.'} ctaLabel="Book a Free Google Audit" ctaHref="/contact/" />
 
     <!-- THE NUMBERS -->
-    <section style="background: #fff; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px; text-align: center;">
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>
           Google Maps Is the Most Valuable Real Estate in Your Market
         </h2>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0;">
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">86%</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">of people use Google Maps to find restaurants near them</div>
+        <div class="trg-stat-grid">
+          <div class="trg-stat-card">
+            <div class="value">86%</div>
+            <div class="label">of people use Google Maps to find restaurants near them</div>
           </div>
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">70%</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">of clicks on Google Maps searches go to the top 3 results</div>
+          <div class="trg-stat-card">
+            <div class="value">70%</div>
+            <div class="label">of clicks on Google Maps searches go to the top 3 results</div>
           </div>
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">$0</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">ad spend required — organic Maps ranking is free traffic forever</div>
+          <div class="trg-stat-card">
+            <div class="value">$0</div>
+            <div class="label">ad spend required — organic Maps ranking is free traffic forever</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- THE PROBLEM -->
-    <section style="background: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>
           Why Most Restaurants Are Invisible on Google
         </h2>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Your Google Business Profile is incomplete</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Your Google Business Profile is incomplete</h3>
+        <p>
           Most restaurant owners claim their Google Business Profile and fill in the basics — name, address, phone number. That's not enough. Google rewards profiles that are fully optimized with consistent NAP data, complete attributes, active photo uploads, Q&A management, and regular posting. An incomplete profile tells Google you're not paying attention.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Your competitors are outranking you on review velocity</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Your competitors are outranking you on review velocity</h3>
+        <p>
           Google's local ranking algorithm weighs recency and volume of reviews heavily. A restaurant with 200 reviews but none in the last 60 days will lose ground to a competitor actively generating 15+ reviews per month. Review velocity — not just total count — is a major ranking factor.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Your website isn't supporting your Maps ranking</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Your website isn't supporting your Maps ranking</h3>
+        <p>
           Google Maps ranking is partly determined by the strength of your website's local signals. If your site doesn't have location-specific content, structured data markup, and consistent NAP data matching your Maps listing, you're leaving ranking points on the table.
         </p>
       </div>
     </section>
 
     <!-- WHAT WE DO -->
-    <section style="background: #fff; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">What You Get</h2>
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>What You Get</h2>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Google Business Profile Optimization</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Google Business Profile Optimization</h3>
+        <p>
           We audit and fully optimize your Google Business Profile — every field, every attribute, every category. We then implement an ongoing management system that keeps your profile active and signals to Google that your restaurant is open, engaged, and relevant.
         </p>
-        <ul style="margin: 16px 0 24px 20px; color: #4a4a4a;">
-          <li style="margin-bottom: 10px;"><strong>Category optimization</strong> — primary and secondary categories set for maximum search coverage</li>
-          <li style="margin-bottom: 10px;"><strong>Weekly Google Posts</strong> — specials, events, and promotions posted directly to your Maps listing</li>
-          <li style="margin-bottom: 10px;"><strong>Photo uploads</strong> — regular fresh photography uploaded to your GBP to signal activity</li>
-          <li style="margin-bottom: 10px;"><strong>Q&A management</strong> — common customer questions answered proactively</li>
-          <li style="margin-bottom: 10px;"><strong>Attribute management</strong> — halal, outdoor seating, parking, accessibility — all the filters customers use</li>
+        <ul>
+          <li><strong>Category optimization</strong> — primary and secondary categories set for maximum search coverage</li>
+          <li><strong>Weekly Google Posts</strong> — specials, events, and promotions posted directly to your Maps listing</li>
+          <li><strong>Photo uploads</strong> — regular fresh photography uploaded to your GBP to signal activity</li>
+          <li><strong>Q&A management</strong> — common customer questions answered proactively</li>
+          <li><strong>Attribute management</strong> — halal, outdoor seating, parking, accessibility — all the filters customers use</li>
         </ul>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Local Citation Building</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Local Citation Building</h3>
+        <p>
           We build and manage consistent citations across every major directory: Yelp, TripAdvisor, Zomato, OpenTable, Facebook, Apple Maps, Bing Places, and dozens of niche directories. Consistent NAP data across the web is a foundational local SEO signal.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Local SEO Content</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Local SEO Content</h3>
+        <p>
           We create location-specific landing pages and content that targets the searches your potential customers are actually making. "Halal biryani Brampton," "best roti Scarborough," "seafood restaurant Mississauga" — every high-intent search in your neighbourhood.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Rank Tracking & Reporting</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Rank Tracking & Reporting</h3>
+        <p>
           Monthly reports showing your rankings for target keywords across your service area, GBP performance metrics (views, clicks, calls, direction requests), and competitor benchmarks so you always know where you stand.
         </p>
       </div>
     </section>
 
     <!-- CASE STUDY -->
-    <section style="background: #1a1a1a; color: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); color: #fff; margin-bottom: 24px;">Real Results</h2>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>Real Results</h2>
         <div style="border-left: 4px solid #E85D04; padding: 32px; border-radius: 8px; margin: 24px 0; border: 1px solid rgba(255,255,255,0.1);">
-          <p style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem; color: #E85D04; font-weight: 700;">Position 8 to Position 2 in 6 months</p>
-          <p style="color: #ccc;">After implementing our full Google Maps SEO stack for Crab Boil — GBP optimization, review generation, local citations, and weekly posting — their ranking for "seafood restaurant Toronto" jumped from position 8 to position 2. Combined with 280+ reviews, their GBP drives over 1,200 direction requests per month.</p>
-          <p style="margin-top: 16px;"><a href="/case-studies/crab-boil/" style="color: #E85D04; text-decoration: underline;">Read the full Crab Boil case study</a></p>
+          <p>Position 8 to Position 2 in 6 months</p>
+          <p>After implementing our full Google Maps SEO stack for Crab Boil — GBP optimization, review generation, local citations, and weekly posting — their ranking for "seafood restaurant Toronto" jumped from position 8 to position 2. Combined with 280+ reviews, their GBP drives over 1,200 direction requests per month.</p>
+          <p><a href="/case-studies/crab-boil/">Read the full Crab Boil case study</a></p>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section style="background: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">Frequently Asked Questions</h2>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>Frequently Asked Questions</h2>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How much does Google Maps SEO cost for a restaurant in Toronto?</h3>
-          <p style="color: #4a4a4a;">Our Google Maps and local SEO packages start at $497/month for Google Business Profile optimization and citation management. Full-service local SEO packages with content and rank tracking run $797–$1,497/month. Most clients see meaningful ranking improvements within 60–90 days.</p>
+        <div class="trg-faq-item">
+          <h3>How much does Google Maps SEO cost for a restaurant in Toronto?</h3>
+          <p style="color: #4a4a4a;" set:html={servicePricingFaqs.googleMaps} />
+          <p>Most clients see meaningful ranking improvements within 60–90 days.</p>
         </div>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How long does it take to rank higher on Google Maps?</h3>
-          <p style="color: #4a4a4a;">Initial ranking improvements typically appear within 30–60 days for less competitive searches and neighbourhoods. Competitive search terms like "best restaurant downtown Toronto" take 3–6 months of sustained optimization. We'll be honest with you about the timeline for your specific market and keywords at the outset.</p>
+        <div class="trg-faq-item">
+          <h3>How long does it take to rank higher on Google Maps?</h3>
+          <p>Initial ranking improvements typically appear within 30–60 days for less competitive searches and neighbourhoods. Competitive search terms like "best restaurant downtown Toronto" take 3–6 months of sustained optimization. We'll be honest with you about the timeline for your specific market and keywords at the outset.</p>
         </div>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">Is Google Maps SEO different from regular SEO?</h3>
-          <p style="color: #4a4a4a;">Yes — significantly. Google Maps (local pack) ranking is determined by proximity, relevance, and prominence signals that are different from organic website rankings. Both matter, and they support each other. But Google Maps is specifically about your Google Business Profile, review velocity, local citations, and local content signals.</p>
+        <div class="trg-faq-item">
+          <h3>Is Google Maps SEO different from regular SEO?</h3>
+          <p>Yes — significantly. Google Maps (local pack) ranking is determined by proximity, relevance, and prominence signals that are different from organic website rankings. Both matter, and they support each other. But Google Maps is specifically about your Google Business Profile, review velocity, local citations, and local content signals.</p>
         </div>
 
-        <div style="padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">Do I need a website for Google Maps SEO to work?</h3>
-          <p style="color: #4a4a4a;">You don't strictly need one, but a strong website significantly amplifies your Maps ranking. We recommend building them together — the website's local SEO signals support the Maps ranking, and the Maps listing drives traffic to the website. Standalone GBP optimization without a website will plateau faster.</p>
+        <div class="trg-faq-item">
+          <h3>Do I need a website for Google Maps SEO to work?</h3>
+          <p>You don't strictly need one, but a strong website significantly amplifies your Maps ranking. We recommend building them together — the website's local SEO signals support the Maps ranking, and the Maps listing drives traffic to the website. Standalone GBP optimization without a website will plateau faster.</p>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section style="background: #1a1a1a; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 60px 24px; text-align: center;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); color: #fff; margin-bottom: 20px;">Your Competitors Are Showing Up. Are You?</h2>
-        <p style="font-size: 1.15rem; color: #ccc; max-width: 580px; margin: 0 auto 28px;">
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <h2>Your Competitors Are Showing Up. Are You?</h2>
+        <p>
           Every day you're not in the top 3 on Google Maps, you're invisible to hundreds of customers searching for exactly what you serve. Start with a free audit — we'll show you exactly where you stand.
         </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: 6px;">
+        <a href="/contact/">
           Book a Free Google Audit
         </a>
       </div>

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import PageCta from '../../components/PageCta.astro';
 
 const caseStudies = [
   {
@@ -15,6 +17,19 @@ const caseStudies = [
     href: "/case-studies/crab-boil/",
     status: "live",
   },
+  {
+    client: "Mystic Caribbean",
+    category: "Google Maps & SEO",
+    headline: "#1 on Kennedy Road. 15 Keywords in the Top 10.",
+    description: "From a 32/100 SpotHopper template to dominant local search in Brampton — with a live SEO dashboard TRG uses to prove ROI.",
+    metrics: [
+      { value: "#1", label: "Kennedy Rd Restaurant" },
+      { value: "73/100", label: "SEO Score" },
+      { value: "15", label: "Keywords Top 10" },
+    ],
+    href: "/case-studies/mystic-caribbean/",
+    status: "live",
+  },
 ];
 ---
 
@@ -22,86 +37,49 @@ const caseStudies = [
   title="Restaurant Marketing Case Studies | Toronto Restaurant Growth"
   description="Real results for real Toronto restaurants. See how TRG has grown restaurant brands through Google Maps SEO, social media, and review management."
 >
+  <main>
+    <PageIntro
+      title="Real Numbers. Real Restaurants."
+      description="These aren't agency-inflated impressions. These are the actual results we've driven for Toronto restaurants — with the receipts to prove it."
+      ctaLabel="Book a Free Google Audit"
+      ctaHref="/contact/"
+    />
 
-  <main style="padding-top: 80px;">
-
-    <!-- HERO -->
-    <section style="background: #1a1a1a; color: #fff; padding: 80px 24px; text-align: center;">
-      <div style="max-width: 800px; margin: 0 auto;">
-        <p style="text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; color: #E85D04; font-weight: 600; margin-bottom: 12px;">Case Studies</p>
-        <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.2rem, 5vw, 3.2rem); color: #fff; margin-bottom: 20px; font-weight: 400;">
-          Real Numbers. Real Restaurants.
-        </h1>
-        <p style="font-size: 1.15rem; color: rgba(255,255,255,0.7); max-width: 580px; margin: 0 auto; line-height: 1.7;">
-          These aren't agency-inflated impressions. These are the actual results we've driven for Toronto restaurants — with the receipts to prove it.
-        </p>
-      </div>
-    </section>
-
-    <!-- CASE STUDIES -->
-    <section style="background: #f5f5f0; padding: 80px 24px;">
-      <div style="max-width: 900px; margin: 0 auto;">
-
-        {caseStudies.map(study => (
-          <a
-            href={study.href}
-            style="display: block; background: #fff; border: 1px solid #e8e8e0; border-radius: 12px; overflow: hidden; text-decoration: none; margin-bottom: 32px;"
-            onmouseover="this.style.borderColor='rgba(232,93,4,0.4)'"
-            onmouseout="this.style.borderColor='#e8e8e0'"
-          >
-            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2a1500 100%); padding: 48px 40px; display: flex; align-items: center; justify-content: center; min-height: 180px;">
-              <div style="text-align: center;">
-                <p style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #E85D04; margin-bottom: 4px;">{study.client}</p>
-                <p style="font-size: 0.82rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em;">{study.category}</p>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        {caseStudies.map((study) => (
+          <a href={study.href} class="trg-link-card">
+            <div class="trg-link-card-header">
+              <div>
+                <p class="font-heading text-3xl text-accent">{study.client}</p>
+                <p class="mt-1 text-xs font-semibold uppercase tracking-widest text-ink-muted">{study.category}</p>
               </div>
             </div>
-            <div style="padding: 36px 40px;">
-              <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.4rem, 3vw, 2rem); color: #1a1a1a; margin-bottom: 16px; font-weight: 400;">
-                {study.headline}
-              </h2>
-              <p style="color: #555; font-size: 1rem; line-height: 1.65; margin-bottom: 32px; max-width: 620px;">
-                {study.description}
-              </p>
-              <div style="display: flex; gap: 32px; flex-wrap: wrap; padding-top: 24px; border-top: 1px solid #f0f0e8; margin-bottom: 24px;">
-                {study.metrics.map(m => (
+            <div class="trg-link-card-body trg-prose">
+              <h2>{study.headline}</h2>
+              <p>{study.description}</p>
+              <div class="mt-6 flex flex-wrap gap-8 border-t border-stone-border pt-6">
+                {study.metrics.map((m) => (
                   <div>
-                    <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.8rem; color: #E85D04;">{m.value}</div>
-                    <div style="font-size: 0.8rem; color: #888; margin-top: 2px;">{m.label}</div>
+                    <p class="font-heading text-3xl text-accent">{m.value}</p>
+                    <p class="text-xs text-ink-muted">{m.label}</p>
                   </div>
                 ))}
               </div>
-              <span style="color: #B84500; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+              <span class="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-cta">
                 Read full case study
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
               </span>
             </div>
           </a>
         ))}
 
-        <!-- COMING SOON placeholder -->
-        <div style="background: #fff; border: 1px dashed #ddd; border-radius: 12px; padding: 48px 40px; text-align: center;">
-          <p style="font-size: 0.8rem; color: #aaa; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Coming Soon</p>
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; color: #bbb; font-weight: 400;">More case studies in progress</h3>
-          <p style="color: #ccc; margin-top: 12px; font-size: 0.9rem;">We're documenting results for current clients. Check back soon.</p>
-        </div>
-
       </div>
     </section>
 
-    <!-- CTA -->
-    <section style="background: #1a1a1a; padding: 80px 24px; text-align: center;">
-      <div style="max-width: 700px; margin: 0 auto;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.6rem); color: #fff; margin-bottom: 20px; font-weight: 400;">
-          Want results like these for your restaurant?
-        </h2>
-        <p style="font-size: 1.1rem; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto 32px; line-height: 1.7;">
-          Every engagement starts with a free Google audit. We'll show you exactly where you stand and what it would take to get results like the ones above.
-        </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 14px 30px; text-decoration: none; font-weight: 600; font-size: 1rem; border-radius: 6px;">
-          Book a Free Google Audit
-        </a>
-      </div>
-    </section>
-
+    <PageCta
+      title="Want results like these for your restaurant?"
+      description="Every engagement starts with a free Google audit. We'll show you exactly where you stand and what it would take to get results like the ones above."
+    />
   </main>
 </BaseLayout>

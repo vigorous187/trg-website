@@ -15,5 +15,10 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [sitemap(), mdx()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes("/contact/thank-you"),
+    }),
+    mdx(),
+  ],
 });

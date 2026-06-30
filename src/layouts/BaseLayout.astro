@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { siteName, trgLogo } from '../data/branding';
 
 export interface Props {
   title?: string;
@@ -9,6 +10,7 @@ export interface Props {
   canonicalURL?: string;
   ogImage?: string;
   schema?: object | object[];
+  noindex?: boolean;
 }
 
 const {
@@ -17,15 +19,19 @@ const {
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
   ogImage = "/og-default.png",
   schema,
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') || 'https://torontorestaurantgrowth.ca';
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+const logoUrl = `${siteUrl}${trgLogo.mark}`;
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'Toronto Restaurant Growth',
+  name: siteName,
   url: siteUrl,
+  logo: logoUrl,
+  image: logoUrl,
   description,
   areaServed: { '@type': 'City', name: 'Toronto' },
   serviceType: 'Restaurant Marketing',
@@ -38,6 +44,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" hreflang="en-CA" href={canonicalURL} />
     <title>{title}</title>
@@ -64,12 +71,13 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
     <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/dm-serif-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://torontorestaurantgrowth.ca/trg-logo.png" />
-    <link rel="shortcut icon" href="https://torontorestaurantgrowth.ca/trg-logo.png" />
-    <link rel="apple-touch-icon" href="https://torontorestaurantgrowth.ca/trg-logo.png" />
+    <!-- Favicon — circular TRG mark -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   </head>
-  <body style="margin:0; padding:0; background-color:#1A1A1A; color:#FFFFFF; font-family: 'Inter', system-ui, sans-serif;">
+  <body class="m-0 bg-cream p-0 font-body text-ink antialiased">
     <Navbar />
     <slot />
     <Footer />

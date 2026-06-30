@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+
+const contactCanonical = new URL('/contact/', Astro.site).href;
+---
+
+<BaseLayout
+  title="Thank You — Toronto Restaurant Growth"
+  description="We received your audit request and will be in touch within one business day."
+  canonicalURL={contactCanonical}
+  noindex={true}
+>
+  <main>
+    <PageIntro
+      eyebrow="Request received"
+      title="You're on the list."
+      description="We'll reach out within one business day to schedule your free 15-minute Google audit. Check your inbox (and spam folder) for a message from Toronto Restaurant Growth."
+    >
+      <p class="mt-6 text-center text-sm text-ink-muted">
+        While you wait, you can read how we helped{' '}
+        <a href="/case-studies/crab-boil/" class="font-semibold text-cta no-underline hover:text-cta-hover">
+          Crab Boil grow to 5,000+ Google reviews
+        </a>
+        .
+      </p>
+    </PageIntro>
+  </main>
+</BaseLayout>

@@ -1,84 +1,55 @@
 ---
-const navLinks = [
-  { label: "Services", href: "/services/" },
-  { label: "Locations", href: "/locations/" },
-  { label: "Case Studies", href: "/case-studies/" },
-  { label: "Pricing", href: "/pricing/" },
-  { label: "Blog", href: "/blog/" },
-];
+import SiteLogo from './SiteLogo.astro';
+import { mainNav, ctaNav } from '../data/navigation';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-[#111111]/95 backdrop-blur-sm border-b border-white/10">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 lg:h-20">
+<header class="sticky top-0 z-50 border-b border-stone-200/80 bg-cream/95 backdrop-blur-md">
+  <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-20 lg:px-8" aria-label="Global">
+    <a href="/" class="flex items-center no-underline shrink-0" aria-label="Toronto Restaurant Growth home">
+      <SiteLogo variant="horizontalDark" />
+    </a>
 
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 no-underline shrink-0">
-        <img src="/trg-logo.png" alt="Toronto Restaurant Growth" class="h-8 w-auto" />
-        <span class="text-white/60 text-xs font-light hidden sm:inline">Toronto Restaurant Growth</span>
+    <div class="hidden items-center gap-8 lg:flex">
+      {mainNav.map((link) => (
+        <a href={link.href} class="text-sm font-medium text-ink-muted no-underline transition-colors hover:text-ink">
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden lg:block">
+      <a href={ctaNav.href} class="btn-cta px-5 py-2.5 text-sm">
+        {ctaNav.label}
       </a>
+    </div>
 
-      <!-- Desktop Nav -->
-      <div class="hidden lg:flex items-center gap-8">
-        {navLinks.map(link => (
-          <a
-            href={link.href}
-            class="text-sm text-[#999999] hover:text-white transition-colors duration-200 no-underline"
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+    <button
+      id="mobile-menu-btn"
+      class="flex flex-col gap-1.5 border-0 bg-transparent p-2 lg:hidden"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="block h-0.5 w-6 bg-ink transition-all duration-200" id="hamburger-line-1"></span>
+      <span class="block h-0.5 w-6 bg-ink transition-all duration-200" id="hamburger-line-2"></span>
+      <span class="block h-0.5 w-6 bg-ink transition-all duration-200" id="hamburger-line-3"></span>
+    </button>
+  </nav>
 
-      <!-- Desktop CTA -->
-      <div class="hidden lg:block">
-        <a
-          href="/contact/"
-          class="inline-block bg-[#B84500] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#963A00] transition-colors duration-200 no-underline whitespace-nowrap"
-        >
-          Book a Free Google Audit
+  <div id="mobile-menu" class="hidden border-t border-stone-200 bg-cream lg:hidden">
+    <div class="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
+      {mainNav.map((link) => (
+        <a href={link.href} class="px-2 py-2 text-sm font-medium text-ink-muted no-underline hover:text-ink">
+          {link.label}
+        </a>
+      ))}
+      <div class="pt-2">
+        <a href={ctaNav.href} class="btn-cta text-sm">
+          {ctaNav.label}
         </a>
       </div>
-
-      <!-- Mobile hamburger -->
-      <button
-        id="mobile-menu-btn"
-        class="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer bg-transparent border-0"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-      >
-        <span class="block w-6 h-0.5 bg-white transition-all duration-200" id="hamburger-line-1"></span>
-        <span class="block w-6 h-0.5 bg-white transition-all duration-200" id="hamburger-line-2"></span>
-        <span class="block w-6 h-0.5 bg-white transition-all duration-200" id="hamburger-line-3"></span>
-      </button>
     </div>
-
-    <!-- Mobile Menu -->
-    <div
-      id="mobile-menu"
-      class="lg:hidden hidden pb-4 border-t border-white/10 mt-0"
-    >
-      <div class="flex flex-col gap-1 pt-4">
-        {navLinks.map(link => (
-          <a
-            href={link.href}
-            class="text-sm text-[#999999] hover:text-white transition-colors duration-200 no-underline py-2 px-2"
-          >
-            {link.label}
-          </a>
-        ))}
-        <div class="pt-2">
-          <a
-            href="/contact/"
-            class="inline-block bg-[#B84500] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#963A00] transition-colors duration-200 no-underline"
-          >
-            Book a Free Google Audit
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
+  </div>
 </header>
 
 <script>

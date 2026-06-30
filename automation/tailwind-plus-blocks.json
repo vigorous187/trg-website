@@ -1,0 +1,42 @@
+{
+  "fetchCommand": "npx mcp-for-tailwind get-variant --category=marketing --block={block} --variant={variant} --format=html --version=v4.1",
+  "global": {
+    "navbar": "marketing/headers/constrained",
+    "footer": "marketing/footers/4-column-with-company-mission"
+  },
+  "pages": {
+    "/": {
+      "hero": "marketing/heroes/split-with-image",
+      "nicheStrip": "marketing/banners/on-brand",
+      "stats": "marketing/stats-sections/simple-grid",
+      "services": "marketing/bento-grids/two-row-bento-grid-with-three-column-second-row",
+      "locations": "marketing/feature-sections/offset-with-feature-list",
+      "halalCallout": "marketing/cta-sections/two-columns-with-photo",
+      "testimonials": "marketing/testimonials/grid",
+      "blogPreview": "marketing/blog-sections/three-column-with-images",
+      "finalCta": "marketing/cta-sections/simple-centered-on-brand"
+    },
+    "/pricing/": {
+      "intro": "marketing/header/centered-with-eyebrow",
+      "growthPlan": "marketing/pricing/single-price-with-details",
+      "socialAddOn": "marketing/pricing/two-tiers-with-extra-tier",
+      "faq": "marketing/faq-sections/two-columns-with-centered-introduction",
+      "finalCta": "marketing/cta-sections/centered-on-dark-panel"
+    },
+    "/contact/": {
+      "intro": "marketing/header/simple-with-eyebrow",
+      "layout": "marketing/contact-sections/side-by-side-grid"
+    },
+    "/services/*": {
+      "hero": "marketing/heroes/split-with-image",
+      "features": "marketing/feature-sections/offset-with-feature-list",
+      "process": "marketing/stats-sections/stepped",
+      "cta": "marketing/cta-sections/simple-justified-on-subtle-brand"
+    },
+    "/locations/*": {
+      "hero": "marketing/header/simple",
+      "features": "marketing/feature-sections/simple-three-column-with-small-icons",
+      "cta": "marketing/cta-sections/simple-centered"
+    }
+  }
+}

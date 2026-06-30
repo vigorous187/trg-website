@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  variant?: 'brand' | 'light';
+}
+
+const {
+  title,
+  description,
+  ctaLabel = 'Book a Free Google Audit',
+  ctaHref = '/contact/',
+  variant = 'brand',
+} = Astro.props;
+
+const isBrand = variant === 'brand';
+---
+
+<section class={`py-20 text-center lg:py-24 ${isBrand ? 'bg-cta' : 'bg-surface'}`}>
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+    <h2 class={`font-heading text-3xl leading-tight sm:text-4xl ${isBrand ? 'text-white' : 'text-ink'}`}>
+      {title}
+    </h2>
+    {description && (
+      <p class={`mx-auto mt-5 max-w-lg text-lg leading-relaxed ${isBrand ? 'text-white/90' : 'text-ink-muted'}`}>
+        {description}
+      </p>
+    )}
+    <a
+      href={ctaHref}
+      class={`mt-8 inline-flex items-center gap-2 rounded-lg px-8 py-4 text-base font-semibold no-underline ${
+        isBrand
+          ? 'bg-white text-cta hover:bg-cream'
+          : 'btn-cta'
+      }`}
+    >
+      {ctaLabel}
+    </a>
+    <slot />
+  </div>
+</section>

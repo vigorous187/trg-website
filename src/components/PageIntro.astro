@@ -1,0 +1,33 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+  ctaLabel?: string;
+  ctaHref?: string;
+  tone?: 'surface' | 'halal';
+}
+
+const { eyebrow, title, description, align = 'center', ctaLabel, ctaHref, tone = 'surface' } = Astro.props;
+const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
+const isHalal = tone === 'halal';
+---
+
+<section class={`border-b border-stone-border py-16 sm:py-20 lg:py-24 ${isHalal ? 'bg-halal-green' : 'bg-surface'}`}>
+  <div class={`max-w-3xl px-4 sm:px-6 lg:px-8 ${align === 'center' ? 'mx-auto' : ''}`}>
+    {eyebrow && <p class={`section-label mb-4 ${alignClass} ${isHalal ? 'text-white/70' : ''}`}>{eyebrow}</p>}
+    <h1 class={`font-heading text-4xl leading-tight sm:text-5xl ${alignClass} ${isHalal ? 'text-white' : 'text-ink'}`}>{title}</h1>
+    {description && (
+      <p class={`mt-5 max-w-2xl text-lg leading-relaxed ${align === 'center' ? 'mx-auto' : ''} ${isHalal ? 'text-white/85' : 'text-ink-muted'}`}>
+        {description}
+      </p>
+    )}
+    {ctaLabel && ctaHref && (
+      <div class={`mt-8 ${align === 'center' ? 'text-center' : ''}`}>
+        <a href={ctaHref} class="btn-cta">{ctaLabel}</a>
+      </div>
+    )}
+    <slot />
+  </div>
+</section>

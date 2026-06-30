@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -25,26 +26,18 @@ const formatted = new Date(post.data.publishDate).toLocaleDateString('en-CA', {
   description={post.data.description}
 >
   <main>
-    <section style="background: #1A1A1A; padding: 100px 24px 72px; text-align: center;">
-      <p style="color: rgba(255,255,255,0.55); font-size: 13px; margin-bottom: 12px;">
-        {post.data.category} · {formatted} · {post.data.readTime || '7 min read'}
-      </p>
-      <h1
-        style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 400; color: #fff; max-width: 760px; margin: 0 auto; line-height: 1.2;"
-      >
-        {post.data.title}
-      </h1>
-    </section>
+    <PageIntro title={post.data.title} description={post.data.description} ctaLabel="Book a Free Google Audit" ctaHref="/contact/" />
 
-    <section style="background: #fff; padding: 64px 24px 96px;">
+    <section class="bg-white py-16 sm:py-20 lg:py-24">
       <article
-        class="prose prose-lg mx-auto max-w-3xl
-          prose-headings:font-[family-name:var(--font-display)] prose-headings:text-[#1A1A1A]
-          prose-p:text-[#555] prose-p:leading-relaxed
-          prose-a:text-[#E85D04] prose-a:font-medium hover:prose-a:underline
-          prose-strong:text-[#1A1A1A]
-          prose-li:text-[#555] prose-li:marker:text-[#E85D04]"
+        class="prose prose-lg mx-auto max-w-3xl px-4 sm:px-6 lg:px-8
+          prose-headings:font-heading prose-headings:text-ink
+          prose-p:text-ink-muted prose-p:leading-relaxed
+          prose-a:text-cta prose-a:font-medium hover:prose-a:underline
+          prose-strong:text-ink
+          prose-li:text-ink-muted prose-li:marker:text-accent"
       >
+        <p class="text-sm text-ink-muted">{formatted} · {post.data.category}</p>
         <Content />
       </article>
     </section>

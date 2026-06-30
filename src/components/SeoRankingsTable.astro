@@ -1,0 +1,51 @@
+---
+import type { MysticSeoReport } from '../data/mystic-seo-report';
+
+interface Props {
+  keywords: MysticSeoReport['keywords'];
+}
+
+const { keywords } = Astro.props;
+
+function changeLabel(change: number | null) {
+  if (change == null || change === 0) return '—';
+  if (change > 0) return `↑${change}`;
+  return `↓${Math.abs(change)}`;
+}
+
+function changeClass(change: number | null) {
+  if (change == null || change === 0) return 'text-ink-muted';
+  if (change > 0) return 'font-semibold text-emerald-700';
+  return 'font-semibold text-red-700';
+}
+
+function rankClass(rank: number) {
+  if (rank === 1) return 'font-heading text-accent';
+  if (rank <= 3) return 'font-semibold text-ink';
+  if (rank <= 10) return 'text-ink';
+  return 'text-ink-muted';
+}
+---
+
+<div class="overflow-x-auto rounded-xl border border-stone-border bg-white">
+  <table class="min-w-full text-left text-sm">
+    <thead class="border-b border-stone-border bg-surface text-xs font-semibold uppercase tracking-widest text-ink-muted">
+      <tr>
+        <th class="px-4 py-3 sm:px-6">Keyword</th>
+        <th class="px-4 py-3 sm:px-6">Category</th>
+        <th class="px-4 py-3 sm:px-6">Rank</th>
+        <th class="px-4 py-3 sm:px-6">Change</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-stone-border">
+      {keywords.map((row) => (
+        <tr>
+          <td class="px-4 py-3 sm:px-6 font-medium text-ink">{row.keyword}</td>
+          <td class="px-4 py-3 sm:px-6 capitalize text-ink-muted">{row.category}</td>
+          <td class={`px-4 py-3 sm:px-6 ${rankClass(row.rank)}`}>#{row.rank}</td>
+          <td class={`px-4 py-3 sm:px-6 ${changeClass(row.change)}`}>{changeLabel(row.change)}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,31 @@
+---
+import { siteName, trgLogo } from '../data/branding';
+
+interface Props {
+  variant?: 'mark' | 'horizontalDark' | 'horizontalLight';
+  class?: string;
+  loading?: 'eager' | 'lazy';
+}
+
+const {
+  variant = 'mark',
+  class: className = '',
+  loading = 'eager',
+} = Astro.props;
+
+const src = trgLogo[variant];
+const sizeClass =
+  variant === 'mark'
+    ? 'h-9 w-9'
+    : 'h-10 w-auto max-w-[min(100%,16rem)] sm:max-w-[18rem] lg:h-11';
+---
+
+<img
+  src={src}
+  alt={trgLogo.alt}
+  class={`block shrink-0 object-contain ${sizeClass} ${className}`}
+  width={variant === 'mark' ? 36 : undefined}
+  height={variant === 'mark' ? 36 : undefined}
+  loading={loading}
+  decoding="async"
+/>

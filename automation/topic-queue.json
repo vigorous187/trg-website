@@ -1,1 +1,49 @@
-{"pending":[]}
+{
+  "pending": [
+    {
+      "slug": "google-business-profile-menu-photos",
+      "title": "Google Business Profile Menu Photos That Actually Get Clicks",
+      "description": "How Toronto restaurants should shoot, upload, and refresh GBP menu and dish photos for more profile views and direction requests.",
+      "category": "Google Maps",
+      "tags": ["google-maps", "gbp", "toronto"],
+      "serviceLink": "/services/google-maps-seo/",
+      "relatedBlog": "/blog/toronto-restaurants-rank-google-maps/"
+    },
+    {
+      "slug": "restaurant-review-response-automation",
+      "title": "Restaurant Review Response Automation Without Sounding Robotic",
+      "description": "Templates, timing, and tone for responding to Google reviews daily — what independent GTA restaurants should automate vs keep human.",
+      "category": "Reviews",
+      "tags": ["reviews", "reputation", "toronto"],
+      "serviceLink": "/services/review-management/",
+      "relatedBlog": "/blog/why-your-restaurant-not-showing-on-google/"
+    },
+    {
+      "slug": "brampton-restaurant-google-maps-case-pattern",
+      "title": "What a #1 Brampton Restaurant Ranking Actually Looks Like",
+      "description": "A practical breakdown of local SEO signals behind Kennedy Road-level visibility — without guaranteed ranking promises.",
+      "category": "Case patterns",
+      "tags": ["brampton", "google-maps", "local-seo"],
+      "serviceLink": "/services/google-maps-seo/",
+      "relatedBlog": "/blog/halal-restaurant-marketing-gta/"
+    },
+    {
+      "slug": "restaurant-website-speed-gta",
+      "title": "Restaurant Website Speed in the GTA: What Slow Pages Cost You",
+      "description": "Core Web Vitals, menu PDFs, and third-party widgets — fixes Toronto operators can ship this week.",
+      "category": "Website",
+      "tags": ["website", "performance", "toronto"],
+      "serviceLink": "/services/restaurant-website-design/",
+      "relatedBlog": "/blog/neighbourhood-landing-pages-restaurants/"
+    },
+    {
+      "slug": "google-ads-vs-local-seo-restaurants",
+      "title": "Google Ads vs Local SEO for Independent Restaurants",
+      "description": "When paid search makes sense for GTA restaurants — and when GBP and organic local SEO compound better over 6–12 months.",
+      "category": "Strategy",
+      "tags": ["google-ads", "local-seo", "toronto"],
+      "serviceLink": "/services/google-maps-seo/",
+      "relatedBlog": "/blog/google-ads-local-campaign-restaurants/"
+    }
+  ]
+}

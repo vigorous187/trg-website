@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { servicePricingFaqs } from '../../data/pricing';
+import PageIntro from '../../components/PageIntro.astro';
 ---
 
 <BaseLayout
@@ -7,143 +9,126 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="Restaurant website design in Toronto that drives reservations. Fast, mobile-first websites built specifically for GTA restaurants — not one-size-fits-all templates."
 >
 
-  <main style="padding-top: 80px;">
+  <main>
 
     <!-- HERO -->
-    <section style="background: #1a1a1a; color: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; text-align: center;">
-        <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 20px; color: #fff;">
-          Restaurant Website Design Toronto
-        </h1>
-        <p style="font-size: 1.25rem; color: #ccc; max-width: 640px; margin: 0 auto 32px;">
-          Your website is the difference between a customer booking a table and going to your competitor. We build fast, mobile-first restaurant websites that convert browsers into diners — not one-size-fits-all templates with stock photos of coffee cups.
-        </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: 6px;">
-          Book a Free Google Audit
-        </a>
-      </div>
-    </section>
+    <PageIntro title="Restaurant Website Design Toronto" description="Your website is the difference between a customer booking a table and going to your competitor. We build fast, mobile-first restaurant websites that convert browsers into diners — not one-size-fits-all templates with stock photos of coffee cups."  ctaLabel="Book a Free Google Audit" ctaHref="/contact/" />
 
     <!-- THE PROBLEM -->
-    <section style="background: #fff; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px; text-align: center;">
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>
           Your Website Is Losing You Customers Right Now
         </h2>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto 32px; color: #4a4a4a;">
+        <p>
           Most restaurant websites were built quickly, never updated, and have no idea how to turn visitors into customers. Here's what that costs you.
         </p>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0;">
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">60%</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">of restaurant searches happen on mobile — slow sites lose those customers instantly</div>
+        <div class="trg-stat-grid">
+          <div class="trg-stat-card">
+            <div class="value">60%</div>
+            <div class="label">of restaurant searches happen on mobile — slow sites lose those customers instantly</div>
           </div>
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">3s</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">is the maximum load time before 53% of mobile visitors abandon your site</div>
+          <div class="trg-stat-card">
+            <div class="value">3s</div>
+            <div class="label">is the maximum load time before 53% of mobile visitors abandon your site</div>
           </div>
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">78%</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">of customers visit a restaurant's website before deciding whether to go</div>
+          <div class="trg-stat-card">
+            <div class="value">78%</div>
+            <div class="label">of customers visit a restaurant's website before deciding whether to go</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- WHAT WE BUILD -->
-    <section style="background: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">What We Build</h2>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>What We Build</h2>
+        <p>
           Every website we build starts with one question: what does this specific restaurant need to get customers through the door? The answer is always different — which is why we don't use templates.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Speed-Optimized for Mobile</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Speed-Optimized for Mobile</h3>
+        <p>
           Your customers are searching on their phones. We build with performance-first architecture that loads in under 1.5 seconds on a 4G connection. Not because it's nice to have — because Google ranks fast sites higher and customers leave slow ones.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Conversion-Focused Design</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Conversion-Focused Design</h3>
+        <p>
           Every element on your site has one job: to get someone to book a table, place an order, or call you. Menu, photos, hours, location, reservation button — all of it optimized and tested for conversion, not just visual appeal.
         </p>
-        <ul style="margin: 16px 0 24px 20px; color: #4a4a4a;">
-          <li style="margin-bottom: 10px;"><strong>Click-to-call phone number</strong> — prominent on mobile, above the fold. The #1 conversion action for restaurants.</li>
-          <li style="margin-bottom: 10px;"><strong>Online reservation integration</strong> — OpenTable, Resy, or direct booking widget built in.</li>
-          <li style="margin-bottom: 10px;"><strong>Menu as actual web content</strong> — not a PDF nobody can read on mobile. Searchable, shareable, and indexable by Google.</li>
-          <li style="margin-bottom: 10px;"><strong>Google Maps embed</strong> — directions and parking information where customers expect to find it.</li>
+        <ul>
+          <li><strong>Click-to-call phone number</strong> — prominent on mobile, above the fold. The #1 conversion action for restaurants.</li>
+          <li><strong>Online reservation integration</strong> — OpenTable, Resy, or direct booking widget built in.</li>
+          <li><strong>Menu as actual web content</strong> — not a PDF nobody can read on mobile. Searchable, shareable, and indexable by Google.</li>
+          <li><strong>Google Maps embed</strong> — directions and parking information where customers expect to find it.</li>
         </ul>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Local SEO Built In</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Local SEO Built In</h3>
+        <p>
           A beautiful website nobody finds is worthless. We build in local SEO from day one: structured data markup, location-specific meta tags, schema markup that tells Google exactly what your restaurant is and where you are.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Photography Direction</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Photography Direction</h3>
+        <p>
           We know what food photography works online and what doesn't. We either direct your existing photography team or recommend vetted local restaurant photographers in Toronto and the GTA.
         </p>
       </div>
     </section>
 
     <!-- HOW IT WORKS -->
-    <section style="background: #fff; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">How It Works</h2>
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>How It Works</h2>
 
         <div style="margin-bottom: 32px;">
-          <p><span style="display: inline-block; background: #E85D04; color: #fff; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: 700; margin-right: 12px;">1</span><strong>Discovery Call</strong></p>
-          <p style="color: #4a4a4a; margin-top: 8px;">We learn about your restaurant, your customers, your goals, and what's not working with your current site. 30 minutes. No sales pitch.</p>
+          <p><span>1</span><strong>Discovery Call</strong></p>
+          <p>We learn about your restaurant, your customers, your goals, and what's not working with your current site. 30 minutes. No sales pitch.</p>
         </div>
 
         <div style="margin-bottom: 32px;">
-          <p><span style="display: inline-block; background: #E85D04; color: #fff; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: 700; margin-right: 12px;">2</span><strong>Design & Build</strong></p>
-          <p style="color: #4a4a4a; margin-top: 8px;">We design, develop, and test your site. You review and approve before anything goes live. Most builds are completed in 3–4 weeks.</p>
+          <p><span>2</span><strong>Design & Build</strong></p>
+          <p>We design, develop, and test your site. You review and approve before anything goes live. Most builds are completed in 3–4 weeks.</p>
         </div>
 
         <div style="margin-bottom: 32px;">
-          <p><span style="display: inline-block; background: #E85D04; color: #fff; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-weight: 700; margin-right: 12px;">3</span><strong>Launch & Optimize</strong></p>
-          <p style="color: #4a4a4a; margin-top: 8px;">We launch, submit to Google Search Console, and monitor performance. Site updates and maintenance are included in our ongoing packages.</p>
+          <p><span>3</span><strong>Launch & Optimize</strong></p>
+          <p>We launch, submit to Google Search Console, and monitor performance. Site updates and maintenance are included in our ongoing packages.</p>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section style="background: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">Frequently Asked Questions</h2>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>Frequently Asked Questions</h2>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How much does a restaurant website cost in Toronto?</h3>
-          <p style="color: #4a4a4a;">Restaurant website design projects start at $2,500 for a single-location restaurant with menu, photos, hours, and booking integration. Multi-location or custom-functionality builds range from $4,000–$8,000. Ongoing monthly packages (including updates, hosting, and SEO) start at $300/month.</p>
+        <div class="trg-faq-item">
+          <h3>How much does a restaurant website cost in Toronto?</h3>
+          <p>{servicePricingFaqs.website}</p>
         </div>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How long does a restaurant website take to build?</h3>
-          <p style="color: #4a4a4a;">Most restaurant websites are completed in 3–4 weeks from discovery call to launch. Rush builds for grand openings or rebrands can be completed in 7–10 business days for an additional fee.</p>
+        <div class="trg-faq-item">
+          <h3>How long does a restaurant website take to build?</h3>
+          <p>Most restaurant websites are completed in 3–4 weeks from discovery call to launch. Rush builds for grand openings or rebrands can be completed in 7–10 business days for an additional fee.</p>
         </div>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">Do you work with existing websites or only build new ones?</h3>
-          <p style="color: #4a4a4a;">Both. We frequently do audits and optimization of existing restaurant websites — fixing speed issues, improving mobile UX, adding local SEO. Sometimes a rebuild is the right call; sometimes optimization gets you most of the way there for less cost. We'll tell you which one you actually need.</p>
+        <div class="trg-faq-item">
+          <h3>Do you work with existing websites or only build new ones?</h3>
+          <p>Both. We frequently do audits and optimization of existing restaurant websites — fixing speed issues, improving mobile UX, adding local SEO. Sometimes a rebuild is the right call; sometimes optimization gets you most of the way there for less cost. We'll tell you which one you actually need.</p>
         </div>
 
-        <div style="padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">Can I update my own menu and content after it's built?</h3>
-          <p style="color: #4a4a4a;">Yes. We build with simple content management in mind. You'll be able to update your menu, photos, and hours without any technical knowledge. We also offer ongoing update services if you'd rather have us handle it.</p>
+        <div class="trg-faq-item">
+          <h3>Can I update my own menu and content after it's built?</h3>
+          <p>Yes. We build with simple content management in mind. You'll be able to update your menu, photos, and hours without any technical knowledge. We also offer ongoing update services if you'd rather have us handle it.</p>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section style="background: #1a1a1a; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 60px 24px; text-align: center;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); color: #fff; margin-bottom: 20px;">Your Website Should Be Your Best Salesperson</h2>
-        <p style="font-size: 1.15rem; color: #ccc; max-width: 580px; margin: 0 auto 28px;">
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <h2>Your Website Should Be Your Best Salesperson</h2>
+        <p>
           Every day a slow, outdated, or unfindable website is live, you're leaving money on the table. Let's build something that actually works.
         </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: 6px;">
+        <a href="/contact/">
           Book a Free Google Audit
         </a>
       </div>

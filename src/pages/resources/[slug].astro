@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import PageSection from '../../components/PageSection.astro';
+import TallyEmbed from '../../components/TallyEmbed.astro';
+import { ctaNav } from '../../data/navigation';
+import { resourceContent } from '../../data/resources';
+import { getLeadMagnetEmbedUrl, leadMagnets, type LeadMagnetKey } from '../../data/tally';
+
+export function getStaticPaths() {
+  return (Object.keys(leadMagnets) as LeadMagnetKey[]).map((key) => ({
+    params: { slug: leadMagnets[key].slug },
+    props: { key },
+  }));
+}
+
+interface Props {
+  key: LeadMagnetKey;
+}
+
+const { key } = Astro.props;
+const magnet = leadMagnets[key];
+const content = resourceContent[key];
+const embedUrl = getLeadMagnetEmbedUrl(import.meta.env, key);
+---
+
+<BaseLayout title={`${magnet.title} — Toronto Restaurant Growth`} description={magnet.metaDescription}>
+  <main>
+    <PageIntro eyebrow={content.eyebrow} title={magnet.title} description={content.intro} />
+
+    <PageSection width="narrow">
+      <h2 class="font-heading text-2xl text-ink">{content.previewTitle}</h2>
+      <ul class="mt-6 space-y-4">
+        {content.previewItems.map((item) => (
+          <li class="flex gap-3 text-sm leading-relaxed text-ink-muted">
+            <span class="text-accent">✓</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-8 text-sm text-ink-muted">
+        Full PDF includes the complete set. See our{' '}
+        <a href={content.serviceLink.href} class="font-semibold text-cta no-underline hover:text-cta-hover">
+          {content.serviceLink.label}
+        </a>{' '}
+        for how TRG implements this for clients.
+      </p>
+    </PageSection>
+
+    <section class="border-y border-stone-border bg-surface py-16 lg:py-20">
+      <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+        <h2 class="font-heading text-3xl text-ink">Get the full PDF</h2>
+        <p class="mt-3 text-base text-ink-muted">Name and email — instant access after submit.</p>
+        <div class="mt-8">
+          <TallyEmbed embedUrl={embedUrl} title={`Download ${magnet.title}`} minHeight="520px" />
+        </div>
+        <p class="mt-6 text-center text-sm text-ink-muted">
+          After submitting, download here:{' '}
+          <a href={magnet.pdfPath} class="font-semibold text-cta no-underline hover:text-cta-hover">
+            {magnet.title} (PDF)
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <PageSection tone="surface" width="narrow">
+      <div class="rounded-2xl bg-cta px-8 py-10 text-center text-white">
+        <h2 class="font-heading text-2xl">Want a full diagnosis for your restaurant?</h2>
+        <p class="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/90">
+          Book a free 15-minute Google audit — we'll show you what's costing you covers today.
+        </p>
+        <a
+          href={ctaNav.href}
+          class="mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3 text-sm font-bold text-cta no-underline hover:bg-cream"
+        >
+          {ctaNav.label}
+        </a>
+      </div>
+    </PageSection>
+  </main>
+</BaseLayout>

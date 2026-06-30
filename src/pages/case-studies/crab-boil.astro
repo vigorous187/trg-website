@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import PageCta from '../../components/PageCta.astro';
+import MetricStrip from '../../components/MetricStrip.astro';
 ---
 
 <BaseLayout
@@ -7,148 +10,119 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="From zero digital presence to 500M+ combined impressions, 113K TikTok followers, and a successful Ottawa expansion. See how Toronto Restaurant Growth runs marketing for one of Canada's fastest-growing casual dining brands."
 >
 
-  <main style="padding-top: 80px;">
+  <main>
 
     <!-- HERO -->
-    <section style="background: #1A1A1A; color: #fff; padding: 80px 24px 100px; text-align: center;">
-      <span style="display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #E85D04; margin-bottom: 20px;">Case Study — Crab Boil</span>
-      <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(32px, 5vw, 56px); line-height: 1.15; max-width: 820px; margin: 0 auto 24px; font-weight: 400;">
-        500 Million Impressions. One Restaurant Group. Zero Traditional Ad Spend.
-      </h1>
-      <p style="font-size: 18px; color: rgba(255,255,255,0.72); max-width: 600px; margin: 0 auto;">
-        How Toronto Restaurant Growth turned Crab Boil's digital presence into one of Canada's most-followed restaurant accounts — and helped them open in Ottawa.
-      </p>
-    </section>
+    <PageIntro eyebrow="Case Study — Crab Boil" title="500 Million Impressions. One Restaurant Group. Zero Traditional Ad Spend." description="How Toronto Restaurant Growth turned Crab Boil's digital presence into one of Canada's most-followed restaurant accounts — and helped them open in Ottawa."  ctaLabel="Book a Free Google Audit" ctaHref="/contact/" />
 
     <!-- METRICS BAR -->
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; background: #E85D04; padding: 0;">
-      <div style="flex: 1 1 180px; padding: 36px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.2);">
-        <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(28px, 4vw, 42px); color: #fff; display: block; line-height: 1; margin-bottom: 8px;">500M+</span>
-        <span style="font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.08em;">Combined Impressions</span>
-      </div>
-      <div style="flex: 1 1 180px; padding: 36px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.2);">
-        <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(28px, 4vw, 42px); color: #fff; display: block; line-height: 1; margin-bottom: 8px;">113K</span>
-        <span style="font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.08em;">TikTok Followers</span>
-      </div>
-      <div style="flex: 1 1 180px; padding: 36px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.2);">
-        <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(28px, 4vw, 42px); color: #fff; display: block; line-height: 1; margin-bottom: 8px;">89K</span>
-        <span style="font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.08em;">Instagram Followers</span>
-      </div>
-      <div style="flex: 1 1 180px; padding: 36px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.2);">
-        <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(28px, 4vw, 42px); color: #fff; display: block; line-height: 1; margin-bottom: 8px;">$2K→$4K</span>
-        <span style="font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.08em;">Monthly Retainer Growth</span>
-      </div>
-      <div style="flex: 1 1 180px; padding: 36px 24px; text-align: center;">
-        <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(28px, 4vw, 42px); color: #fff; display: block; line-height: 1; margin-bottom: 8px;">Ottawa</span>
-        <span style="font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.08em;">New Market Launched</span>
-      </div>
-    </div>
+    <MetricStrip metrics={[
+    { value: "500M+", label: "Combined Impressions" },
+    { value: "113K", label: "TikTok Followers" },
+    { value: "89K", label: "Instagram Followers" },
+    { value: "$2K→$4K", label: "Monthly Retainer Growth" },
+    { value: "Ottawa", label: "New Market Launched" }
+    ]} />
 
     <!-- BODY CONTENT -->
-    <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
 
       <!-- THE CHALLENGE -->
-      <section style="padding: 72px 0; border-bottom: 1px solid #e8e8e5;">
-        <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #E85D04; margin-bottom: 16px; display: block;">01 — The Challenge</span>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; line-height: 1.2; margin-bottom: 24px; color: #1A1A1A;">A Restaurant That Deserved to Be Known</h2>
+      <section class="border-b border-stone-border py-16 sm:py-20 trg-prose">
+        <p class="section-label mb-4">01 — The Challenge</p>
+        <h2>A Restaurant That Deserved to Be Known</h2>
 
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">Crab Boil had the food. The experience. The kind of communal, hands-on seafood dining that people drive across the city for. What they didn't have was a digital presence that matched what happened inside their doors.</p>
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">Multi-location restaurants face a specific problem that single-location spots don't: every new location you open is a new digital entity. It needs its own Google Business Profile, its own local SEO signals, its own review momentum. Managing that consistently — while also building a social following that works across markets — takes systems, not hustle.</p>
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">When Crab Boil came to Toronto Restaurant Growth, they were running lean on digital. Their Google Business Profiles were incomplete. Their review responses were inconsistent. Social was reactive — posting when someone had time, not on a strategy built to grow.</p>
+        <p>Crab Boil had the food. The experience. The kind of communal, hands-on seafood dining that people drive across the city for. What they didn't have was a digital presence that matched what happened inside their doors.</p>
+        <p>Multi-location restaurants face a specific problem that single-location spots don't: every new location you open is a new digital entity. It needs its own Google Business Profile, its own local SEO signals, its own review momentum. Managing that consistently — while also building a social following that works across markets — takes systems, not hustle.</p>
+        <p>When Crab Boil came to Toronto Restaurant Growth, they were running lean on digital. Their Google Business Profiles were incomplete. Their review responses were inconsistent. Social was reactive — posting when someone had time, not on a strategy built to grow.</p>
 
-        <div style="border-left: 4px solid #E85D04; padding: 24px 32px; margin: 40px 0; background: #F5F5F0; border-radius: 0 8px 8px 0;">
-          <p style="font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; line-height: 1.5; font-style: italic; color: #1A1A1A; margin: 0;">"The restaurants that win in Canada over the next five years will be the ones that understand Google and TikTok the way they understand their kitchen. Crab Boil understood that early."</p>
+        <div class="trg-callout">
+          <p>"The restaurants that win in Canada over the next five years will be the ones that understand Google and TikTok the way they understand their kitchen. Crab Boil understood that early."</p>
         </div>
       </section>
 
       <!-- WHAT TRG DID -->
-      <section style="padding: 72px 0; border-bottom: 1px solid #e8e8e5;">
-        <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #E85D04; margin-bottom: 16px; display: block;">02 — What TRG Did</span>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; line-height: 1.2; margin-bottom: 24px; color: #1A1A1A;">A System Built for a Growing Brand</h2>
+      <section class="border-b border-stone-border py-16 sm:py-20 trg-prose">
+        <p class="section-label mb-4">02 — What TRG Did</p>
+        <h2>A System Built for a Growing Brand</h2>
 
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">We didn't start with content. We started with infrastructure — the kind of work most agencies skip because it isn't visible. Before a single post went live under the new strategy, we audited every digital touchpoint.</p>
+        <p>We didn't start with content. We started with infrastructure — the kind of work most agencies skip because it isn't visible. Before a single post went live under the new strategy, we audited every digital touchpoint.</p>
 
-        <ul style="list-style: none; margin: 24px 0;">
-          <li style="display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #ebebeb; font-size: 16px; color: #2a2a2a; line-height: 1.6;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 1px;">→</span>
+        <ul>
+          <li>
+            <span>→</span>
             <span><strong>Social Strategy & Content Calendar:</strong> Built a content engine around Crab Boil's visual identity — the boils, the bibs, the communal table energy that makes people tag their friends. Content was planned weekly, shot consistently, and optimized for TikTok's non-follower algorithm.</span>
           </li>
-          <li style="display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #ebebeb; font-size: 16px; color: #2a2a2a; line-height: 1.6;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 1px;">→</span>
+          <li>
+            <span>→</span>
             <span><strong>TikTok Growth Architecture:</strong> TikTok rewards content that holds attention and triggers saves and shares — not just likes. We reverse-engineered what was working in the food space on TikTok and built a posting cadence that compounded over time. 113K followers isn't a vanity number — it represents hundreds of thousands of Canadians who now know the brand.</span>
           </li>
-          <li style="display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #ebebeb; font-size: 16px; color: #2a2a2a; line-height: 1.6;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 1px;">→</span>
+          <li>
+            <span>→</span>
             <span><strong>Instagram Brand Building:</strong> On Instagram, we focused on aesthetic cohesion, Story engagement, and Reels that reinforced the TikTok presence. The 89K Instagram following acts as a trust signal — when a potential customer searches the brand, they see a page that looks like a real brand.</span>
           </li>
-          <li style="display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #ebebeb; font-size: 16px; color: #2a2a2a; line-height: 1.6;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 1px;">→</span>
+          <li>
+            <span>→</span>
             <span><strong>Google Business Profile Optimization:</strong> We completed and optimized GBP listings for each location — categories, attributes, hours, menus, Q&A, photos. We set up the systems to generate consistent new reviews and respond to every review.</span>
           </li>
-          <li style="display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #ebebeb; font-size: 16px; color: #2a2a2a; line-height: 1.6;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 1px;">→</span>
+          <li>
+            <span>→</span>
             <span><strong>Review Management:</strong> We implemented a review generation system — timing asks to the moments customers are most likely to leave them, and responding to every review to show Google and future customers that this is an active, customer-focused business.</span>
           </li>
-          <li style="display: flex; gap: 16px; padding: 16px 0; font-size: 16px; color: #2a2a2a; line-height: 1.6;">
-            <span style="color: #E85D04; font-weight: 700; flex-shrink: 0; margin-top: 1px;">→</span>
+          <li>
+            <span>→</span>
             <span><strong>Multi-Location Support:</strong> As Crab Boil prepared the Ottawa expansion, we built a playbook for launching a new location digitally — GBP setup, pre-opening social content, review seeding strategy, and local SEO signals.</span>
           </li>
         </ul>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; margin: 36px 0 12px; color: #1A1A1A;">Why the Retainer Grew</h3>
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">Crab Boil started with a $2,000/month retainer. As the results compounded and the scope expanded — adding the Ottawa launch, deepening the content strategy, taking on more of the GBP and review management — the retainer grew to $4,000/month. That growth happened because the work was working.</p>
+        <h3>Why the Retainer Grew</h3>
+        <p>Crab Boil started with a $2,000/month retainer. As the results compounded and the scope expanded — adding the Ottawa launch, deepening the content strategy, taking on more of the GBP and review management — the retainer grew to $4,000/month. That growth happened because the work was working.</p>
       </section>
 
       <!-- RESULTS -->
-      <section style="padding: 72px 0; border-bottom: 1px solid #e8e8e5;">
-        <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #E85D04; margin-bottom: 16px; display: block;">03 — The Results</span>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; line-height: 1.2; margin-bottom: 24px; color: #1A1A1A;">What 500 Million Impressions Actually Means</h2>
+      <section class="border-b border-stone-border py-16 sm:py-20 trg-prose">
+        <p class="section-label mb-4">03 — The Results</p>
+        <h2>What 500 Million Impressions Actually Means</h2>
 
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">Let's be clear about what 500 million combined impressions means for a restaurant group. This isn't a fashion brand or a media company. Impressions on a restaurant account are overwhelmingly local — people in the GTA, people planning a night out, people who saw a friend's share and thought "I need to try that."</p>
+        <p>Let's be clear about what 500 million combined impressions means for a restaurant group. This isn't a fashion brand or a media company. Impressions on a restaurant account are overwhelmingly local — people in the GTA, people planning a night out, people who saw a friend's share and thought "I need to try that."</p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 40px 0;">
-          <div style="background: #F5F5F0; border-radius: 12px; padding: 28px 24px; text-align: center;">
-            <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: 36px; color: #E85D04; display: block; margin-bottom: 8px; line-height: 1;">500M+</span>
-            <span style="font-size: 14px; color: #555; font-weight: 500;">Total combined impressions across platforms</span>
+          <div class="trg-stat-card">
+            <span>500M+</span>
+            <span>Total combined impressions across platforms</span>
           </div>
-          <div style="background: #F5F5F0; border-radius: 12px; padding: 28px 24px; text-align: center;">
-            <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: 36px; color: #E85D04; display: block; margin-bottom: 8px; line-height: 1;">113K</span>
-            <span style="font-size: 14px; color: #555; font-weight: 500;">TikTok followers at @crabboil.ca</span>
+          <div class="trg-stat-card">
+            <span>113K</span>
+            <span>TikTok followers at @crabboil.ca</span>
           </div>
-          <div style="background: #F5F5F0; border-radius: 12px; padding: 28px 24px; text-align: center;">
-            <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: 36px; color: #E85D04; display: block; margin-bottom: 8px; line-height: 1;">89K</span>
-            <span style="font-size: 14px; color: #555; font-weight: 500;">Instagram followers</span>
+          <div class="trg-stat-card">
+            <span>89K</span>
+            <span>Instagram followers</span>
           </div>
-          <div style="background: #F5F5F0; border-radius: 12px; padding: 28px 24px; text-align: center;">
-            <span style="font-family: 'DM Serif Display', Georgia, serif; font-size: 36px; color: #E85D04; display: block; margin-bottom: 8px; line-height: 1;">2x</span>
-            <span style="font-size: 14px; color: #555; font-weight: 500;">Retainer growth from $2K to $4K/month</span>
+          <div class="trg-stat-card">
+            <span>2x</span>
+            <span>Retainer growth from $2K to $4K/month</span>
           </div>
         </div>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; font-weight: 400; margin: 36px 0 12px; color: #1A1A1A;">The Ottawa Launch</h3>
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">The real proof of what TRG built wasn't a follower count — it was the Ottawa expansion. Because 113,000 TikTok followers and 89,000 Instagram followers don't stop caring about a brand when it opens in a new city. The pre-existing digital presence gave Ottawa customers a reason to be excited before the doors opened. That's what digital presence at scale actually buys you: de-risked expansion.</p>
+        <h3>The Ottawa Launch</h3>
+        <p>The real proof of what TRG built wasn't a follower count — it was the Ottawa expansion. Because 113,000 TikTok followers and 89,000 Instagram followers don't stop caring about a brand when it opens in a new city. The pre-existing digital presence gave Ottawa customers a reason to be excited before the doors opened. That's what digital presence at scale actually buys you: de-risked expansion.</p>
       </section>
 
       <!-- WHAT THIS MEANS -->
-      <section style="padding: 72px 0;">
-        <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #E85D04; margin-bottom: 16px; display: block;">04 — What This Means for You</span>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; line-height: 1.2; margin-bottom: 24px; color: #1A1A1A;">If It Worked for 500M Impressions, It Can Work for Your Restaurant</h2>
+      <section class="py-16 sm:py-20 trg-prose">
+        <p class="section-label mb-4">04 — What This Means for You</p>
+        <h2>If It Worked for 500M Impressions, It Can Work for Your Restaurant</h2>
 
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">The restaurants winning in Toronto right now are not necessarily the ones with the best food. They're the ones that show up when someone searches "seafood restaurant near me" at 6:30 PM on a Friday. They're the ones with 4.7 stars and 300 reviews and a TikTok account that their target customers actually follow.</p>
+        <p>The restaurants winning in Toronto right now are not necessarily the ones with the best food. They're the ones that show up when someone searches "seafood restaurant near me" at 6:30 PM on a Friday. They're the ones with 4.7 stars and 300 reviews and a TikTok account that their target customers actually follow.</p>
 
-        <p style="font-size: 17px; line-height: 1.75; color: #2a2a2a; margin-bottom: 20px;">Crab Boil made that decision. The results speak for themselves. If you're ready to make it, we're ready to build it.</p>
+        <p>Crab Boil made that decision. The results speak for themselves. If you're ready to make it, we're ready to build it.</p>
       </section>
 
     </div>
 
     <!-- CTA -->
-    <div style="background: #1A1A1A; color: #fff; padding: 72px 24px; text-align: center;">
-      <div style="max-width: 800px; margin: 0 auto;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; color: #fff; margin-bottom: 16px;">Book Your Free Google Audit</h2>
-        <p style="font-size: 17px; color: rgba(255,255,255,0.72); max-width: 520px; margin: 0 auto 36px;">We'll review your Google Business Profile, your website, and your reviews — and show you exactly what's costing you customers. 15 minutes. No pitch. Just clarity.</p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; font-size: 16px; font-weight: 700; padding: 16px 40px; border-radius: 6px; text-decoration: none;">Book a Free Google Audit</a>
-      </div>
-    </div>
+    <PageCta title="Book Your Free Google Audit" description="We'll review your Google Business Profile, your website, and your reviews — and show you exactly what's costing you customers. 15 minutes. No pitch. Just clarity." />
 
   </main>
 </BaseLayout>

@@ -1,161 +1,145 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { servicePricingFaqs } from '../../data/pricing';
+import PageIntro from '../../components/PageIntro.astro';
 ---
 
 <BaseLayout
   title="Restaurant Social Media Management Toronto | Toronto Restaurant Growth"
-  description="Social media management for Toronto restaurants that drives real foot traffic — not just followers. TikTok, Instagram, and Facebook content built by a team that's already done it."
+  description="Social and video content add-on for Toronto restaurants — $3,000/month through Jayden Aj. TikTok, Reels, and on-site production. Not included in core TRG plans."
 >
 
-  <main style="padding-top: 80px;">
+  <main>
 
     <!-- HERO -->
-    <section style="background: #1a1a1a; color: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px; text-align: center;">
-        <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 20px; color: #fff;">
-          Restaurant Social Media Management Toronto
-        </h1>
-        <p style="font-size: 1.25rem; color: #ccc; max-width: 640px; margin: 0 auto 32px;">
-          We've built one of Canada's most-followed restaurant accounts from scratch. Now we bring that exact playbook to independent restaurants across the GTA — because we know what works and what's a waste of your money.
-        </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: 6px;">
-          Book a Free Google Audit
-        </a>
-      </div>
-    </section>
+    <PageIntro title="Restaurant Social Media Management Toronto" description="Short-form video and social that fills seats — delivered by Jayden Aj through Forge's content team. This is a separate add-on ($3,000/month), not part of core TRG website and SEO plans." ctaLabel="Book a Free Google Audit" ctaHref="/contact/" />
 
     <!-- THE PROOF -->
-    <section style="background: #fff; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px; text-align: center;">
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>
           We've Already Done This. At Scale.
         </h2>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto 16px; color: #4a4a4a;">
+        <p>
           Most social media agencies guess at what works for restaurants. We don't guess — we have the receipts.
         </p>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0;">
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">500M+</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">combined impressions delivered across our restaurant clients</div>
+        <div class="trg-stat-grid">
+          <div class="trg-stat-card">
+            <div class="value">500M+</div>
+            <div class="label">combined impressions delivered across our restaurant clients</div>
           </div>
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">598K</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">average views per video for Jayden restaurant content</div>
+          <div class="trg-stat-card">
+            <div class="value">598K</div>
+            <div class="label">average views per video for Jayden restaurant content</div>
           </div>
-          <div style="text-align: center; padding: 24px; background: rgba(232,93,4,0.08); border-radius: 8px;">
-            <div style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2.4rem; color: #E85D04; font-weight: 700;">113K</div>
-            <div style="font-size: 0.9rem; color: #4a4a4a; margin-top: 8px;">TikTok followers built for @crabboil.ca from zero</div>
+          <div class="trg-stat-card">
+            <div class="value">113K</div>
+            <div class="label">TikTok followers built for @crabboil.ca from zero</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- THE PROBLEM -->
-    <section style="background: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>
           Why Most Restaurant Social Media Fails
         </h2>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">You're posting, but nobody's seeing it</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>You're posting, but nobody's seeing it</h3>
+        <p>
           Posting a photo of your daily special and getting 12 likes isn't social media strategy — it's digital wallpaper. The algorithm rewards content that earns engagement, shares, and saves. If you're not creating that kind of content, you're invisible.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">You're on the wrong platforms for your restaurant</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>You're on the wrong platforms for your restaurant</h3>
+        <p>
           A halal restaurant in Brampton has a completely different platform strategy than a fine dining spot on King West. TikTok drives discovery. Instagram drives aspiration. Facebook drives community loyalty. We know which combination works for your specific restaurant and neighbourhood.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">You're measuring followers instead of foot traffic</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>You're measuring followers instead of foot traffic</h3>
+        <p>
           Followers don't pay your rent. We measure what actually matters: content reach in your local area, website clicks from social, reservation requests driven by specific posts, and the correlation between content performance and weekly covers.
         </p>
       </div>
     </section>
 
     <!-- WHAT WE DO -->
-    <section style="background: #fff; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">What You Get</h2>
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>What You Get</h2>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Content Strategy Built for Your Restaurant</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Content Strategy Built for Your Restaurant</h3>
+        <p>
           We build a content calendar around your menu, your seasons, your community, and the moments that matter in your specific neighbourhood. No generic food photography templates.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Video Production & Editing</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Video Production & Editing</h3>
+        <p>
           Video is the only format that drives real discovery on TikTok and Instagram Reels. We direct, film, and edit short-form video content that shows your food and atmosphere in a way that makes people want to come in. No talking head videos. No generic stock music.
         </p>
-        <ul style="margin: 16px 0 24px 20px; color: #4a4a4a;">
-          <li style="margin-bottom: 10px;"><strong>Food reveal videos</strong> — the format that drives the most saves and shares for restaurants</li>
-          <li style="margin-bottom: 10px;"><strong>Behind-the-scenes kitchen content</strong> — builds trust and authentic connection</li>
-          <li style="margin-bottom: 10px;"><strong>Neighbourhood hooks</strong> — content that speaks directly to your local community</li>
-          <li style="margin-bottom: 10px;"><strong>Event and special promotion content</strong> — drive urgency and action</li>
+        <ul>
+          <li><strong>Food reveal videos</strong> — the format that drives the most saves and shares for restaurants</li>
+          <li><strong>Behind-the-scenes kitchen content</strong> — builds trust and authentic connection</li>
+          <li><strong>Neighbourhood hooks</strong> — content that speaks directly to your local community</li>
+          <li><strong>Event and special promotion content</strong> — drive urgency and action</li>
         </ul>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Community Management</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Community Management</h3>
+        <p>
           We respond to comments and DMs within a few hours. Every response is written in your restaurant's voice — not generic customer service copy. We also identify and engage with local food accounts that have real influence in your community.
         </p>
 
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.4rem; margin: 24px 0 12px;">Monthly Performance Reports</h3>
-        <p style="color: #4a4a4a; margin-bottom: 16px;">
+        <h3>Monthly Performance Reports</h3>
+        <p>
           Plain-English reports showing what worked, what didn't, and what we're doing next month. Reach, engagement, follower growth, and most importantly: which content drove website visits and reservation requests.
         </p>
       </div>
     </section>
 
     <!-- CASE STUDY -->
-    <section style="background: #1a1a1a; color: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); color: #fff; margin-bottom: 24px;">Real Results</h2>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>Real Results</h2>
 
-        <div style="background: #1a1a1a; border-left: 4px solid #E85D04; padding: 32px; border-radius: 8px; margin: 24px 0; border: 1px solid rgba(255,255,255,0.1);">
-          <p style="font-family: 'DM Serif Display', Georgia, serif; font-size: 2rem; color: #E85D04; font-weight: 700;">0 to 113K TikTok followers</p>
-          <p style="color: #ccc;">Crab Boil had zero social media presence when they came to us. We built their TikTok strategy, content calendar, and production pipeline from scratch. Within 18 months: 113K TikTok followers, 89K Instagram followers, 500M+ combined impressions, and a successful Ottawa expansion driven entirely by the social audience we built.</p>
-          <p style="margin-top: 16px;"><a href="/case-studies/crab-boil/" style="color: #E85D04; text-decoration: underline;">Read the full Crab Boil case study</a></p>
+        <div class="trg-card-dark-accent">
+          <p>0 to 113K TikTok followers</p>
+          <p>Crab Boil had zero social media presence when they came to us. We built their TikTok strategy, content calendar, and production pipeline from scratch. Within 18 months: 113K TikTok followers, 89K Instagram followers, 500M+ combined impressions, and a successful Ottawa expansion driven entirely by the social audience we built.</p>
+          <p><a href="/case-studies/crab-boil/">Read the full Crab Boil case study</a></p>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section style="background: #f5f5f0; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 0 24px;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); margin-bottom: 24px;">Frequently Asked Questions</h2>
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>Frequently Asked Questions</h2>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How much does restaurant social media management cost in Toronto?</h3>
-          <p style="color: #4a4a4a;">Our social media management packages start at $1,200/month for content strategy, scheduling, and community management. Full-service packages including video production range from $2,000–$3,500/month depending on content volume and posting frequency.</p>
+        <div class="trg-faq-item">
+          <h3>How much does restaurant social media management cost in Toronto?</h3>
+          <p style="color: #4a4a4a;" set:html={servicePricingFaqs.social} />
         </div>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">Do I need to be on every platform?</h3>
-          <p style="color: #4a4a4a;">No. We recommend the platforms that are right for your restaurant based on your cuisine type, neighbourhood, and target customer. Most Toronto restaurants get the best ROI from TikTok + Instagram. Some benefit from Facebook for community events and promotions. We won't make you manage platforms that aren't working for your restaurant.</p>
+        <div class="trg-faq-item">
+          <h3>Do I need to be on every platform?</h3>
+          <p>No. We recommend the platforms that are right for your restaurant based on your cuisine type, neighbourhood, and target customer. Most Toronto restaurants get the best ROI from TikTok + Instagram. Some benefit from Facebook for community events and promotions. We won't make you manage platforms that aren't working for your restaurant.</p>
         </div>
 
-        <div style="border-bottom: 1px solid #ddd; padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">How long before we see results?</h3>
-          <p style="color: #4a4a4a;">Local reach and engagement typically improve within the first 30 days as we dial in your content strategy. Meaningful follower growth and traffic impact usually shows within 60–90 days. The compounding effect — where your content is still driving discovery months after it's posted — builds over 6–12 months.</p>
+        <div class="trg-faq-item">
+          <h3>How long before we see results?</h3>
+          <p>Local reach and engagement typically improve within the first 30 days as we dial in your content strategy. Meaningful follower growth and traffic impact usually shows within 60–90 days. The compounding effect — where your content is still driving discovery months after it's posted — builds over 6–12 months.</p>
         </div>
 
-        <div style="padding: 24px 0;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 1.15rem; margin-bottom: 10px; color: #1a1a1a;">Will you post every day?</h3>
-          <p style="color: #4a4a4a;">Posting frequency is based on what drives results for your specific restaurant and platform — not arbitrary targets. Quality and strategic timing beat daily posting every time. We typically post 4–7 times per week across platforms, with a heavier emphasis on the days and times your target customers are most active.</p>
+        <div class="trg-faq-item">
+          <h3>Will you post every day?</h3>
+          <p>Posting frequency is based on what drives results for your specific restaurant and platform — not arbitrary targets. Quality and strategic timing beat daily posting every time. We typically post 4–7 times per week across platforms, with a heavier emphasis on the days and times your target customers are most active.</p>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section style="background: #1a1a1a; padding: 80px 0;">
-      <div style="max-width: 800px; margin: 0 auto; padding: 60px 24px; text-align: center;">
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2rem); color: #fff; margin-bottom: 20px;">Stop Posting Into the Void</h2>
-        <p style="font-size: 1.15rem; color: #ccc; max-width: 580px; margin: 0 auto 28px;">
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <h2>Stop Posting Into the Void</h2>
+        <p>
           Social media that doesn't drive customers through your door is just an expense. Let's build a strategy that actually fills tables.
         </p>
-        <a href="/contact/" style="display: inline-block; background: #E85D04; color: #fff; padding: 16px 32px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: 6px;">
+        <a href="/contact/">
           Book a Free Google Audit
         </a>
       </div>

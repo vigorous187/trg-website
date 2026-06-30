@@ -1,192 +1,219 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import PageSection from '../components/PageSection.astro';
+import TallyEmbed from '../components/TallyEmbed.astro';
+import { ctaNav } from '../data/navigation';
+import { contentAddOn, growthPlan, intakeToTier, tierById } from '../data/pricing';
+import {
+  auditPrefillFromSearchParams,
+  getAuditEmbedUrl,
+  trgContactEmail,
+} from '../data/tally';
+
+const trustItems = [
+  '100% Free — No Credit Card',
+  '15 Minutes Max',
+  'Restaurant-Specific Insights',
+  'No Sales Pressure',
+];
+
+const auditIncludes = [
+  'Where your restaurant ranks on Google Maps for your cuisine and neighbourhood',
+  "What's missing from your Google Business Profile (most have 3–5 critical gaps)",
+  'One thing you can fix this week to get more views — at no cost',
+];
+
+const prefill = auditPrefillFromSearchParams(Astro.url.searchParams);
+const embedUrl = getAuditEmbedUrl(import.meta.env, prefill);
+
+const afterSteps = [
+  {
+    step: '1',
+    title: 'We review your digital presence',
+    body: "Before the call, we audit your Google Business Profile, your website's SEO, your review velocity, and how you show up in local search.",
+  },
+  {
+    step: '2',
+    title: '15-minute call, no fluff',
+    body: "We walk you through what's working, what's costing you customers, and the highest-leverage fixes — whether you hire us or not.",
+  },
+  {
+    step: '3',
+    title: 'A proposal if it makes sense',
+    body: "If TRG is a fit, we'll share a specific proposal. If not, we'll tell you that too.",
+  },
+  {
+    step: '4',
+    title: 'Month-to-month if you proceed',
+    body: 'No long-term contracts. We earn your business each month as results compound.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Is the audit really free?',
+    a: "Yes. No charge, no credit card, and no obligation. Most owners leave with actionable information they didn't have before.",
+  },
+  {
+    q: 'What exactly do you audit?',
+    a: 'Your Google Business Profile, basic website SEO health, and review signals — how you look to a customer searching on Google right now.',
+  },
+  {
+    q: 'How long does the call take?',
+    a: 'About 15 minutes. We respect your time — diagnosis, not a sales deck.',
+  },
+  {
+    q: 'Do you work with chains or only independents?',
+    a: 'Independent restaurants and small regional groups (2–5 locations). We do not work with national franchises.',
+  },
+  {
+    q: 'What cities do you cover?',
+    a: 'The Greater Toronto Area: Toronto, Mississauga, Brampton, Scarborough, Etobicoke, North York, Markham, Vaughan, Hamilton, and nearby municipalities.',
+  },
+];
 ---
 
 <BaseLayout
   title="Book a Free Google Audit — Toronto Restaurant Growth"
   description="Get a free 15-minute review of your Google Business Profile, website, and reviews. We'll tell you exactly what's costing you customers. No pitch."
 >
+  <main>
+    <PageIntro
+      eyebrow="Free consultation"
+      title="Your Free Google Audit — No Sales Pitch"
+      description="We'll look at your Google Business Profile, your website, and your reviews — and tell you exactly what's costing you customers. 15 minutes. No pitch."
+    >
+      <ul class="mx-auto mt-8 max-w-xl space-y-3 text-left text-sm text-ink-muted">
+        {auditIncludes.map((item) => (
+          <li class="flex gap-3">
+            <span class="mt-0.5 text-accent">✓</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-6 text-center text-sm font-medium text-ink">This is not a pitch. It's a diagnosis.</p>
+    </PageIntro>
 
-  <main style="padding-top: 80px;">
-
-    <!-- HERO -->
-    <section style="background: #1A1A1A; color: #fff; padding: 88px 24px 96px; text-align: center;">
-      <span style="display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #E85D04; margin-bottom: 20px;">Free Consultation</span>
-      <h1 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(34px, 5vw, 58px); line-height: 1.1; max-width: 720px; margin: 0 auto 20px; font-weight: 400;">Book a Free Google Audit</h1>
-      <p style="font-size: 18px; color: rgba(255,255,255,0.72); max-width: 580px; margin: 0 auto; line-height: 1.7;">We'll look at your Google Business Profile, your website, and your reviews — and tell you exactly what's costing you customers. 15 minutes. No pitch.</p>
+    <section class="border-y border-stone-border bg-surface py-5">
+      <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-4 sm:px-6">
+        {trustItems.map((item) => (
+          <div class="flex items-center gap-2 text-sm font-semibold text-ink">
+            <span class="flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs text-white">✓</span>
+            {item}
+          </div>
+        ))}
+      </div>
     </section>
 
-    <!-- TRUST STRIP -->
-    <div style="background: #F5F5F0; padding: 24px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; border-bottom: 1px solid #e0e0de;">
-      <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #333;">
-        <span style="width: 20px; height: 20px; background: #E85D04; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0;">✓</span>
-        <span>100% Free — No Credit Card</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #333;">
-        <span style="width: 20px; height: 20px; background: #E85D04; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0;">✓</span>
-        <span>15 Minutes Max</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #333;">
-        <span style="width: 20px; height: 20px; background: #E85D04; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0;">✓</span>
-        <span>Restaurant-Specific Insights</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #333;">
-        <span style="width: 20px; height: 20px; background: #E85D04; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0;">✓</span>
-        <span>No Sales Pressure</span>
-      </div>
-    </div>
+    <section class="bg-white py-16 lg:py-24">
+      <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_380px] lg:gap-16 lg:px-8">
+        <div>
+          <h2 class="font-heading text-3xl text-ink sm:text-4xl">Tell us about your restaurant</h2>
+          <p class="mt-4 text-base leading-relaxed text-ink-muted">
+            Fill out the form below and we'll be in touch within one business day to schedule your free audit.
+          </p>
 
-    <!-- MAIN BODY -->
-    <div style="max-width: 1100px; margin: 0 auto; padding: 72px 24px; display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: start;">
-
-      <!-- LEFT: FORM -->
-      <div>
-        <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 38px); font-weight: 400; line-height: 1.2; margin-bottom: 12px; color: #1A1A1A;">Tell Us About Your Restaurant</h2>
-        <p style="font-size: 16px; color: #555; margin-bottom: 36px; line-height: 1.6;">Fill out the form below and we'll be in touch within one business day to schedule your free audit.</p>
-
-        <!-- Tally form embed -->
-        <iframe
-          data-tally-src="https://tally.so/embed/2Evezg?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-          loading="lazy"
-          width="100%"
-          height="500"
-          frameborder="0"
-          title="Book a Free Google Audit"
-          style="border: none;"
-        ></iframe>
-        <script src="https://tally.so/widgets/embed.js"></script>
-      </div>
-
-      <!-- RIGHT: SIDEBAR -->
-      <div style="position: sticky; top: 32px;">
-
-        <div style="background: #F5F5F0; border-radius: 16px; padding: 36px; margin-bottom: 32px;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; font-weight: 400; margin-bottom: 20px; color: #1A1A1A;">Prefer to Reach Out Directly?</h3>
-
-          <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e0e0de;">
-            <div style="width: 40px; height: 40px; background: #E85D04; color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">📧</div>
-            <div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 4px;">Email</div>
-              <a href="mailto:hello@torontorestaurantgrowth.ca" style="font-size: 15px; font-weight: 600; color: #1A1A1A; text-decoration: none;">hello@torontorestaurantgrowth.ca</a>
-            </div>
+          <div class="mt-10">
+            <TallyEmbed embedUrl={embedUrl} title="Book a Free Google Audit" minHeight="720px" />
           </div>
 
-          <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e0e0de;">
-            <div style="width: 40px; height: 40px; background: #E85D04; color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">🕐</div>
-            <div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 4px;">Response Time</div>
-              <span style="font-size: 15px; font-weight: 600; color: #1A1A1A;">Within 1 business day</span>
-            </div>
-          </div>
-
-          <div style="display: flex; align-items: flex-start; gap: 16px;">
-            <div style="width: 40px; height: 40px; background: #E85D04; color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">📍</div>
-            <div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #666; margin-bottom: 4px;">Service Area</div>
-              <span style="font-size: 15px; font-weight: 600; color: #1A1A1A;">Greater Toronto Area</span>
-            </div>
-          </div>
+          <details class="mt-10 rounded-xl border border-stone-border bg-surface p-6">
+            <summary class="cursor-pointer font-heading text-lg text-ink">How service selections map to plans</summary>
+            <p class="mt-4 text-sm leading-relaxed text-ink-muted">
+              Pick what you need help with — we'll recommend the right fit on the audit call. Full details on our{' '}
+              <a href="/pricing/" class="font-semibold text-cta no-underline hover:text-cta-hover">pricing page</a>.
+            </p>
+            <ul class="mt-4 space-y-3 border-t border-stone-border pt-4">
+              {intakeToTier.map((row) => (
+                <li class="text-sm leading-relaxed text-ink-muted">
+                  <strong class="text-ink">{row.option}</strong>
+                  <span class="mt-1 block">{row.note}</span>
+                  {row.addOn === 'content' ? (
+                    <span class="mt-1 block text-xs">
+                      Add-on: {contentAddOn.name} ({contentAddOn.monthlyLabel}).
+                    </span>
+                  ) : row.tierId ? (
+                    <span class="mt-1 block text-xs">
+                      Included in {tierById(row.tierId).name} ({tierById(row.tierId).monthlyLabel}).
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </details>
         </div>
 
-        <div style="background: #1A1A1A; border-radius: 16px; padding: 32px; margin-bottom: 32px;">
-          <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 18px; font-weight: 400; color: #fff; margin-bottom: 16px;">Follow Our Work</h3>
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <a href="https://tiktok.com/@torontorestaurantgrowth" style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.07); border-radius: 8px; text-decoration: none; color: #fff; font-size: 14px; font-weight: 500;" target="_blank" rel="noopener">
-              <span>🎵</span>
-              <span style="flex: 1;">TikTok</span>
-              <span style="font-size: 12px; color: rgba(255,255,255,0.55);">@torontorestaurantgrowth</span>
-            </a>
-            <a href="https://instagram.com/torontorestaurantgrowth" style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.07); border-radius: 8px; text-decoration: none; color: #fff; font-size: 14px; font-weight: 500;" target="_blank" rel="noopener">
-              <span>📷</span>
-              <span style="flex: 1;">Instagram</span>
-              <span style="font-size: 12px; color: rgba(255,255,255,0.55);">@torontorestaurantgrowth</span>
-            </a>
-            <a href="https://tiktok.com/@crabboil.ca" style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.07); border-radius: 8px; text-decoration: none; color: #fff; font-size: 14px; font-weight: 500;" target="_blank" rel="noopener">
-              <span>🦀</span>
-              <span style="flex: 1;">Crab Boil (Client)</span>
-              <span style="font-size: 12px; color: rgba(255,255,255,0.55);">@crabboil.ca</span>
+        <aside class="lg:sticky lg:top-24 lg:self-start">
+          <div class="trg-card mb-6">
+            <h3 class="font-heading text-lg text-ink">The plan</h3>
+            <p class="mt-3 text-sm text-ink-muted">
+              <strong class="text-ink">{growthPlan.name}</strong> — {growthPlan.monthlyLabel}
+            </p>
+            <p class="mt-1 text-sm text-ink-muted">{growthPlan.setupLabel}</p>
+            <a href="/pricing/" class="mt-4 inline-flex text-sm font-semibold text-cta no-underline hover:text-cta-hover">
+              View full pricing →
             </a>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- WHAT TO EXPECT -->
-    <div style="background: #F5F5F0; padding: 72px 24px; text-align: center;">
-      <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 38px); font-weight: 400; margin-bottom: 48px; color: #1A1A1A;">What Happens After You Book</h2>
-      <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column;">
-        <div style="display: flex; gap: 24px; text-align: left; padding: 28px 0; border-bottom: 1px solid #deded9;">
-          <div style="width: 44px; height: 44px; background: #E85D04; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; flex-shrink: 0;">1</div>
-          <div>
-            <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 19px; font-weight: 400; margin-bottom: 8px; color: #1A1A1A;">We review your digital presence</h3>
-            <p style="font-size: 15px; color: #555; margin: 0; line-height: 1.65;">Before the call, we audit your Google Business Profile, your website's SEO, your review velocity, and how you show up in local search. We come prepared with specifics — not generic talking points.</p>
+          <div class="trg-card mb-6 border-accent/20 bg-surface">
+            <h3 class="font-heading text-lg text-ink">Content add-on</h3>
+            <p class="mt-2 text-sm text-ink-muted">Social + video through Jayden Aj — not included in Growth.</p>
+            <p class="mt-3 font-heading text-lg text-accent">{contentAddOn.monthlyLabel}</p>
           </div>
-        </div>
-        <div style="display: flex; gap: 24px; text-align: left; padding: 28px 0; border-bottom: 1px solid #deded9;">
-          <div style="width: 44px; height: 44px; background: #E85D04; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; flex-shrink: 0;">2</div>
-          <div>
-            <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 19px; font-weight: 400; margin-bottom: 8px; color: #1A1A1A;">15-minute call, no fluff</h3>
-            <p style="font-size: 15px; color: #555; margin: 0; line-height: 1.65;">We walk you through exactly what we found: what's working, what's costing you customers, and what the highest-leverage fixes are. You'll leave with actionable information regardless of whether you work with us.</p>
+
+          <div class="trg-card mb-6 bg-surface">
+            <h3 class="font-heading text-lg text-ink">Prefer email?</h3>
+            <p class="mt-3 text-sm text-ink-muted">Response within one business day.</p>
+            <a
+              href={`mailto:${trgContactEmail}`}
+              class="mt-3 inline-block text-sm font-semibold text-ink no-underline hover:text-cta"
+            >
+              {trgContactEmail}
+            </a>
+            <p class="mt-4 text-xs text-ink-muted">Service area: Greater Toronto Area</p>
           </div>
-        </div>
-        <div style="display: flex; gap: 24px; text-align: left; padding: 28px 0; border-bottom: 1px solid #deded9;">
-          <div style="width: 44px; height: 44px; background: #E85D04; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; flex-shrink: 0;">3</div>
-          <div>
-            <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 19px; font-weight: 400; margin-bottom: 8px; color: #1A1A1A;">A proposal if it makes sense — nothing if it doesn't</h3>
-            <p style="font-size: 15px; color: #555; margin: 0; line-height: 1.65;">If we think TRG is a good fit for your restaurant, we'll present a specific proposal with pricing. If we don't think we're the right match, we'll tell you that too. We don't chase clients who aren't a fit.</p>
+
+          <div class="trg-card">
+            <h3 class="font-heading text-lg text-ink">Follow our work</h3>
+            <div class="mt-4 flex flex-col gap-2">
+              <a href="https://tiktok.com/@torontorestaurantgrowth" class="trg-link-card text-sm" target="_blank" rel="noopener">
+                TikTok · @torontorestaurantgrowth
+              </a>
+              <a href="https://instagram.com/torontorestaurantgrowth" class="trg-link-card text-sm" target="_blank" rel="noopener">
+                Instagram · @torontorestaurantgrowth
+              </a>
+            </div>
           </div>
-        </div>
-        <div style="display: flex; gap: 24px; text-align: left; padding: 28px 0;">
-          <div style="width: 44px; height: 44px; background: #E85D04; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; flex-shrink: 0;">4</div>
-          <div>
-            <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 19px; font-weight: 400; margin-bottom: 8px; color: #1A1A1A;">Month-to-month engagement if you proceed</h3>
-            <p style="font-size: 15px; color: #555; margin: 0; line-height: 1.65;">No long-term contracts. No lock-in. We start with a defined scope, execute, show you the results, and earn your business each month. The relationship grows as the results do.</p>
+        </aside>
+      </div>
+    </section>
+
+    <PageSection tone="surface" width="narrow" title="What happens after you book">
+      <div class="space-y-8">
+        {afterSteps.map((item) => (
+          <div class="flex gap-5">
+            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cta font-heading text-lg text-white">
+              {item.step}
+            </div>
+            <div>
+              <h3 class="font-heading text-xl text-ink">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-muted">{item.body}</p>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
-    </div>
+    </PageSection>
 
-    <!-- FAQ -->
-    <div style="max-width: 720px; margin: 0 auto; padding: 72px 24px; border-top: 1px solid #e8e8e5;">
-      <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 38px); font-weight: 400; margin-bottom: 48px; color: #1A1A1A;">Frequently Asked Questions</h2>
-
-      <div style="padding: 28px 0; border-bottom: 1px solid #e8e8e5;">
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; font-weight: 400; margin-bottom: 12px; color: #1A1A1A;">Is the audit really free?</h3>
-        <p style="font-size: 16px; color: #444; line-height: 1.72; margin: 0;">Yes. There's no charge, no credit card required, and no obligation to work with us after the call. We do the audit because it's the best way to have a real conversation — and because most restaurant owners leave the call with valuable information they didn't have before.</p>
+    <PageSection width="narrow" title="Frequently asked questions">
+      <div class="divide-y divide-stone-border">
+        {faqs.map((item) => (
+          <div class="py-8 first:pt-0 last:pb-0">
+            <h3 class="font-heading text-xl text-ink">{item.q}</h3>
+            <p class="mt-3 text-base leading-relaxed text-ink-muted">{item.a}</p>
+          </div>
+        ))}
       </div>
-
-      <div style="padding: 28px 0; border-bottom: 1px solid #e8e8e5;">
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; font-weight: 400; margin-bottom: 12px; color: #1A1A1A;">What exactly do you audit?</h3>
-        <p style="font-size: 16px; color: #444; line-height: 1.72; margin: 0;">Three things: your Google Business Profile (completeness, review velocity, response rate, category optimization), your website (basic SEO health, local signals, mobile experience), and your reviews (star rating trend, recency, response consistency). We look at how your restaurant appears to a customer searching on Google right now.</p>
-      </div>
-
-      <div style="padding: 28px 0; border-bottom: 1px solid #e8e8e5;">
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; font-weight: 400; margin-bottom: 12px; color: #1A1A1A;">How long does the call take?</h3>
-        <p style="font-size: 16px; color: #444; line-height: 1.72; margin: 0;">15 minutes is our target. We respect your time. The call doesn't turn into a sales presentation — we share what we found, answer your questions, and let you decide how you want to proceed.</p>
-      </div>
-
-      <div style="padding: 28px 0; border-bottom: 1px solid #e8e8e5;">
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; font-weight: 400; margin-bottom: 12px; color: #1A1A1A;">Do you work with chains or only independents?</h3>
-        <p style="font-size: 16px; color: #444; line-height: 1.72; margin: 0;">We primarily work with independent restaurants and small regional chains (2–5 locations). We don't work with national franchises. Our experience is with owner-operated restaurants where the owner is involved in the business and cares about the outcome.</p>
-      </div>
-
-      <div style="padding: 28px 0;">
-        <h3 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 20px; font-weight: 400; margin-bottom: 12px; color: #1A1A1A;">What cities do you cover?</h3>
-        <p style="font-size: 16px; color: #444; line-height: 1.72; margin: 0;">We focus on the Greater Toronto Area: Toronto (all neighbourhoods), Mississauga, Brampton, Scarborough, Etobicoke, North York, Markham, Vaughan, and surrounding municipalities. If you're outside the GTA, reach out and we'll let you know if we can help.</p>
-      </div>
-    </div>
-
+    </PageSection>
   </main>
 </BaseLayout>
-
-<style>
-  @media (max-width: 900px) {
-    div[style*="grid-template-columns: 1fr 420px"] {
-      grid-template-columns: 1fr !important;
-      gap: 48px !important;
-    }
-    div[style*="position: sticky"] {
-      position: static !important;
-    }
-  }
-</style>
