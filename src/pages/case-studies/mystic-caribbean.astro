@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClientLogo from '../../components/ClientLogo.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import PageCta from '../../components/PageCta.astro';
 import MetricStrip from '../../components/MetricStrip.astro';
@@ -20,7 +21,9 @@ const report = mysticSeoReport;
       description="How Toronto Restaurant Growth rebuilt Mystic Caribbean's digital foundation — and turned a SpotHopper template into a restaurant that wins Google."
       ctaLabel="Book a Free Google Audit"
       ctaHref="/contact/"
-    />
+    >
+      <ClientLogo client={mysticProof.logo} size="lg" class="mx-auto mt-8" loading="eager" />
+    </PageIntro>
 
     <MetricStrip
       metrics={[

@@ -1,0 +1,40 @@
+---
+import { clientLogos, type ClientLogoId } from '../data/client-logos';
+
+interface Props {
+  client: ClientLogoId;
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  loading?: 'eager' | 'lazy';
+}
+
+const { client, size = 'md', class: className = '', loading = 'lazy' } = Astro.props;
+const logo = clientLogos[client];
+
+const sizeClass = {
+  sm: 'h-8 max-w-[120px]',
+  md: 'h-10 max-w-[160px] sm:h-11 sm:max-w-[180px]',
+  lg: 'h-12 max-w-[200px] sm:h-14 sm:max-w-[240px]',
+}[size];
+---
+
+{logo.src.endsWith('.webp') ? (
+  <picture>
+    <source srcset={logo.src} type="image/webp" />
+    <img
+      src={'srcFallback' in logo ? logo.srcFallback : logo.src}
+      alt={logo.alt}
+      class={`block w-auto object-contain object-left ${sizeClass} ${className}`}
+      loading={loading}
+      decoding="async"
+    />
+  </picture>
+) : (
+  <img
+    src={logo.src}
+    alt={logo.alt}
+    class={`block w-auto object-contain object-left ${sizeClass} ${className}`}
+    loading={loading}
+    decoding="async"
+  />
+)}

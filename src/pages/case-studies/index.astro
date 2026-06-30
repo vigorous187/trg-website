@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClientLogo from '../../components/ClientLogo.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import PageCta from '../../components/PageCta.astro';
 
 const caseStudies = [
   {
     client: "Crab Boil",
+    logo: "crabBoil" as const,
     category: "Social Media & Growth",
     headline: "500 Million Impressions. Zero Traditional Ad Spend.",
     description: "From zero digital presence to 113K TikTok followers, 89K Instagram followers, and a successful Ottawa expansion. The most-followed restaurant brand TRG has built.",
@@ -19,6 +21,7 @@ const caseStudies = [
   },
   {
     client: "Mystic Caribbean",
+    logo: "mystic" as const,
     category: "Google Maps & SEO",
     headline: "#1 on Kennedy Road. 15 Keywords in the Top 10.",
     description: "From a 32/100 SpotHopper template to dominant local search in Brampton — with a live SEO dashboard TRG uses to prove ROI.",
@@ -51,8 +54,8 @@ const caseStudies = [
           <a href={study.href} class="trg-link-card">
             <div class="trg-link-card-header">
               <div>
-                <p class="font-heading text-3xl text-accent">{study.client}</p>
-                <p class="mt-1 text-xs font-semibold uppercase tracking-widest text-ink-muted">{study.category}</p>
+                <ClientLogo client={study.logo} size="lg" />
+                <p class="mt-3 text-xs font-semibold uppercase tracking-widest text-ink-muted">{study.category}</p>
               </div>
             </div>
             <div class="trg-link-card-body trg-prose">

@@ -1,7 +1,10 @@
 /** Homepage proof metrics — verified client outcomes (update from forge client data). */
 
+import type { ClientLogoId } from "./client-logos";
+
 export const crabBoilProof = {
   name: "Crab Boil",
+  logo: "crabBoil" satisfies ClientLogoId,
   location: "Toronto, Mississauga & Ottawa",
   href: "/case-studies/crab-boil/",
   tag: "Lead case study",
@@ -40,6 +43,7 @@ export const crabBoilProof = {
 
 export const mysticProof = {
   name: "Mystic Caribbean Resto & Bar",
+  logo: "mystic" satisfies ClientLogoId,
   location: "Brampton",
   href: "/case-studies/mystic-caribbean/",
   tag: "Active SEO client",

@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClientLogo from '../../components/ClientLogo.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import PageCta from '../../components/PageCta.astro';
 import SeoScoreStrip from '../../components/SeoScoreStrip.astro';
 import SeoRankingsTable from '../../components/SeoRankingsTable.astro';
+import { mysticProof } from '../../data/client-proof';
 import { mysticSeoReport } from '../../data/mystic-seo-report';
 
 const report = mysticSeoReport;
@@ -20,7 +22,9 @@ const report = mysticSeoReport;
       description={`Tracked local SEO for ${report.clientName} in ${report.location}. Updated ${report.reportDate}. These are the same metrics TRG uses to prove ROI for restaurant clients.`}
       ctaLabel="Book a Free Google Audit"
       ctaHref="/contact/"
-    />
+    >
+      <ClientLogo client={mysticProof.logo} size="lg" class="mx-auto mt-8" loading="eager" />
+    </PageIntro>
 
     <section class="border-y border-stone-border bg-surface py-10 sm:py-12">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

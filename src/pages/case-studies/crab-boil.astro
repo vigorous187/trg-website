@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClientLogo from '../../components/ClientLogo.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import PageCta from '../../components/PageCta.astro';
 import MetricStrip from '../../components/MetricStrip.astro';
+import { crabBoilProof } from '../../data/client-proof';
 ---
 
 <BaseLayout
@@ -13,7 +15,9 @@ import MetricStrip from '../../components/MetricStrip.astro';
   <main>
 
     <!-- HERO -->
-    <PageIntro eyebrow="Case Study — Crab Boil" title="500 Million Impressions. One Restaurant Group. Zero Traditional Ad Spend." description="How Toronto Restaurant Growth turned Crab Boil's digital presence into one of Canada's most-followed restaurant accounts — and helped them open in Ottawa."  ctaLabel="Book a Free Google Audit" ctaHref="/contact/" />
+    <PageIntro eyebrow="Case Study — Crab Boil" title="500 Million Impressions. One Restaurant Group. Zero Traditional Ad Spend." description="How Toronto Restaurant Growth turned Crab Boil's digital presence into one of Canada's most-followed restaurant accounts — and helped them open in Ottawa."  ctaLabel="Book a Free Google Audit" ctaHref="/contact/">
+      <ClientLogo client={crabBoilProof.logo} size="lg" class="mx-auto mt-8" loading="eager" />
+    </PageIntro>
 
     <!-- METRICS BAR -->
     <MetricStrip metrics={[
