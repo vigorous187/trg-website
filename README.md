@@ -1,43 +1,26 @@
-# Astro Starter Kit: Minimal
+# Toronto Restaurant Growth (trg-site)
 
-```sh
-npm create astro@latest -- --template minimal
+Production site: https://torontorestaurantgrowth.ca
+
+Stack: Astro 6, Tailwind 4, MDX blog, Cloudflare Pages
+
+## Commands
+
+- `npm install` — install dependencies
+- `npm run dev` — start local dev server
+- `npm run build` — production build (includes 8 SEO gates)
+- `npm run preview` — preview production build locally
+
+## Docs
+
+- `BLOG_PIPELINE.md` — blog automation and commands
+- `docs/ponytail-debt.md` — intentional shortcuts and upgrade triggers
+- `.cursor/rules/ponytail.mdc` — agent operating mode for this repo
+
+## Deploy
+
+```bash
+wrangler pages deploy dist --project-name torontorestaurantgrowth
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+See `domain-manifest.json` in `~/Developer/shared/scripts/config/`

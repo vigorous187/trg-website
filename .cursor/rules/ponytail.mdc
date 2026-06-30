@@ -1,0 +1,98 @@
+---
+description: Ponytail operating mode for TRG — audit-first, minimal diffs, SEO non-regression, phase-gate boundaries
+alwaysApply: true
+---
+
+# Ponytail (trg-site / torontorestaurantgrowth.ca)
+
+This repo is an **existing production Astro site**. Improve it without drift, speculative abstractions, or AI-style bloat.
+
+## Workflow (every non-trivial task)
+
+1. **Read** — structure, entry points, minimum relevant files
+2. **Orient** — canonical vs legacy vs duplicate vs uncertain
+3. **Propose** — keep / simplify / delete / defer + smallest safe plan + approval items
+4. **Implement** — smallest high-confidence diff; reuse existing paths
+5. **Review** — net files/lines/deps; call out debt
+
+## Decision ladder (before every change)
+
+1. Does this need to exist at all?
+2. Reuse existing repo code?
+3. Stdlib / native / framework?
+4. Already-installed dependency?
+5. Simplify or delete instead of add?
+6. One file / one function / one tight change?
+7. Only then write minimum new code
+8. Review net diff — files, lines, deps; log debt if deferring
+
+## Permanent rules
+
+- Minimize scope — smallest correct diff; no unrelated changes
+- No abstractions for hypothetical futures; no over-engineering
+- No new dependencies unless the current stack cannot reasonably solve it
+- Edit existing files over creating new ones; match surrounding conventions
+- Comments only for non-obvious business logic or deep technical details
+- No repo-wide cleanup without explicit approval
+- Preserve working behavior unless the task explicitly changes it
+- Do not spread unfinished patterns as the new default
+- Tests only when requested or they add meaningful coverage of real behavior
+
+## SEO non-regression contract (BINDING — hard stops)
+
+1. **Never change URL slugs** without a matching 301 in `scripts/verify-redirects.mjs` and `npm run seo:redirects:verify:live`
+2. **Never add `noindex`** to indexable pages; preserve `BaseLayout` canonical behavior
+3. **Never remove or bypass build gates** — `npm run build` must pass all 8 checks before deploy
+4. **Title / meta:** surgical only, GSC-driven; preserve homepage H1 brand lockup
+5. **Internal links:** only real routes or verified redirects
+6. **Sitemap:** keep `/contact/thank-you/` filtered; do not break `@astrojs/sitemap`
+7. **Deploy smoke-test** after every production push
+8. **No hreflang expansion** without explicit approval
+9. **Pricing, Tally IDs** (`2Evezg`, `Xxg9Kd`), and Mystic draft content unchanged unless explicitly requested
+
+When SEO vs simplification conflict, **SEO wins**.
+
+## Canonical docs (when docs conflict)
+
+- `BLOG_PIPELINE.md` over `README.md`
+- `src/data/navigation.ts` for nav
+- `scripts/verify-redirects.mjs` for redirects
+- `scripts/site-gates.json` for content rules
+- `shared/knowledge-hub/seo/website-production-standard.md` at workspace level
+
+## Phase boundaries
+
+**In scope:** surgical page/content/SEO fixes, blog posts, niche pages
+
+**Out of scope unless explicitly requested:**
+- Architecture redesign
+- shadcn / React adoption
+- Repo-wide refactors or bulk cleanup
+- Astro upgrades on other sites
+
+## Debt ledger
+
+Track deferred shortcuts in `docs/ponytail-debt.md`. When leaving intentional debt in code:
+
+```typescript
+// ponytail: current ceiling, trigger for upgrade
+```
+
+## Approval required
+
+- Wide cleanup or architectural remediation
+- Behavior changes outside the request
+- URL, title, or redirect changes
+
+## Future task output format
+
+When proposing work (before implementing), output exactly these 8 bullets:
+
+1. **Goal** — one-line outcome
+2. **Read first** — minimum files/routes to inspect
+3. **Orient** — canonical vs legacy/duplicate callouts
+4. **Proposed change** — keep / simplify / delete / defer; smallest safe diff
+5. **SEO impact** — contract items touched, or explicit "none"
+6. **Build gates** — which checks must pass; live redirect verify if URLs change
+7. **Approval required** — items needing sign-off before implementation
+8. **Debt / deferrals** — ledger entries or follow-ups to leave behind
