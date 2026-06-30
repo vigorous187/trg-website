@@ -26,6 +26,10 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
+      - name: Configure git for automation commits
+        run: |
+          git config user.email "hello@torontorestaurantgrowth.ca"
+          git config user.name "TRG Blog Automation"
       - name: Create blog post PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
