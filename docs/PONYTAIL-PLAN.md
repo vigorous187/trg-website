@@ -82,12 +82,11 @@ Dashboard API first → site repos → GSC sync baseline
 
 | Deliverable                     | Status  |
 | ------------------------------- | ------- |
-| client-seo-playbook.json        | pending |
-| forge-seo-sprint skill          | pending |
-| Dashboard industry profiles     | pending |
-| CE internal link map            | pending |
-| Client seeds (MHB/IBUH/MTC/CSS) | pending |
-| Ponytail on 4 client repos      | pending |
-| Per-site GSC sprint             | pending |
-
-Update this table as Phase 2 ships.
+| client-seo-playbook.json        | **done** — `shared/scripts/config/` |
+| forge-seo-sprint skill          | **done** — `~/claude/skills/forge-seo-sprint/` |
+| Dashboard industry profiles     | **done** — `abc7610` |
+| CE internal link map            | **done** — `SITE_LINK_DEFAULTS` in content-engine |
+| Client seeds (MHB/IBUH/MTC/CSS) | **done** — run `npx tsx scripts/seed-forge-clients.ts` |
+| Ponytail on 4 client repos      | **done** — docs only, builds pass |
+| Per-site GSC sprint             | **pending** — use forge-seo-sprint skill |
+| Keyword import + GSC sync       | **pending** — after seed |
