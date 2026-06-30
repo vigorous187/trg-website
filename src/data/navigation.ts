@@ -53,6 +53,14 @@ export const footerResources = [
     label: "Halal Restaurant Marketing",
     href: "/niche/halal-restaurant-marketing-toronto/",
   },
+  {
+    label: "SEO para Restaurantes (ES)",
+    href: "/niche/seo-restaurantes-toronto/",
+  },
+  {
+    label: "SEO pour Restaurants (FR)",
+    href: "/niche/seo-restaurants-toronto/",
+  },
 ] as const;
 
 export const footerContact = [
