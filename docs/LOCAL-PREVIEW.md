@@ -2,15 +2,27 @@
 
 **Not deployed to production.** Review changes locally before any publish.
 
-## Preview URLs (after running builds)
+## Preview URLs (running now)
 
-| Site                   | Command                                                                                  | URL                    |
-| ---------------------- | ---------------------------------------------------------------------------------------- | ---------------------- |
-| Michael the Home Buyer | `cd ~/Developer/mhb/repos/michael-the-homebuyer-astro && npm run preview -- --port 4321` | http://localhost:4321/ |
-| I Buy Ugly Houses      | `cd ~/Developer/mhb/repos/ibuyuglyhouses-astro && npm run preview -- --port 4322`        | http://localhost:4322/ |
-| MTC Renovations        | `cd ~/Developer/mtc/repos/mtcrenovations-astro && npm run preview -- --port 4323`        | http://localhost:4323/ |
-| Canadian Smart Savings | `cd ~/Developer/css/repos/canadianSmartSavingsWebsite && npm run preview -- --port 4324` | http://localhost:4324/ |
-| TRG (reference)        | `cd ~/Developer/forge/repos/trg-site && npm run preview -- --port 4325`                  | http://localhost:4325/ |
+Cloudflare-hybrid sites use **`npm run dev`**, not `preview`.
+
+| Site | URL | Local commit |
+|------|-----|--------------|
+| Michael the Home Buyer | http://127.0.0.1:4321/ | `7f10e05` |
+| I Buy Ugly Houses | http://127.0.0.1:4322/ | `2eb3acc` |
+| MTC Renovations | http://127.0.0.1:4323/ | `feee8a9` |
+| Canadian Smart Savings | http://127.0.0.1:4324/ | `cf4f670` |
+
+Restart commands:
+
+```bash
+# MHB, IBUH, MTC — dev
+cd ~/Developer/mhb/repos/michael-the-homebuyer-astro && npm run dev -- --port 4321 --host 127.0.0.1
+cd ~/Developer/mhb/repos/ibuyuglyhouses-astro && npm run dev -- --port 4322 --host 127.0.0.1
+cd ~/Developer/mtc/repos/mtcrenovations-astro && npm run dev -- --port 4323 --host 127.0.0.1
+# CSS — static preview
+cd ~/Developer/css/repos/canadianSmartSavingsWebsite && npm run preview -- --port 4324 --host 127.0.0.1
+```
 
 ## What changed (local commits only)
 
