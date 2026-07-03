@@ -23,7 +23,10 @@ export const footerServices = [
     href: "/services/social-media-management/",
   },
   { label: "Google Maps & SEO", href: "/services/google-maps-seo/" },
-  { label: "Review Management", href: "/services/review-management/" },
+  {
+    label: "Review Management",
+    href: "/services/restaurant-review-management/",
+  },
   {
     label: "Grand Opening Marketing",
     href: "/services/grand-opening-marketing/",
@@ -31,8 +34,11 @@ export const footerServices = [
 ] as const;
 
 export const footerLocations = [
-  { label: "Scarborough", href: "/locations/scarborough/" },
-  { label: "Brampton", href: "/locations/brampton/" },
+  {
+    label: "Scarborough",
+    href: "/locations/restaurant-marketing-scarborough/",
+  },
+  { label: "Brampton", href: "/locations/restaurant-marketing-brampton/" },
   { label: "Mississauga", href: "/locations/mississauga/" },
   { label: "North York", href: "/locations/north-york/" },
   { label: "Etobicoke", href: "/locations/etobicoke/" },
@@ -44,6 +50,7 @@ export const footerLocations = [
 export const footerResources = [
   { label: "Blog", href: "/blog/" },
   { label: "Case Studies", href: "/case-studies/" },
+  { label: "Pricing", href: "/pricing/" },
   {
     label: "Review Templates",
     href: "/resources/google-review-response-templates/",

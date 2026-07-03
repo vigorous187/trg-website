@@ -24,7 +24,7 @@ export const resourceContent: Record<LeadMagnetKey, ResourceContent> = {
       "1-star food complaint — apologize, take offline, no argument on Google",
     ],
     serviceLink: {
-      href: "/services/review-management/",
+      href: "/services/restaurant-review-management/",
       label: "Review Management service",
     },
   },
