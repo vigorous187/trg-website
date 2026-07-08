@@ -6,12 +6,12 @@
 
 Cloudflare-hybrid sites use **`npm run dev`**, not `preview`.
 
-| Site | URL | Local commit |
-|------|-----|--------------|
-| Michael the Home Buyer | http://127.0.0.1:4321/ | `7f10e05` |
-| I Buy Ugly Houses | http://127.0.0.1:4322/ | `2eb3acc` |
-| MTC Renovations | http://127.0.0.1:4323/ | `feee8a9` |
-| Canadian Smart Savings | http://127.0.0.1:4324/ | `cf4f670` |
+| Site                   | URL                    | Local commit |
+| ---------------------- | ---------------------- | ------------ |
+| Michael the Home Buyer | http://127.0.0.1:4321/ | `7f10e05`    |
+| I Buy Ugly Houses      | http://127.0.0.1:4322/ | `2eb3acc`    |
+| MTC Renovations        | http://127.0.0.1:4323/ | `feee8a9`    |
+| Canadian Smart Savings | http://127.0.0.1:4324/ | `cf4f670`    |
 
 Restart commands:
 

@@ -26,7 +26,7 @@
 | Layer     | Location                                                     | Purpose                                                     |
 | --------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
 | Manifest  | `~/Developer/shared/scripts/config/client-seo-playbook.json` | Per-client slug, repo, domain, vertical, deploy, link map   |
-| Skill     | `~/claude/skills/forge-seo-sprint/SKILL.md`                  | Agent workflow: GSC audit → surgical fixes → build → deploy |
+| Skill     | `~/.claude/skills/forge-seo-sprint/SKILL.md`                  | Agent workflow: GSC audit → surgical fixes → build → deploy |
 | Dashboard | `seo-dashboard-platform`                                     | CE, GSC sync, keywords, reports, industry profiles          |
 
 ### Clients
@@ -80,13 +80,13 @@ Dashboard API first → site repos → GSC sync baseline
 
 ## Phase 2 progress
 
-| Deliverable                     | Status  |
-| ------------------------------- | ------- |
-| client-seo-playbook.json        | **done** — `shared/scripts/config/` |
-| forge-seo-sprint skill          | **done** — `~/claude/skills/forge-seo-sprint/` |
-| Dashboard industry profiles     | **done** — `abc7610` |
-| CE internal link map            | **done** — `SITE_LINK_DEFAULTS` in content-engine |
+| Deliverable                     | Status                                                 |
+| ------------------------------- | ------------------------------------------------------ |
+| client-seo-playbook.json        | **done** — `shared/scripts/config/`                    |
+| forge-seo-sprint skill          | **done** — `~/.claude/skills/forge-seo-sprint/`         |
+| Dashboard industry profiles     | **done** — `abc7610`                                   |
+| CE internal link map            | **done** — `SITE_LINK_DEFAULTS` in content-engine      |
 | Client seeds (MHB/IBUH/MTC/CSS) | **done** — run `npx tsx scripts/seed-forge-clients.ts` |
-| Ponytail on 4 client repos      | **done** — docs only, builds pass |
-| Per-site GSC sprint             | **pending** — use forge-seo-sprint skill |
-| Keyword import + GSC sync       | **pending** — after seed |
+| Ponytail on 4 client repos      | **done** — docs only, builds pass                      |
+| Per-site GSC sprint             | **pending** — use forge-seo-sprint skill               |
+| Keyword import + GSC sync       | **pending** — after seed                               |

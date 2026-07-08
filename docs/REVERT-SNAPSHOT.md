@@ -19,11 +19,11 @@ After Phase 2 commits land, record new SHAs below.
 
 ## Phase 2 commits (2026-06-30)
 
-| Repo                        | Commit    | Message |
-| --------------------------- | --------- | ------- |
-| trg-site                    | `1ffaecf` | docs: plan + revert snapshot |
+| Repo                        | Commit    | Message                                             |
+| --------------------------- | --------- | --------------------------------------------------- |
+| trg-site                    | `1ffaecf` | docs: plan + revert snapshot                        |
 | seo-dashboard-platform      | `abc7610` | feat(phase2): industry profiles, keywords, CE links |
-| michael-the-homebuyer-astro | `33f66bd` | docs: Ponytail Phase 2 |
-| ibuyuglyhouses-astro        | `5b6231b` | docs: Ponytail Phase 2 |
-| mtcrenovations-astro        | `3772d4f` | docs: Ponytail Phase 2 |
-| canadianSmartSavingsWebsite | `bf105eb` | docs: Ponytail Phase 2 |
+| michael-the-homebuyer-astro | `33f66bd` | docs: Ponytail Phase 2                              |
+| ibuyuglyhouses-astro        | `5b6231b` | docs: Ponytail Phase 2                              |
+| mtcrenovations-astro        | `3772d4f` | docs: Ponytail Phase 2                              |
+| canadianSmartSavingsWebsite | `bf105eb` | docs: Ponytail Phase 2                              |
