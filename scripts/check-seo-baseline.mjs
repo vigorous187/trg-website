@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = process.cwd();
+const SITE = "https://torontorestaurantgrowth.ca";
 
 const checks = {
   robotsFile: path.join(ROOT, "public", "robots.txt"),
@@ -10,7 +11,12 @@ const checks = {
     path.join(ROOT, "dist", "sitemap-index.xml"),
     path.join(ROOT, "dist", "sitemap-0.xml"),
   ],
-  noindexPaths: [],
+  noindexPaths: [
+    "/contact/thank-you/",
+    "/locations/brampton/",
+    "/locations/scarborough/",
+    "/services/review-management/",
+  ],
 };
 
 async function readIfExists(filePath) {
@@ -23,6 +29,37 @@ async function readIfExists(filePath) {
 
 function assertTrue(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+function extractAttribute(tag, attribute) {
+  const match = tag.match(
+    new RegExp(`\\b${attribute}\\s*=\\s*["']([^"']+)["']`, "i"),
+  );
+  return match?.[1] ?? null;
+}
+
+function extractRobotsContent(html) {
+  for (const tag of html.match(/<meta\b[^>]*>/gi) ?? []) {
+    if (extractAttribute(tag, "name")?.toLowerCase() === "robots") {
+      return extractAttribute(tag, "content");
+    }
+  }
+  return null;
+}
+
+function extractCanonical(html) {
+  for (const tag of html.match(/<link\b[^>]*>/gi) ?? []) {
+    const rel = extractAttribute(tag, "rel")?.toLowerCase().split(/\s+/) ?? [];
+    if (rel.includes("canonical")) return extractAttribute(tag, "href");
+  }
+  return null;
+}
+
+function distHtmlForUrl(pageUrl) {
+  const url = new URL(pageUrl);
+  assertTrue(url.origin === SITE, `Sitemap URL uses an unexpected origin: ${pageUrl}`);
+  const relativePath = decodeURIComponent(url.pathname).replace(/^\/|\/$/g, "");
+  return path.join(ROOT, "dist", relativePath, "index.html");
 }
 
 async function main() {
@@ -55,7 +92,38 @@ async function main() {
     );
   }
 
-  console.log("SEO baseline check passed.");
+  const sitemapUrls = [
+    ...combinedSitemap.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/gi),
+  ]
+    .map((match) => match[1])
+    .filter((pageUrl) => !new URL(pageUrl).pathname.endsWith(".xml"));
+
+  assertTrue(sitemapUrls.length > 0, "Sitemap contains no page URLs");
+
+  for (const pageUrl of sitemapUrls) {
+    const htmlPath = distHtmlForUrl(pageUrl);
+    const html = await readIfExists(htmlPath);
+    assertTrue(html, `Sitemap URL has no built HTML: ${pageUrl}`);
+    assertTrue(
+      !/<meta\b[^>]*http-equiv\s*=\s*["']refresh["'][^>]*>/i.test(html),
+      `Redirect page is present in sitemap: ${pageUrl}`,
+    );
+
+    const robotsContent = extractRobotsContent(html);
+    assertTrue(
+      !robotsContent?.toLowerCase().split(/[\s,]+/).includes("noindex"),
+      `Noindex page is present in sitemap: ${pageUrl}`,
+    );
+
+    const canonical = extractCanonical(html);
+    assertTrue(canonical, `Sitemap page is missing a canonical: ${pageUrl}`);
+    assertTrue(
+      new URL(canonical, SITE).href === new URL(pageUrl).href,
+      `Sitemap canonical mismatch: ${pageUrl} -> ${canonical}`,
+    );
+  }
+
+  console.log(`SEO baseline check passed (${sitemapUrls.length} sitemap pages).`);
 }
 
 main().catch((error) => {

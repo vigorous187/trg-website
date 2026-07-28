@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-blog-chrome.mjs && node ./scripts/audit-headings.mjs && node ./scripts/check-blog-uniqueness.mjs && node ./scripts/blog-opposing-review.mjs && node ./scripts/check-blog-quality.mjs && node ./scripts/check-geo-lite.mjs && node ./scripts/check-brand-alignment.mjs",
+    "build": "astro build && node ./scripts/verify-redirects.mjs && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-blog-chrome.mjs && node ./scripts/audit-headings.mjs && node ./scripts/check-blog-uniqueness.mjs && node ./scripts/blog-opposing-review.mjs && node ./scripts/check-blog-quality.mjs && node ./scripts/check-geo-lite.mjs && node ./scripts/check-brand-alignment.mjs",
     "blog:inventory": "node ./scripts/blog-inventory.mjs",
     "blog:open-slot": "node ./scripts/blog-open-slot.mjs",
     "blog:opposing-review": "node ./scripts/blog-opposing-review.mjs",

@@ -1,0 +1,7 @@
+# Replaced routes must be real HTTP redirects, not 200 meta-refresh pages.
+/locations/brampton /locations/restaurant-marketing-brampton/ 301
+/locations/brampton/ /locations/restaurant-marketing-brampton/ 301
+/locations/scarborough /locations/restaurant-marketing-scarborough/ 301
+/locations/scarborough/ /locations/restaurant-marketing-scarborough/ 301
+/services/review-management /services/restaurant-review-management/ 301
+/services/review-management/ /services/restaurant-review-management/ 301
