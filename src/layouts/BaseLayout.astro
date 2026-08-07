@@ -7,6 +7,7 @@ import { siteName, trgLogo } from '../data/branding';
 export interface Props {
   title?: string;
   description?: string;
+  lang?: string;
   canonicalURL?: string;
   ogImage?: string;
   schema?: object | object[];
@@ -16,6 +17,7 @@ export interface Props {
 const {
   title = "Toronto Restaurant Growth | Restaurant Marketing Agency",
   description = "Toronto's only marketing agency built exclusively for independent restaurants. We handle your website, social media, Google Maps, and reviews — so you can focus on running your kitchen.",
+  lang = "en-CA",
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
   ogImage = "/og-default.png",
   schema,
@@ -39,7 +41,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
