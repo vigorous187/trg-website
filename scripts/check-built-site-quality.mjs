@@ -28,6 +28,8 @@ const descriptions = new Map();
 const pages = [];
 let images = 0;
 let schemas = 0;
+let inlineStylesheets = 0;
+let renderBlockingStylesheets = 0;
 
 for (const file of htmlFiles) {
   const html = readFileSync(resolve(dist, file), "utf8");
@@ -39,7 +41,16 @@ for (const file of htmlFiles) {
   const descriptionTag = [...html.matchAll(/<meta\b[^>]*>/gi)].map((m) => m[0]).find((tag) => attr(tag, "name")?.toLowerCase() === "description");
   const description = descriptionTag ? attr(descriptionTag, "content")?.trim() || "" : "";
   const canonicals = [...html.matchAll(/<link\b[^>]*>/gi)].map((m) => m[0]).filter((tag) => (attr(tag, "rel") || "").toLowerCase().split(/\s+/).includes("canonical"));
+  const stylesheetLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+    .map((m) => m[0])
+    .filter((tag) => (attr(tag, "rel") || "").toLowerCase().split(/\s+/).includes("stylesheet"));
+  const pageInlineStylesheets = (html.match(/<style\b/gi) || []).length;
   pages.push({ file, path, indexable });
+
+  inlineStylesheets += pageInlineStylesheets;
+  renderBlockingStylesheets += stylesheetLinks.length;
+  if (!pageInlineStylesheets) failures.push(`${file}: missing compiled inline stylesheet`);
+  if (stylesheetLinks.length) failures.push(`${file}: render-blocking stylesheet link found`);
 
   if (!/<html\b[^>]*lang=["'][^"']+["']/i.test(html)) failures.push(`${file}: missing html lang`);
   if (!title) failures.push(`${file}: missing title`);
@@ -96,5 +107,5 @@ for (const file of files.filter((f) => /^sitemap.*\.xml$/.test(f))) for (const m
 for (const page of pages.filter((p) => p.indexable)) if (!sitemapUrls.has(page.path)) failures.push(`${page.file}: missing from sitemap`);
 for (const path of sitemapUrls) if (pages.find((page) => page.path === path && !page.indexable)) failures.push(`sitemap contains noindex ${path}`);
 
-console.log(JSON.stringify({ status: failures.length ? "FAIL" : "PASS", htmlPages: pages.length, indexablePages: pages.filter((p) => p.indexable).length, images, schemas, sitemapUrls: sitemapUrls.size, failures }, null, 2));
+console.log(JSON.stringify({ status: failures.length ? "FAIL" : "PASS", htmlPages: pages.length, indexablePages: pages.filter((p) => p.indexable).length, images, schemas, inlineStylesheets, renderBlockingStylesheets, sitemapUrls: sitemapUrls.size, failures }, null, 2));
 if (failures.length) process.exitCode = 1;

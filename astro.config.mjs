@@ -18,6 +18,14 @@ export default defineConfig({
   output: "static",
   trailingSlash: "always",
 
+  // The site ships one shared, compiled Tailwind stylesheet. On mobile that
+  // stylesheet was the only render-blocking dependency ahead of the text LCP.
+  // Inline the exact compiled CSS so first paint does not wait for a second
+  // request while preserving the existing visual output byte-for-byte.
+  build: {
+    inlineStylesheets: "always",
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
