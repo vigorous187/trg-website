@@ -24,13 +24,14 @@ jobs:
         with:
           ref: ${{ inputs.source_commit }}
           fetch-depth: 0
-      - name: Verify exact source identity and main ancestry
+      - name: Verify exact source identity and current main tip
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main
+          [[ "${{ inputs.source_commit }}" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
           test "$(git rev-parse HEAD)" = "${{ inputs.source_commit }}"
-          git merge-base --is-ancestor HEAD origin/main
+          test "$(git rev-parse origin/main)" = "${{ inputs.source_commit }}"
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

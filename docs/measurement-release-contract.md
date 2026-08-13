@@ -30,7 +30,7 @@ After the exact release passes critical production verification, the workflow re
 - `npm run test:measurement-contract` tests origin/form allowlists, success-only parsing, unique-ID deduplication, safe thank-you receipts, the IndexNow source key, production verification, and rollback request construction.
 - `npm run build` also checks the built analytics, metadata, thank-you, and IndexNow contracts.
 - Pull requests run the focused tests, every existing build/SEO gate, and a read-only baseline check of current production.
-- The manual production workflow accepts an exact full commit SHA, requires that commit to be on `origin/main`, embeds the commit in `/release.json`, captures the current successful Cloudflare Pages deployment, deploys, verifies the live commit identity and critical contracts, and invokes [Cloudflare's official rollback endpoint](https://developers.cloudflare.com/api/typescript/resources/pages/subresources/projects/subresources/deployments/methods/rollback) if release verification fails.
+- The manual production workflow accepts an exact full commit SHA, requires that commit to equal the current `origin/main` tip, embeds the commit in `/release.json`, captures the current successful Cloudflare Pages deployment, deploys, verifies the live commit identity and critical contracts, and invokes [Cloudflare's official rollback endpoint](https://developers.cloudflare.com/api/typescript/resources/pages/subresources/projects/subresources/deployments/methods/rollback) if release verification fails.
 
 ## Verification status and blockers
 

@@ -286,3 +286,27 @@ test("rollback targets the current successful production deployment", () => {
     "https://api.cloudflare.com/client/v4/accounts/account/pages/projects/torontorestaurantgrowth/deployments/good/rollback",
   );
 });
+
+test("production workflow releases only the exact current main tip", async () => {
+  const workflow = await readFile(".github/workflows/deploy.yml", "utf8");
+
+  assert.match(workflow, /\[\[ "\$\{\{ inputs\.source_commit \}\}" =~ \^\[0-9a-f\]\{40\}\$ \]\]/);
+  assert.match(
+    workflow,
+    /\+refs\/heads\/main:refs\/remotes\/origin\/main/,
+  );
+  assert.match(
+    workflow,
+    /test "\$\(git rev-parse HEAD\)" = "\$\{\{ inputs\.source_commit \}\}"/,
+  );
+  assert.match(
+    workflow,
+    /test "\$\(git rev-parse origin\/main\)" = "\$\{\{ inputs\.source_commit \}\}"/,
+  );
+  assert.doesNotMatch(workflow, /merge-base --is-ancestor/);
+
+  assert.match(workflow, /post-deploy-safety\.mjs rollback --deployment-id=/);
+  assert.match(workflow, /post-deploy-safety\.mjs verify --profile=baseline/);
+  assert.match(workflow, /npm run indexnow:submit/);
+  assert.match(workflow, /trg-indexnow-\$\{\{ inputs\.source_commit \}\}/);
+});
