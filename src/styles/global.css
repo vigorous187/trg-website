@@ -89,8 +89,8 @@
 @theme {
   --color-bg-dark: #1a1a1a;
   --color-bg-darker: #111111;
-  --color-accent: #e85d04;
-  --color-accent-hover: #ff7020;
+  --color-accent: #a93f00;
+  --color-accent-hover: #843100;
   --color-cta: #b84500;
   --color-cta-hover: #963a00;
   --color-accent-orange: var(--color-accent);
