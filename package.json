@@ -15,6 +15,7 @@
     "seo:guidelines:init": "node ./scripts/seo-init-guideline-baseline.mjs",
     "seo:guidelines:check": "node ./scripts/seo-check-guideline-baseline.mjs",
     "test:measurement-contract": "node --test ./scripts/test-measurement-contract.mjs ./scripts/test-indexnow-submission.mjs",
+    "verify:synthetic-receipt": "node ./scripts/verify-synthetic-tally-receipt.mjs",
     "indexnow:dry-run": "node ./scripts/indexnow-submission.mjs --dry-run",
     "indexnow:submit": "node ./scripts/indexnow-submission.mjs",
     "audit-headings": "node ./scripts/audit-headings.mjs",

@@ -6,8 +6,10 @@ import {
   claimTallySubmission,
   consumeConfirmedAuditReceipt,
   parseTallySubmissionMessage,
+  processTallySubmissionEvent,
   storeConfirmedAuditReceipt,
 } from "../src/lib/tally-conversion.mjs";
+import { verifySyntheticTallyReceipt } from "./verify-synthetic-tally-receipt.mjs";
 import {
   buildRollbackRequest,
   selectLastKnownGoodDeployment,
@@ -138,6 +140,38 @@ test("thank-you confirmation requires a fresh verified receipt and consumes it o
     consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, 31 * 60 * 1_000),
     null,
   );
+});
+
+test("trusted callback integration emits and receipts exactly once without downstream effects", () => {
+  assert.deepEqual(verifySyntheticTallyReceipt(), {
+    status: "PASS",
+    mode: "isolated-local-synthetic",
+    formId: AUDIT_FORM_ID,
+    submissionId: "synthetic_receipt_20260813",
+    acceptedCallbacks: 1,
+    rejectedDuplicateCallbacks: 1,
+    dataLayerEvents: 1,
+    receiptConsumptions: 1,
+    networkRequests: 0,
+    tallySubmissions: 0,
+    externalWrites: 0,
+  });
+});
+
+test("trusted callback integration rejects a different iframe source", () => {
+  const storage = memoryStorage();
+  const result = processTallySubmissionEvent(
+    { ...tallyEvent(), source: {} },
+    {
+      expectedSource: {},
+      formId: AUDIT_FORM_ID,
+      storage,
+      pageClaims: new Set(),
+      dataLayer: [],
+      pagePath: "/contact/",
+    },
+  );
+  assert.equal(result, null);
 });
 
 test("IndexNow source key is exact", async () => {

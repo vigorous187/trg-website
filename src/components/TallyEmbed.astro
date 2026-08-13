@@ -48,10 +48,7 @@ const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Goo
   </div>
   <script>
     import {
-      buildGenerateLeadEvent,
-      claimTallySubmission,
-      parseTallySubmissionMessage,
-      storeConfirmedAuditReceipt,
+      processTallySubmissionEvent,
     } from '../lib/tally-conversion.mjs';
 
     const tallyFrames = Array.from(document.querySelectorAll('[data-tally-embed]'))
@@ -70,27 +67,20 @@ const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Goo
       const formId = frame?.dataset.tallyFormId;
       if (!frame || !formId) return;
 
-      const submission = parseTallySubmissionMessage(event, {
-        allowedFormIds: [formId],
-      });
-      if (!submission || claimedThisPage.has(submission.submissionId)) return;
-
-      const claimed = claimTallySubmission(sessionStorage, submission.submissionId);
-      if (!claimed) return;
-      claimedThisPage.add(submission.submissionId);
-
-      if (frame.dataset.tallyConfirmsAudit === 'true') {
-        storeConfirmedAuditReceipt(sessionStorage, submission);
-      }
-
       const analyticsWindow = window as Window & {
         dataLayer?: Record<string, unknown>[];
       };
       analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
-      analyticsWindow.dataLayer.push(buildGenerateLeadEvent(submission, {
+      processTallySubmissionEvent(event, {
+        expectedSource: frame.contentWindow,
+        formId,
         formName: frame.dataset.tallyFormName,
+        confirmsAudit: frame.dataset.tallyConfirmsAudit === 'true',
+        storage: sessionStorage,
+        pageClaims: claimedThisPage,
+        dataLayer: analyticsWindow.dataLayer,
         pagePath: window.location.pathname,
-      }));
+      });
     });
   </script>
 ) : (

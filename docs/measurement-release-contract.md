@@ -13,6 +13,10 @@ The submission ID is stored in `sessionStorage` and forwarded to the GTM `dataLa
 
 The thank-you page never emits `generate_lead`. Its confirmed copy appears only after consuming a fresh, one-time receipt written by the verified audit-form callback. A direct visit receives neutral copy and is not counted.
 
+### Downstream-suppressing synthetic verification
+
+`TRG_SYNTHETIC_RECEIPT_TEST=enabled npm run verify:synthetic-receipt` runs an isolated local callback harness against the same trusted source/origin/form-ID handler used by the site. It replays one synthetic success callback twice and requires exactly one `generate_lead` in an in-memory `dataLayer` plus one consumable audit receipt. It does not open or submit Tally, load GTM, call `fetch`, write an external system, or use personal information. The command is disabled unless the explicit environment flag is present and must remain limited to local or isolated preview verification.
+
 ## IndexNow
 
 The public IndexNow key is `ae30d3d7-a441-4846-a8fc-59e36bdc205a`. Both source and built files must return that exact value plus one newline. A homepage fallback, HTML body, redirect, or different status is a failure even if the URL returns content.

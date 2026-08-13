@@ -67,6 +67,42 @@ export function buildGenerateLeadEvent(submission, context) {
   };
 }
 
+export function processTallySubmissionEvent(
+  event,
+  {
+    expectedSource,
+    formId,
+    formName,
+    confirmsAudit = false,
+    storage,
+    pageClaims,
+    dataLayer,
+    pagePath,
+    now = Date.now(),
+  } = {},
+) {
+  if (!expectedSource || event?.source !== expectedSource) return null;
+  if (!pageClaims || !Array.isArray(dataLayer)) return null;
+
+  const submission = parseTallySubmissionMessage(event, {
+    allowedFormIds: [formId],
+  });
+  if (!submission || pageClaims.has(submission.submissionId)) return null;
+  if (!claimTallySubmission(storage, submission.submissionId)) return null;
+
+  pageClaims.add(submission.submissionId);
+  const receiptStored = confirmsAudit
+    ? storeConfirmedAuditReceipt(storage, submission, now)
+    : false;
+  const analyticsEvent = buildGenerateLeadEvent(submission, {
+    formName,
+    pagePath,
+  });
+  dataLayer.push(analyticsEvent);
+
+  return { submission, analyticsEvent, receiptStored };
+}
+
 export function storeConfirmedAuditReceipt(storage, submission, now = Date.now()) {
   if (!storage || !submission) return false;
   try {
