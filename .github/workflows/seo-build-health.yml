@@ -1,6 +1,8 @@
 name: SEO build health (weekly)
 
 on:
+  pull_request:
+    branches: [main]
   schedule:
     - cron: "0 12 * * 1"
   workflow_dispatch:
@@ -19,4 +21,7 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
+      - run: npm run test:measurement-contract
       - run: npm run build
+      - name: Verify current production baseline
+        run: node scripts/post-deploy-safety.mjs verify --profile=baseline --retries=1 --delay-ms=0

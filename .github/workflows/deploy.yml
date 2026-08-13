@@ -1,0 +1,105 @@
+name: Production deploy with verification and rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_commit:
+        description: Exact full commit SHA on main to deploy
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: trg-production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the exact authorized source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_commit }}
+          fetch-depth: 0
+      - name: Verify exact source identity and current main tip
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "${{ inputs.source_commit }}" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+          test "$(git rev-parse HEAD)" = "${{ inputs.source_commit }}"
+          test "$(git rev-parse origin/main)" = "${{ inputs.source_commit }}"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run test:measurement-contract
+      - name: Build exact release candidate
+        env:
+          PUBLIC_RELEASE_COMMIT: ${{ inputs.source_commit }}
+          PUBLIC_RELEASE_BRANCH: main
+        run: npm run build
+
+      - name: Capture last-known-good production deployment
+        id: last_known_good
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: echo "deployment_id=$(node scripts/post-deploy-safety.mjs capture)" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy Cloudflare Pages
+        id: deploy_pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4"
+          command: pages deploy dist --project-name=torontorestaurantgrowth --branch=main --commit-hash=${{ inputs.source_commit }} --commit-dirty=true
+
+      - name: Verify production critically
+        id: production_verify
+        run: node scripts/post-deploy-safety.mjs verify --expected-commit=${{ inputs.source_commit }}
+
+      - name: Roll back to last-known-good deployment
+        id: rollback
+        if: ${{ failure() && steps.deploy_pages.outcome == 'success' && steps.production_verify.outcome == 'failure' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/post-deploy-safety.mjs rollback --deployment-id=${{ steps.last_known_good.outputs.deployment_id }}
+
+      - name: Verify restored production
+        if: ${{ always() && steps.rollback.outcome == 'success' }}
+        run: node scripts/post-deploy-safety.mjs verify --profile=baseline
+
+      - name: Submit canonical release URLs to IndexNow
+        id: indexnow_submit
+        if: ${{ steps.production_verify.outcome == 'success' }}
+        continue-on-error: true
+        env:
+          RELEASE_COMMIT: ${{ inputs.source_commit }}
+        run: npm run indexnow:submit -- --receipt=artifacts/indexnow-receipt.json
+
+      - name: Upload IndexNow submission receipt
+        if: ${{ always() && steps.production_verify.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: trg-indexnow-${{ inputs.source_commit }}
+          path: artifacts/indexnow-receipt.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Alert without rolling back a healthy release
+        if: ${{ steps.indexnow_submit.outcome == 'failure' }}
+        shell: bash
+        run: |
+          echo "::warning title=IndexNow submission failed::Production verification passed, so the healthy release was retained. Review the trg-indexnow receipt artifact and retry submission."
+          {
+            echo "### IndexNow follow-up required"
+            echo "- Production verification passed; no rollback was requested."
+            echo "- IndexNow submission failed; inspect the receipt artifact and retry."
+          } >> "$GITHUB_STEP_SUMMARY"

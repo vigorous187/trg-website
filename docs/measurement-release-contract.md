@@ -1,0 +1,50 @@
+# Measurement and release contract
+
+## Confirmed conversions
+
+The site counts `generate_lead` only when the embedded Tally frame sends the official [`Tally.FormSubmitted` `postMessage`](https://developers.tally.so/widgets/events). The listener requires all of the following:
+
+- exact origin `https://tally.so`;
+- the message source is the known iframe on the page;
+- the payload form ID matches the iframe's allowed canonical form ID (`2Evezg` or `Xxg9Kd`); and
+- the payload contains a valid unique Tally submission ID.
+
+The submission ID is stored in `sessionStorage` and forwarded to the GTM `dataLayer` as `submission_id`. A repeated message for the same submission cannot create a second `generate_lead` event in that browser session. Email links emit `email_click` without sending the email address.
+
+The thank-you page never emits `generate_lead`. Its confirmed copy appears only after consuming a fresh, one-time receipt written by the verified audit-form callback. A direct visit receives neutral copy and is not counted.
+
+### Downstream-suppressing synthetic verification
+
+`TRG_SYNTHETIC_RECEIPT_TEST=enabled npm run verify:synthetic-receipt` runs an isolated local callback harness against the same trusted source/origin/form-ID handler used by the site. It replays one synthetic success callback twice and requires exactly one `generate_lead` in an in-memory `dataLayer` plus one consumable audit receipt. It does not open or submit Tally, load GTM, call `fetch`, write an external system, or use personal information. The command is disabled unless the explicit environment flag is present and must remain limited to local or isolated preview verification.
+
+## IndexNow
+
+The public IndexNow key is `ae30d3d7-a441-4846-a8fc-59e36bdc205a`. Both source and built files must return that exact value plus one newline. A homepage fallback, HTML body, redirect, or different status is a failure even if the URL returns content.
+
+After the exact release passes critical production verification, the workflow reads the built sitemap and submits its unique, HTTPS, same-host canonical URLs to IndexNow. The submitter independently requires the live key to return HTTP 200, `text/plain`, and the exact key body before it sends anything. It records the timestamp, release commit, URL count, HTTP status, and SHA-256 payload hash in a retained workflow artifact. A submission failure emits a workflow warning but cannot trigger rollback of an otherwise verified healthy site.
+
+`npm run indexnow:dry-run` validates the built canonical URL payload and writes a receipt without making a network request. IndexNow acceptance confirms receipt, not indexing; indexing remains subject to search-engine processing and monitoring.
+
+## Automated gates
+
+- `npm run test:measurement-contract` tests origin/form allowlists, success-only parsing, unique-ID deduplication, safe thank-you receipts, the IndexNow source key, production verification, and rollback request construction.
+- `npm run build` also checks the built analytics, metadata, thank-you, and IndexNow contracts.
+- Pull requests run the focused tests, every existing build/SEO gate, and a read-only baseline check of current production.
+- The manual production workflow accepts an exact full commit SHA, requires that commit to equal the current `origin/main` tip, embeds the commit in `/release.json`, captures the current successful Cloudflare Pages deployment, deploys, verifies the live commit identity and critical contracts, and invokes [Cloudflare's official rollback endpoint](https://developers.cloudflare.com/api/typescript/resources/pages/subresources/projects/subresources/deployments/methods/rollback) if release verification fails.
+
+## Verification status and blockers
+
+Highest gate: **Launch Ready — NOT VERIFIED**.
+
+| Area | Result | Evidence / blocker |
+| --- | --- | --- |
+| Local callback and dedupe contract | PASS after tests | Synthetic official-shape messages only; no real form submitted. |
+| Tally submission delivery | NOT TESTED | Requires an authorized uniquely marked Tally submission and access to verify it in Tally. |
+| Tally webhook delivery/retries | NOT TESTED | No webhook endpoint or Tally webhook configuration was inspected or changed. A webhook is required for server-side reconciliation independent of the browser. |
+| GTM dataLayer event | PASS after build | Compiled contract contains one success-only `generate_lead`. |
+| GA4 destination and conversion marking | NOT VERIFIED | GTM container access and GA4 DebugView/property access are required to prove the tag fires once and that `generate_lead` is configured as a key event. |
+| Consent behavior | NOT VERIFIED | Existing denied defaults were preserved. Consent policy and CMP selection require owner/legal approval. |
+| Production release behavior | NOT TESTED | No push or deployment was authorized. Release verification will run only after an approved deployment. |
+| Rollback | DRY-RUN ONLY | Request URL/method are tested; no live rollback was performed. |
+
+An end-to-end test needs an approved test identity, unique marker, Tally submission access, GTM Preview or GA4 DebugView access, and a decision about retaining or deleting the test record.

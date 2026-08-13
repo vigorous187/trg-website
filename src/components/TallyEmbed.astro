@@ -3,12 +3,21 @@ import { trgContactEmail } from '../data/tally';
 
 interface Props {
   embedUrl: string;
+  formId: string;
   title: string;
+  confirmsAudit?: boolean;
   minHeight?: string;
   class?: string;
 }
 
-const { embedUrl, title, minHeight = '640px', class: className = '' } = Astro.props;
+const {
+  embedUrl,
+  formId,
+  title,
+  confirmsAudit = false,
+  minHeight = '640px',
+  class: className = '',
+} = Astro.props;
 const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Google Audit request')}`;
 ---
 
@@ -32,15 +41,46 @@ const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Goo
       loading="lazy"
       allow="fullscreen"
       data-tally-embed
+      data-tally-form-id={formId}
+      data-tally-form-name={title}
+      data-tally-confirms-audit={confirmsAudit ? 'true' : 'false'}
     />
   </div>
   <script>
-    document.querySelectorAll('[data-tally-embed]').forEach((frame) => {
-      if (!(frame instanceof HTMLIFrameElement)) return;
+    import {
+      processTallySubmissionEvent,
+    } from '../lib/tally-conversion.mjs';
+
+    const tallyFrames = Array.from(document.querySelectorAll('[data-tally-embed]'))
+      .filter((frame): frame is HTMLIFrameElement => frame instanceof HTMLIFrameElement);
+
+    tallyFrames.forEach((frame) => {
       const panel = frame.parentElement?.querySelector('[aria-hidden="true"]');
       const hide = () => panel?.classList.add('hidden');
       frame.addEventListener('load', hide, { once: true });
       window.setTimeout(hide, 8000);
+    });
+
+    const claimedThisPage = new Set<string>();
+    window.addEventListener('message', (event) => {
+      const frame = tallyFrames.find((candidate) => candidate.contentWindow === event.source);
+      const formId = frame?.dataset.tallyFormId;
+      if (!frame || !formId) return;
+
+      const analyticsWindow = window as Window & {
+        dataLayer?: Record<string, unknown>[];
+      };
+      analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
+      processTallySubmissionEvent(event, {
+        expectedSource: frame.contentWindow,
+        formId,
+        formName: frame.dataset.tallyFormName,
+        confirmsAudit: frame.dataset.tallyConfirmsAudit === 'true',
+        storage: sessionStorage,
+        pageClaims: claimedThisPage,
+        dataLayer: analyticsWindow.dataLayer,
+        pagePath: window.location.pathname,
+      });
     });
   </script>
 ) : (

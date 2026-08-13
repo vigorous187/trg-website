@@ -18,14 +18,16 @@ const sizeClass =
   variant === 'mark'
     ? 'h-9 w-9'
     : 'h-10 w-auto max-w-[min(100%,16rem)] sm:max-w-[18rem] lg:h-11';
+const width = variant === 'mark' ? 36 : variant === 'horizontalDark' ? 450 : 900;
+const height = variant === 'mark' ? 36 : variant === 'horizontalDark' ? 163 : 325;
 ---
 
 <img
   src={src}
   alt={trgLogo.alt}
   class={`block shrink-0 object-contain ${sizeClass} ${className}`}
-  width={variant === 'mark' ? 36 : undefined}
-  height={variant === 'mark' ? 36 : undefined}
+  width={width}
+  height={height}
   loading={loading}
   decoding="async"
 />
