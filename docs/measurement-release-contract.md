@@ -17,6 +17,10 @@ The thank-you page never emits `generate_lead`. Its confirmed copy appears only 
 
 The public IndexNow key is `ae30d3d7-a441-4846-a8fc-59e36bdc205a`. Both source and built files must return that exact value plus one newline. A homepage fallback, HTML body, redirect, or different status is a failure even if the URL returns content.
 
+After the exact release passes critical production verification, the workflow reads the built sitemap and submits its unique, HTTPS, same-host canonical URLs to IndexNow. The submitter independently requires the live key to return HTTP 200, `text/plain`, and the exact key body before it sends anything. It records the timestamp, release commit, URL count, HTTP status, and SHA-256 payload hash in a retained workflow artifact. A submission failure emits a workflow warning but cannot trigger rollback of an otherwise verified healthy site.
+
+`npm run indexnow:dry-run` validates the built canonical URL payload and writes a receipt without making a network request. IndexNow acceptance confirms receipt, not indexing; indexing remains subject to search-engine processing and monitoring.
+
 ## Automated gates
 
 - `npm run test:measurement-contract` tests origin/form allowlists, success-only parsing, unique-ID deduplication, safe thank-you receipts, the IndexNow source key, production verification, and rollback request construction.
