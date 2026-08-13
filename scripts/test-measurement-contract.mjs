@@ -188,19 +188,19 @@ test("production verification covers metadata, Tally success, IndexNow, crawl fi
     if (path === "/") {
       return response(
         200,
-        `<title>Toronto Restaurant Growth</title><link rel="canonical" href="https://torontorestaurantgrowth.ca/"><script>GTM-WH4XSW4L;event: 'email_click'</script>`,
+        `<title>Toronto Restaurant Growth</title><meta name="description" content="Restaurant marketing"><link rel="canonical" href="https://torontorestaurantgrowth.ca/"><script>GTM-WH4XSW4L;event: 'email_click'</script>`,
       );
     }
     if (path === "/contact/") {
       return response(
         200,
-        '<iframe src="https://tally.so/embed/2Evezg" data-tally-form-id="2Evezg"></iframe><script src="/_astro/tally.js"></script>',
+        '<title>Contact</title><meta name="description" content="Contact TRG"><link rel="canonical" href="https://torontorestaurantgrowth.ca/contact/"><iframe src="https://tally.so/embed/2Evezg" data-tally-form-id="2Evezg"></iframe><script src="/_astro/tally.js"></script>',
       );
     }
     if (path === "/resources/google-review-response-templates/") {
       return response(
         200,
-        '<iframe src="https://tally.so/embed/Xxg9Kd" data-tally-form-id="Xxg9Kd"></iframe>',
+        '<title>Review templates</title><meta name="description" content="Review templates"><link rel="canonical" href="https://torontorestaurantgrowth.ca/resources/google-review-response-templates/"><iframe src="https://tally.so/embed/Xxg9Kd" data-tally-form-id="Xxg9Kd"></iframe>',
       );
     }
     if (path === "/_astro/tally.js") {
@@ -241,15 +241,15 @@ test("production verification covers metadata, Tally success, IndexNow, crawl fi
   };
 
   const result = await verifyProduction({ fetchImpl, expectedCommit: "release-sha" });
-  assert.equal(result.checks.length, 12);
+  assert.equal(result.checks.length, 13);
 });
 
 test("production verification fails closed on a different release commit", async () => {
   const fetchImpl = async (url) => {
     const path = new URL(url).pathname;
-    if (path === "/") return response(200, '<title>Toronto Restaurant Growth</title><link rel="canonical" href="https://torontorestaurantgrowth.ca/"><script>GTM-WH4XSW4L;event: \'email_click\'</script>');
-    if (path === "/contact/") return response(200, '<iframe src="https://tally.so/embed/2Evezg" data-tally-form-id="2Evezg"></iframe><script src="/_astro/tally.js"></script>');
-    if (path === "/resources/google-review-response-templates/") return response(200, '<iframe src="https://tally.so/embed/Xxg9Kd" data-tally-form-id="Xxg9Kd"></iframe>');
+    if (path === "/") return response(200, '<title>Toronto Restaurant Growth</title><meta name="description" content="Restaurant marketing"><link rel="canonical" href="https://torontorestaurantgrowth.ca/"><script>GTM-WH4XSW4L;event: \'email_click\'</script>');
+    if (path === "/contact/") return response(200, '<title>Contact</title><meta name="description" content="Contact TRG"><link rel="canonical" href="https://torontorestaurantgrowth.ca/contact/"><iframe src="https://tally.so/embed/2Evezg" data-tally-form-id="2Evezg"></iframe><script src="/_astro/tally.js"></script>');
+    if (path === "/resources/google-review-response-templates/") return response(200, '<title>Review templates</title><meta name="description" content="Review templates"><link rel="canonical" href="https://torontorestaurantgrowth.ca/resources/google-review-response-templates/"><iframe src="https://tally.so/embed/Xxg9Kd" data-tally-form-id="Xxg9Kd"></iframe>');
     if (path === "/_astro/tally.js") return response(200, 'const origin="https://tally.so";const event="Tally.FormSubmitted";dataLayer.push({event:"generate_lead",submission_id:"id"})');
     if (path === "/contact/thank-you/") return response(200, '<meta name="robots" content="noindex, follow"><link rel="canonical" href="https://torontorestaurantgrowth.ca/contact/">');
     if (path === "/robots.txt") return response(200, "Sitemap: https://torontorestaurantgrowth.ca/sitemap-index.xml");

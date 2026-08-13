@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node ./scripts/verify-redirects.mjs && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-blog-chrome.mjs && node ./scripts/audit-headings.mjs && node ./scripts/check-blog-uniqueness.mjs && node ./scripts/blog-opposing-review.mjs && node ./scripts/check-blog-quality.mjs && node ./scripts/check-geo-lite.mjs && node ./scripts/check-brand-alignment.mjs && node ./scripts/check-measurement-contract.mjs",
+    "build": "astro build && node ./scripts/verify-redirects.mjs && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-blog-chrome.mjs && node ./scripts/audit-headings.mjs && node ./scripts/check-blog-uniqueness.mjs && node ./scripts/blog-opposing-review.mjs && node ./scripts/check-blog-quality.mjs && node ./scripts/check-geo-lite.mjs && node ./scripts/check-brand-alignment.mjs && node ./scripts/check-measurement-contract.mjs && npm run check:site-quality",
     "blog:inventory": "node ./scripts/blog-inventory.mjs",
     "blog:open-slot": "node ./scripts/blog-open-slot.mjs",
     "blog:opposing-review": "node ./scripts/blog-opposing-review.mjs",
@@ -15,6 +15,7 @@
     "seo:guidelines:init": "node ./scripts/seo-init-guideline-baseline.mjs",
     "seo:guidelines:check": "node ./scripts/seo-check-guideline-baseline.mjs",
     "test:measurement-contract": "node --test ./scripts/test-measurement-contract.mjs ./scripts/test-indexnow-submission.mjs",
+    "check:site-quality": "node ./scripts/check-built-site-quality.mjs",
     "verify:synthetic-receipt": "node ./scripts/verify-synthetic-tally-receipt.mjs",
     "indexnow:dry-run": "node ./scripts/indexnow-submission.mjs --dry-run",
     "indexnow:submit": "node ./scripts/indexnow-submission.mjs",

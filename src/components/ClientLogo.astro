@@ -10,6 +10,7 @@ interface Props {
 
 const { client, size = 'md', class: className = '', loading = 'lazy' } = Astro.props;
 const logo = clientLogos[client];
+const dimensions = client === 'crabBoil' ? { width: 1080, height: 1080 } : { width: 1024, height: 341 };
 
 const sizeClass = {
   sm: 'h-8 max-w-[120px]',
@@ -27,6 +28,8 @@ const sizeClass = {
       class={`block w-auto object-contain object-left ${sizeClass} ${className}`}
       loading={loading}
       decoding="async"
+      width={dimensions.width}
+      height={dimensions.height}
     />
   </picture>
 ) : (
@@ -36,5 +39,7 @@ const sizeClass = {
     class={`block w-auto object-contain object-left ${sizeClass} ${className}`}
     loading={loading}
     decoding="async"
+    width={dimensions.width}
+    height={dimensions.height}
   />
 )}

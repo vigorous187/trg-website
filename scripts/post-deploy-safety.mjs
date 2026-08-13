@@ -79,6 +79,12 @@ export async function verifyProduction({
     home.text.includes('rel="canonical" href="https://torontorestaurantgrowth.ca/"'),
     "Homepage canonical is invalid",
   );
+  for (const [path, page] of [["/", home], ["/contact/", contact], ["/resources/google-review-response-templates/", resource]]) {
+    assert(/<title>[^<]+<\/title>/i.test(page.text), `${path} title is missing`);
+    assert(/<meta\s+name=["']description["']\s+content=["'][^"']+["']/i.test(page.text), `${path} description is missing`);
+    assert(page.text.includes(`rel="canonical" href="${base}${path}"`), `${path} canonical is invalid`);
+    for (const match of page.text.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) JSON.parse(match[1]);
+  }
 
   assert(contact.response.status === 200, `Contact page returned ${contact.response.status}`);
   assert(contact.text.includes("https://tally.so/embed/2Evezg"), "Audit Tally embed is missing");
@@ -110,6 +116,7 @@ export async function verifyProduction({
     "robots_sitemap",
     "sitemap_index",
     "real_404",
+    "representative_page_quality",
   ];
 
   if (profile === "release") {
