@@ -17,6 +17,10 @@ const checks = {
     "/locations/scarborough/",
     "/services/review-management/",
   ],
+  errorPageFiles: [
+    path.join(ROOT, "dist", "404.html"),
+    path.join(ROOT, "dist", "404", "index.html"),
+  ],
 };
 
 async function readIfExists(filePath) {
@@ -120,6 +124,23 @@ async function main() {
     assertTrue(
       new URL(canonical, SITE).href === new URL(pageUrl).href,
       `Sitemap canonical mismatch: ${pageUrl} -> ${canonical}`,
+    );
+  }
+
+  const errorPage = await readIfExists(path.join(ROOT, "dist", "404.html"));
+  assertTrue(errorPage, "Missing dist/404.html");
+  for (const errorPath of checks.errorPageFiles) {
+    const html = await readIfExists(errorPath);
+    if (!html) continue;
+    const rel = path.relative(ROOT, errorPath);
+    const robotsContent = extractRobotsContent(html);
+    assertTrue(
+      robotsContent?.toLowerCase().split(/[\s,]+/).includes("noindex"),
+      `Error page is missing noindex: ${rel}`,
+    );
+    assertTrue(
+      !html.includes("application/ld+json"),
+      `Error page must not emit JSON-LD: ${rel}`,
     );
   }
 

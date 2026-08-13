@@ -1,7 +1,7 @@
 /**
- * Verify the three known Astro redirect pages.
+ * Verify known redirects.
  *
- * Default: build-time check of dist/ meta-refresh targets.
+ * Default: build-time check of dist/ meta-refresh targets and public/_redirects.
  * --live:   fetch production and assert redirect + Location header.
  */
 import { readFile } from "node:fs/promises";
@@ -26,6 +26,11 @@ const REDIRECTS = [
   },
 ];
 
+const STATIC_REDIRECTS = [
+  { from: "/sitemap.xml", to: "/sitemap-index.xml" },
+  { from: "/sitemap.xml/", to: "/sitemap-index.xml" },
+];
+
 function distHtmlForPath(urlPath) {
   const trimmed = urlPath.replace(/^\/|\/$/g, "");
   return path.join(DIST, trimmed, "index.html");
@@ -45,8 +50,30 @@ function normalizePath(p) {
   return p.endsWith("/") ? p : `${p}/`;
 }
 
-async function verifyBuildTime() {
+async function verifyStaticRedirectsFile() {
+  const file = path.join(ROOT, "public", "_redirects");
+  const text = await readFile(file, "utf8");
   const failures = [];
+
+  for (const { from, to } of STATIC_REDIRECTS) {
+    const pattern = new RegExp(
+      `^${escapeRegExp(from)}\\s+${escapeRegExp(to)}\\s+301\\s*$`,
+      "m",
+    );
+    if (!pattern.test(text)) {
+      failures.push(`${from}: missing 301 to ${to} in public/_redirects`);
+    }
+  }
+
+  return failures;
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+async function verifyBuildTime() {
+  const failures = await verifyStaticRedirectsFile();
 
   for (const { from, to } of REDIRECTS) {
     const file = distHtmlForPath(from);
@@ -77,10 +104,10 @@ async function verifyBuildTime() {
   return failures;
 }
 
-async function verifyLive() {
+async function verifyLiveRedirects(redirects) {
   const failures = [];
 
-  for (const { from, to } of REDIRECTS) {
+  for (const { from, to } of redirects) {
     const url = `${SITE}${from}`;
     let res;
     try {
@@ -111,6 +138,13 @@ async function verifyLive() {
   return failures;
 }
 
+async function verifyLive() {
+  return [
+    ...(await verifyLiveRedirects(REDIRECTS)),
+    ...(await verifyLiveRedirects(STATIC_REDIRECTS)),
+  ];
+}
+
 async function main() {
   const live = process.argv.includes("--live");
   const failures = live ? await verifyLive() : await verifyBuildTime();
@@ -123,8 +157,9 @@ async function main() {
     process.exit(1);
   }
 
+  const total = REDIRECTS.length + STATIC_REDIRECTS.length;
   console.log(
-    `Redirect verification passed (${REDIRECTS.length} redirects, ${live ? "live" : "build"}).`,
+    `Redirect verification passed (${total} redirects, ${live ? "live" : "build"}).`,
   );
 }
 
