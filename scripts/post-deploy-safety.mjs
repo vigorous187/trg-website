@@ -152,6 +152,7 @@ export async function verifyProduction({
     assert(contactScripts.includes("Tally.FormSubmitted"), "Tally success listener is missing");
     assert(contactScripts.includes("https://tally.so"), "Tally origin allowlist is missing");
     assert(contactScripts.includes("submission_id"), "Submission ID contract is missing");
+    assert(contactScripts.includes("event_id"), "Canonical conversion event ID is missing");
     assert(contactScripts.includes("generate_lead"), "generate_lead contract is missing");
     assert(!thankYou.text.includes("data-tally-embed"), "Thank-you page can count a direct visit");
     checks.push("email_click", "tally_confirmed_lead", "indexnow_key", "release_identity");

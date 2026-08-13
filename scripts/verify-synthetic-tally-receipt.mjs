@@ -56,6 +56,10 @@ export function verifySyntheticTallyReceipt({ now = 1_786_647_600_000 } = {}) {
   assert.equal(dataLayer.length, 1, "Synthetic callback did not emit exactly one event");
   assert.equal(dataLayer[0].event, "generate_lead");
   assert.equal(dataLayer[0].submission_id, SYNTHETIC_SUBMISSION_ID);
+  assert.equal(
+    dataLayer[0].event_id,
+    `${SYNTHETIC_SUBMISSION_ID}.generate_lead`,
+  );
   assert.equal(first.receiptStored, true, "Confirmed synthetic receipt was not stored");
   assert.equal(receipt?.submissionId, SYNTHETIC_SUBMISSION_ID);
   assert.equal(secondReceipt, null, "Synthetic receipt was not consumed exactly once");

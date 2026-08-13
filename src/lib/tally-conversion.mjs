@@ -62,6 +62,7 @@ export function buildGenerateLeadEvent(submission, context) {
     form_id: submission.formId,
     form_name: context.formName || submission.formName,
     submission_id: submission.submissionId,
+    event_id: `${submission.submissionId}.generate_lead`,
     lead_source: "tally_embed",
     page_path: context.pagePath,
   };

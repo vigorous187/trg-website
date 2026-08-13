@@ -49,6 +49,7 @@ assert(resource.includes('data-tally-form-id="Xxg9Kd"'), "Lead-magnet Tally form
 assert(clientScripts.includes("Tally.FormSubmitted"), "Official Tally success event is missing");
 assert(clientScripts.includes("https://tally.so"), "Tally origin allowlist is missing");
 assert(clientScripts.includes("submission_id"), "Unique Tally submission ID is not forwarded");
+assert(clientScripts.includes("event_id"), "Canonical conversion event ID is missing");
 assert(clientScripts.includes("generate_lead"), "Success-only generate_lead contract is missing");
 
 assert(thankYou.includes('content="noindex, follow"'), "Thank-you page is not noindex");
