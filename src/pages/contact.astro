@@ -8,6 +8,7 @@ import { contentAddOn, growthPlan, intakeToTier, tierById } from '../data/pricin
 import {
   auditPrefillFromSearchParams,
   getAuditEmbedUrl,
+  resolveTallyFormId,
   trgContactEmail,
 } from '../data/tally';
 
@@ -26,6 +27,7 @@ const auditIncludes = [
 
 const prefill = auditPrefillFromSearchParams(Astro.url.searchParams);
 const embedUrl = getAuditEmbedUrl(import.meta.env, prefill);
+const formId = resolveTallyFormId('audit', import.meta.env);
 
 const afterSteps = [
   {
@@ -115,7 +117,13 @@ const faqs = [
           </p>
 
           <div class="mt-10">
-            <TallyEmbed embedUrl={embedUrl} title="Book a Free Google Audit" minHeight="720px" />
+            <TallyEmbed
+              embedUrl={embedUrl}
+              formId={formId}
+              title="Book a Free Google Audit"
+              confirmsAudit={true}
+              minHeight="720px"
+            />
           </div>
 
           <details class="mt-10 rounded-xl border border-stone-border bg-surface p-6">

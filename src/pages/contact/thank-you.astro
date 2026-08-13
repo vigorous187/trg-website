@@ -1,22 +1,30 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import { resolveTallyFormId } from '../../data/tally';
 
 const contactCanonical = new URL('/contact/', Astro.site).href;
+const auditFormId = resolveTallyFormId('audit', import.meta.env);
 ---
 
 <BaseLayout
   title="Thank You — Toronto Restaurant Growth"
-  description="We received your audit request and will be in touch within one business day."
+  description="Learn what happens after requesting a free restaurant Google audit from Toronto Restaurant Growth."
   canonicalURL={contactCanonical}
   noindex={true}
 >
   <main>
     <PageIntro
-      eyebrow="Request received"
-      title="You're on the list."
-      description="We'll reach out within one business day to schedule your free 15-minute Google audit. Check your inbox (and spam folder) for a message from Toronto Restaurant Growth."
+      eyebrow="Toronto Restaurant Growth"
+      title="Thanks for your interest."
+      description="If you just submitted the audit form, this page will confirm it once the verified Tally submission event is available."
     >
+      <div id="confirmed-audit" class="hidden" aria-live="polite" data-audit-form-id={auditFormId}>
+        <h2 class="font-heading text-2xl text-ink">Your request was received.</h2>
+        <p class="mt-3 text-sm text-ink-muted">
+          We'll reach out within one business day to schedule your free 15-minute Google audit. Check your inbox and spam folder.
+        </p>
+      </div>
       <p class="mt-6 text-center text-sm text-ink-muted">
         While you wait, you can read how we helped{' '}
         <a href="/case-studies/crab-boil/" class="font-semibold text-cta no-underline hover:text-cta-hover">
@@ -26,4 +34,16 @@ const contactCanonical = new URL('/contact/', Astro.site).href;
       </p>
     </PageIntro>
   </main>
+  <script>
+    import { consumeConfirmedAuditReceipt } from '../../lib/tally-conversion.mjs';
+
+    const confirmedAudit = document.getElementById('confirmed-audit');
+    const receipt = consumeConfirmedAuditReceipt(
+      sessionStorage,
+      confirmedAudit?.dataset.auditFormId,
+    );
+    if (receipt) {
+      confirmedAudit?.classList.remove('hidden');
+    }
+  </script>
 </BaseLayout>

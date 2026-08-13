@@ -106,5 +106,17 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
     <Navbar />
     <slot />
     <Footer />
+    <script is:inline>
+      document.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
+        link.addEventListener('click', function () {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'email_click',
+            link_type: 'email',
+            page_path: window.location.pathname
+          });
+        });
+      });
+    </script>
   </body>
 </html>
