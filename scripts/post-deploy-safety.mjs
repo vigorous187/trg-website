@@ -54,6 +54,7 @@ async function fetchSameOriginScripts(fetchImpl, baseUrl, html) {
 export async function verifyProduction({
   baseUrl = DEFAULT_BASE_URL,
   profile = "release",
+  expectedCommit = "",
   fetchImpl = fetch,
 } = {}) {
   const base = baseUrl.replace(/\/$/, "");
@@ -112,9 +113,26 @@ export async function verifyProduction({
   ];
 
   if (profile === "release") {
-    const indexNow = await fetchText(fetchImpl, `${base}/${INDEXNOW_KEY}.txt`);
+    const [indexNow, release] = await Promise.all([
+      fetchText(fetchImpl, `${base}/${INDEXNOW_KEY}.txt`),
+      fetchText(fetchImpl, `${base}/release.json`),
+    ]);
     assert(indexNow.response.status === 200, `IndexNow key returned ${indexNow.response.status}`);
     assert(indexNow.text === `${INDEXNOW_KEY}\n`, "IndexNow key response is not exact");
+    assert(release.response.status === 200, `Release identity returned ${release.response.status}`);
+    let releaseIdentity;
+    try {
+      releaseIdentity = JSON.parse(release.text);
+    } catch {
+      throw new Error("Release identity is not valid JSON");
+    }
+    assert(typeof releaseIdentity.commit === "string", "Release commit identity is missing");
+    if (expectedCommit) {
+      assert(
+        releaseIdentity.commit === expectedCommit,
+        `Expected release ${expectedCommit}, found ${releaseIdentity.commit}`,
+      );
+    }
     assert(home.text.includes("event: 'email_click'"), "email_click contract is missing");
 
     const contactScripts = await fetchSameOriginScripts(
@@ -129,7 +147,7 @@ export async function verifyProduction({
     assert(contactScripts.includes("submission_id"), "Submission ID contract is missing");
     assert(contactScripts.includes("generate_lead"), "generate_lead contract is missing");
     assert(!thankYou.text.includes("data-tally-embed"), "Thank-you page can count a direct visit");
-    checks.push("email_click", "tally_confirmed_lead", "indexnow_key");
+    checks.push("email_click", "tally_confirmed_lead", "indexnow_key", "release_identity");
   }
 
   return { baseUrl: base, profile, checks };
@@ -245,6 +263,7 @@ async function main() {
     const result = await verifyProductionWithRetry({
       baseUrl: argValue("base-url", DEFAULT_BASE_URL),
       profile: argValue("profile", "release"),
+      expectedCommit: argValue("expected-commit", ""),
       retries: Number(argValue("retries", "6")),
       delayMs: Number(argValue("delay-ms", "5000")),
     });

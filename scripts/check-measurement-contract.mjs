@@ -24,7 +24,7 @@ async function scriptsUnder(relativePath) {
   return scripts.join("\n");
 }
 
-const [home, contact, resource, thankYou, sourceKey, builtKey, clientScripts] =
+const [home, contact, resource, thankYou, sourceKey, builtKey, releaseJson, clientScripts] =
   await Promise.all([
     text("dist/index.html"),
     text("dist/contact/index.html"),
@@ -32,6 +32,7 @@ const [home, contact, resource, thankYou, sourceKey, builtKey, clientScripts] =
     text("dist/contact/thank-you/index.html"),
     text(`public/${INDEXNOW_KEY}.txt`),
     text(`dist/${INDEXNOW_KEY}.txt`),
+    text("dist/release.json"),
     scriptsUnder("dist/_astro"),
   ]);
 
@@ -59,5 +60,10 @@ assert(!thankYou.includes("data-tally-embed"), "Thank-you page must not contain 
 
 assert(sourceKey === `${INDEXNOW_KEY}\n`, "Source IndexNow key file is not exact");
 assert(builtKey === `${INDEXNOW_KEY}\n`, "Built IndexNow key file is not exact");
+
+const release = JSON.parse(releaseJson);
+const expectedCommit = process.env.PUBLIC_RELEASE_COMMIT || "local";
+assert(release.commit === expectedCommit, "Built release commit identity is not exact");
+assert(release.branch === (process.env.PUBLIC_RELEASE_BRANCH || "local"), "Built release branch identity is not exact");
 
 console.log("TRG measurement and metadata contract passed.");

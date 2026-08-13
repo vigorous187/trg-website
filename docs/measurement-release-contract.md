@@ -22,7 +22,7 @@ The public IndexNow key is `ae30d3d7-a441-4846-a8fc-59e36bdc205a`. Both source a
 - `npm run test:measurement-contract` tests origin/form allowlists, success-only parsing, unique-ID deduplication, safe thank-you receipts, the IndexNow source key, production verification, and rollback request construction.
 - `npm run build` also checks the built analytics, metadata, thank-you, and IndexNow contracts.
 - Pull requests run the focused tests, every existing build/SEO gate, and a read-only baseline check of current production.
-- The manual production workflow captures the current successful Cloudflare Pages deployment, deploys, performs critical release checks, and invokes [Cloudflare's official rollback endpoint](https://developers.cloudflare.com/api/typescript/resources/pages/subresources/projects/subresources/deployments/methods/rollback) if release verification fails.
+- The manual production workflow accepts an exact full commit SHA, requires that commit to be on `origin/main`, embeds the commit in `/release.json`, captures the current successful Cloudflare Pages deployment, deploys, verifies the live commit identity and critical contracts, and invokes [Cloudflare's official rollback endpoint](https://developers.cloudflare.com/api/typescript/resources/pages/subresources/projects/subresources/deployments/methods/rollback) if release verification fails.
 
 ## Verification status and blockers
 
