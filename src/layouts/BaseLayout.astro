@@ -12,6 +12,7 @@ export interface Props {
   ogImage?: string;
   schema?: object | object[];
   noindex?: boolean;
+  omitCanonical?: boolean;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   ogImage = "/og-default.png",
   schema,
   noindex = false,
+  omitCanonical = false,
 } = Astro.props;
 
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') || 'https://torontorestaurantgrowth.ca';
@@ -66,15 +68,15 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
     <!-- End Google Tag Manager -->
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}
-    <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" hreflang="en-CA" href={canonicalURL} />
+    {!omitCanonical && <link rel="canonical" href={canonicalURL} />}
+    {!omitCanonical && <link rel="alternate" hreflang={lang} href={canonicalURL} />}
     <title>{title}</title>
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:url" content={canonicalURL} />
+    {!omitCanonical && <meta property="og:url" content={canonicalURL} />}
     <meta property="og:type" content="website" />
 
     <!-- Twitter Card -->

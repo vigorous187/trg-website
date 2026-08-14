@@ -17,6 +17,7 @@ const checks = {
     "/locations/scarborough/",
     "/services/review-management/",
   ],
+  errorPage: path.join(ROOT, "dist", "404.html"),
 };
 
 async function readIfExists(filePath) {
@@ -122,6 +123,16 @@ async function main() {
       `Sitemap canonical mismatch: ${pageUrl} -> ${canonical}`,
     );
   }
+
+  const errorPage = await readIfExists(checks.errorPage);
+  assertTrue(errorPage, "Missing dist/404.html");
+  const errorRobots = extractRobotsContent(errorPage);
+  assertTrue(
+    errorRobots?.toLowerCase().split(/[\s,]+/).includes("noindex"),
+    "404 page is missing noindex",
+  );
+  assertTrue(!extractCanonical(errorPage), "404 page must omit canonical");
+  assertTrue(!errorPage.includes("application/ld+json"), "404 page must omit JSON-LD");
 
   console.log(`SEO baseline check passed (${sitemapUrls.length} sitemap pages).`);
 }
