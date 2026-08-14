@@ -26,6 +26,23 @@ const REDIRECTS = [
   },
 ];
 
+const STATIC_REDIRECTS = [
+  { from: "/sitemap.xml", to: "/sitemap-index.xml" },
+  { from: "/sitemap.xml/", to: "/sitemap-index.xml" },
+];
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+async function verifyStaticRedirectsFile() {
+  const text = await readFile(path.join(ROOT, "public", "_redirects"), "utf8");
+  return STATIC_REDIRECTS.flatMap(({ from, to }) => {
+    const rule = new RegExp(`^${escapeRegExp(from)}\\s+${escapeRegExp(to)}\\s+301\\s*$`, "m");
+    return rule.test(text) ? [] : [`${from}: missing 301 to ${to} in public/_redirects`];
+  });
+}
+
 function distHtmlForPath(urlPath) {
   const trimmed = urlPath.replace(/^\/|\/$/g, "");
   return path.join(DIST, trimmed, "index.html");
@@ -46,7 +63,7 @@ function normalizePath(p) {
 }
 
 async function verifyBuildTime() {
-  const failures = [];
+  const failures = await verifyStaticRedirectsFile();
 
   for (const { from, to } of REDIRECTS) {
     const file = distHtmlForPath(from);
@@ -77,10 +94,10 @@ async function verifyBuildTime() {
   return failures;
 }
 
-async function verifyLive() {
+async function verifyLiveRedirects(redirects) {
   const failures = [];
 
-  for (const { from, to } of REDIRECTS) {
+  for (const { from, to } of redirects) {
     const url = `${SITE}${from}`;
     let res;
     try {
@@ -111,6 +128,13 @@ async function verifyLive() {
   return failures;
 }
 
+async function verifyLive() {
+  return [
+    ...(await verifyLiveRedirects(REDIRECTS)),
+    ...(await verifyLiveRedirects(STATIC_REDIRECTS)),
+  ];
+}
+
 async function main() {
   const live = process.argv.includes("--live");
   const failures = live ? await verifyLive() : await verifyBuildTime();
@@ -124,7 +148,7 @@ async function main() {
   }
 
   console.log(
-    `Redirect verification passed (${REDIRECTS.length} redirects, ${live ? "live" : "build"}).`,
+    `Redirect verification passed (${REDIRECTS.length + STATIC_REDIRECTS.length} redirects, ${live ? "live" : "build"}).`,
   );
 }
 
