@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const lastUpdated = 'May 14, 2026';
+const lastUpdated = 'August 14, 2026';
 ---
 
 <BaseLayout
@@ -61,6 +61,11 @@ const lastUpdated = 'May 14, 2026';
           Our site may use cookies or similar technologies for security, performance, or embedded widgets. You can
           control cookies through your browser.
         </p>
+        <p>
+          Optional analytics and advertising technologies remain off unless you choose Accept all. Rejecting or
+          withdrawing consent does not affect necessary site features.
+        </p>
+        <button type="button" data-consent-preferences aria-haspopup="dialog" aria-controls="site-consent-panel" class="rounded-lg border-2 border-ink px-5 py-3 font-semibold text-ink hover:border-cta hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">Review or withdraw privacy choices</button>
 
         <h2>Retention</h2>
         <p>

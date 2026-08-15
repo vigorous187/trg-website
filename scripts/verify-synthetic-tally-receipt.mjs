@@ -42,6 +42,7 @@ export function verifySyntheticTallyReceipt({ now = 1_786_647_600_000 } = {}) {
     storage,
     pageClaims,
     dataLayer,
+    measurementConsent: true,
     pagePath: "/contact/",
     now,
   };

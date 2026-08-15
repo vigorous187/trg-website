@@ -1,0 +1,85 @@
+<aside id="site-consent-panel" class="consent-panel" role="dialog" aria-modal="false" aria-labelledby="site-consent-title" aria-describedby="site-consent-description" hidden>
+  <div class="consent-copy">
+    <h2 id="site-consent-title">Your privacy choices</h2>
+    <p id="site-consent-description">
+      Necessary site features always work. Analytics and advertising stay off unless you choose Accept all.
+      Read our <a href="/privacy/">Privacy Policy</a>.
+    </p>
+  </div>
+  <div class="consent-actions">
+    <button type="button" class="consent-reject" data-consent-reject>Reject all</button>
+    <button type="button" class="consent-accept" data-consent-accept>Accept all</button>
+    <button type="button" class="consent-close" data-consent-close hidden>Close</button>
+  </div>
+  <p class="sr-only" aria-live="polite" data-consent-status></p>
+</aside>
+
+<script>
+  function bindConsentPanel() {
+    const panel = document.querySelector('#site-consent-panel');
+    if (!(panel instanceof HTMLElement) || panel.dataset['bound'] === 'true') return;
+    panel.dataset['bound'] = 'true';
+    const accept = panel.querySelector('[data-consent-accept]');
+    const reject = panel.querySelector('[data-consent-reject]');
+    const close = panel.querySelector('[data-consent-close]');
+    const status = panel.querySelector('[data-consent-status]');
+    let returnFocus: HTMLElement | null = null;
+    const show = (trigger: Element | null = null) => {
+      returnFocus = trigger instanceof HTMLElement
+        ? trigger
+        : document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      panel.hidden = false;
+      if (close instanceof HTMLElement) close.hidden = !window.__siteConsent?.getChoice();
+      window.requestAnimationFrame(() => { if (accept instanceof HTMLElement) accept.focus(); });
+    };
+    const hide = (message: string) => {
+      panel.hidden = true;
+      if (status) status.textContent = message;
+      if (returnFocus instanceof HTMLElement) returnFocus.focus();
+    };
+    accept?.addEventListener('click', () => {
+      window.__siteConsent?.accept();
+      hide('All optional analytics and advertising have been accepted.');
+    });
+    reject?.addEventListener('click', () => {
+      window.__siteConsent?.reject();
+      hide('Optional analytics and advertising have been rejected.');
+    });
+    close?.addEventListener('click', () => hide('Privacy choices closed without changes.'));
+    panel.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && window.__siteConsent?.getChoice()) {
+        event.preventDefault();
+        hide('Privacy choices closed without changes.');
+      }
+    });
+    document.querySelectorAll('[data-consent-preferences]').forEach((button) => {
+      button.addEventListener('click', () => show(button));
+    });
+    (window as any).__siteConsentPanelOpen = show;
+    if (!(window as any).__siteConsentOpenBound) {
+      (window as any).__siteConsentOpenBound = true;
+      window.addEventListener('site-consent-open', () => (window as any).__siteConsentPanelOpen?.());
+    }
+    if (!window.__siteConsent?.getChoice()) show();
+  }
+  bindConsentPanel();
+</script>
+
+<style>
+  .consent-panel { position: fixed; z-index: 1000; right: 1rem; bottom: 1rem; left: 1rem; margin: 0 auto; max-width: 72rem; border: 1px solid #d6d1c7; border-radius: 1rem; background: #fff; color: #1a1a1a; box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 18%); padding: 1.25rem; }
+  .consent-panel[hidden] { display: none; }
+  .consent-copy h2 { margin: 0; font-size: 1.25rem; line-height: 1.3; }
+  .consent-copy p { margin: .5rem 0 0; max-width: 52rem; line-height: 1.55; }
+  .consent-copy a { color: #a84400; text-decoration: underline; text-underline-offset: .2em; }
+  .consent-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+  .consent-actions button { min-height: 44px; border-radius: .5rem; border: 2px solid #1a1a1a; padding: .65rem 1rem; font: inherit; font-weight: 700; cursor: pointer; }
+  .consent-accept { background: #1a1a1a; color: #fff; }
+  .consent-reject, .consent-close { background: #fff; color: #1a1a1a; }
+  .consent-actions button:focus-visible, .consent-copy a:focus-visible { outline: 3px solid #e85d04; outline-offset: 3px; }
+  @media (min-width: 48rem) {
+    .consent-panel { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .consent-panel[hidden] { display: none; }
+    .consent-actions { flex: 0 0 auto; margin-top: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .consent-panel { scroll-behavior: auto; } }
+</style>
