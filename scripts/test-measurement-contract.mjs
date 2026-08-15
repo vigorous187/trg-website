@@ -175,6 +175,28 @@ test("trusted callback integration rejects a different iframe source", () => {
   assert.equal(result, null);
 });
 
+test("trusted callback keeps the business receipt but suppresses measurement without consent", () => {
+  const storage = memoryStorage();
+  const dataLayer = [];
+  const source = {};
+  const result = processTallySubmissionEvent(
+    { ...tallyEvent(), source },
+    {
+      expectedSource: source,
+      formId: AUDIT_FORM_ID,
+      confirmsAudit: true,
+      storage,
+      pageClaims: new Set(),
+      dataLayer,
+      measurementConsent: false,
+      pagePath: "/contact/",
+    },
+  );
+  assert.ok(result?.receiptStored);
+  assert.equal(result.analyticsEvent, null);
+  assert.equal(dataLayer.length, 0);
+});
+
 test("IndexNow source key is exact", async () => {
   const key = await readFile(
     new URL(`../public/${INDEXNOW_KEY}.txt`, import.meta.url),

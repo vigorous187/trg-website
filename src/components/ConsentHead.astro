@@ -1,0 +1,18 @@
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+  if (window.__siteConsentDefaultVersion !== 1) {
+    window.gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+    window.__siteConsentDefaultVersion = 1;
+  }
+</script>
+<script>
+  import { bootstrapConsent } from '../lib/consent-runtime.mjs';
+  bootstrapConsent();
+</script>

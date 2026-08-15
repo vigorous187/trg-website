@@ -78,6 +78,7 @@ export function processTallySubmissionEvent(
     storage,
     pageClaims,
     dataLayer,
+    measurementConsent = false,
     pagePath,
     now = Date.now(),
   } = {},
@@ -99,9 +100,9 @@ export function processTallySubmissionEvent(
     formName,
     pagePath,
   });
-  dataLayer.push(analyticsEvent);
+  if (measurementConsent) dataLayer.push(analyticsEvent);
 
-  return { submission, analyticsEvent, receiptStored };
+  return { submission, analyticsEvent: measurementConsent ? analyticsEvent : null, receiptStored };
 }
 
 export function storeConfirmedAuditReceipt(storage, submission, now = Date.now()) {

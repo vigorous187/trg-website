@@ -79,6 +79,7 @@ const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Goo
         storage: sessionStorage,
         pageClaims: claimedThisPage,
         dataLayer: analyticsWindow.dataLayer,
+        measurementConsent: window.__siteConsent?.hasMeasurementConsent() === true,
         pagePath: window.location.pathname,
       });
     });
