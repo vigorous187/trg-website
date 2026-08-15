@@ -8,7 +8,16 @@ import {
   createConsentController,
   parseConsentRecord,
 } from "../src/lib/consent-runtime.mjs";
-import { auditZarazConfig } from "./verify-zaraz-consent-config.mjs";
+import { ZARAZ_TOKEN_ENV, auditZarazConfig, buildZarazConfigRequest } from "./verify-zaraz-consent-config.mjs";
+
+test("Zaraz preflight uses the dedicated read secret and an exact GET request", () => {
+  assert.equal(ZARAZ_TOKEN_ENV, "CLOUDFLARE_ZARAZ_READ_TOKEN");
+  assert.deepEqual(buildZarazConfigRequest({ token: "zaraz-read", zoneId: "zone" }), {
+    url: "https://api.cloudflare.com/client/v4/zones/zone/settings/zaraz/config",
+    options: { method: "GET", headers: { Authorization: "Bearer zaraz-read" } },
+  });
+  assert.throws(() => buildZarazConfigRequest({ token: "", zoneId: "zone" }), /CLOUDFLARE_ZARAZ_READ_TOKEN/);
+});
 
 test("release preflight fails closed when Zaraz auto-injection is enabled", () => {
   assert.deepEqual(auditZarazConfig({ settings: { autoInjectScript: true }, tools: {} }), ["Zaraz autoInjectScript must be false"]);
@@ -95,4 +104,7 @@ test("production workflow runs the live Zaraz preflight before deploy", async ()
   const deploy = workflow.indexOf("cloudflare/wrangler-action@v3");
   assert.ok(zarazPreflight > 0 && zarazPreflight < deploy);
   assert.match(workflow, /CLOUDFLARE_ZONE_ID: 7102a31aa58d6acf0145f56f0fb6463d/);
+  assert.match(workflow, /CLOUDFLARE_ZARAZ_READ_TOKEN: \$\{\{ secrets\.CLOUDFLARE_ZARAZ_READ_TOKEN \}\}/);
+  const preflightStep = workflow.slice(workflow.lastIndexOf("- name: Verify live Cloudflare Zaraz", zarazPreflight), workflow.indexOf("- name: Build exact", zarazPreflight));
+  assert.doesNotMatch(preflightStep, /CLOUDFLARE_API_TOKEN/);
 });

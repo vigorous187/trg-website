@@ -1,14 +1,22 @@
 import { pathToFileURL } from "node:url";
 
+export const ZARAZ_TOKEN_ENV = "CLOUDFLARE_ZARAZ_READ_TOKEN";
+
+export function buildZarazConfigRequest({ token, zoneId }) {
+  if (!token || !zoneId) throw new Error(`${ZARAZ_TOKEN_ENV} and CLOUDFLARE_ZONE_ID are required`);
+  return {
+    url: `https://api.cloudflare.com/client/v4/zones/${zoneId}/settings/zaraz/config`,
+    options: { method: "GET", headers: { Authorization: `Bearer ${token}` } },
+  };
+}
+
 export function auditZarazConfig(config) {
   return config?.settings?.autoInjectScript === false ? [] : ["Zaraz autoInjectScript must be false"];
 }
 
 async function main() {
-  const token = process.env.CLOUDFLARE_API_TOKEN;
-  const zoneId = process.env.CLOUDFLARE_ZONE_ID;
-  if (!token || !zoneId) throw new Error("CLOUDFLARE_API_TOKEN and CLOUDFLARE_ZONE_ID are required");
-  const response = await fetch(`https://api.cloudflare.com/client/v4/zones/${zoneId}/settings/zaraz/config`, { headers: { Authorization: `Bearer ${token}` } });
+  const request = buildZarazConfigRequest({ token: process.env[ZARAZ_TOKEN_ENV], zoneId: process.env.CLOUDFLARE_ZONE_ID });
+  const response = await fetch(request.url, request.options);
   if (!response.ok) throw new Error(`Cloudflare Zaraz read failed with HTTP ${response.status}`);
   const body = await response.json();
   if (!body.success) throw new Error("Cloudflare Zaraz read returned an unsuccessful response");
