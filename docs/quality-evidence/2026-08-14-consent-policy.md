@@ -19,6 +19,7 @@ Representative URLs and templates: `/`, `/contact/`, `/privacy/`, shared `BaseLa
 | Responsive | Consent UI at 320px | PASS | Shared layout | Local browser at 320 CSS px; no horizontal overflow | Local preview, 2026-08-14 | 200% zoom remains untested |
 | Functionality | Existing Tally forms and receipts | PASS | Contact/embed | Business receipt remains independent; measurement only after consent | Measurement contract tests | Authorized live receipt remains |
 | Analytics/privacy | Repository-controlled GTM and withdrawal | PASS | Shared layout | Deterministic ordering, persistence, denial, exactly-once and no-PII tests | `scripts/consent-contract.test.mjs` | Production network acceptance remains |
+| Release safety | Live Zaraz configuration preflight | PASS | Manual release | Read-only API gate requires `autoInjectScript=false` before build/deploy | `verify-zaraz-consent-config.mjs`; deterministic contract tests | Current live configuration intentionally blocks release until corrected |
 | Analytics/privacy | Cloudflare Zaraz before choice | FAIL | Production zone | Read-only Cloudflare API configuration audit | `autoInjectScript: true`; no tools currently configured | Owner must disable auto-injection to satisfy the no-Zaraz-before-choice policy |
 | Operations | Exact-SHA release, rollback and IndexNow | PASS | Workflow | Existing guarded workflow unchanged | `.github/workflows/deploy.yml` | This PR does not deploy |
 

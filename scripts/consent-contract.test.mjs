@@ -8,6 +8,12 @@ import {
   createConsentController,
   parseConsentRecord,
 } from "../src/lib/consent-runtime.mjs";
+import { auditZarazConfig } from "./verify-zaraz-consent-config.mjs";
+
+test("release preflight fails closed when Zaraz auto-injection is enabled", () => {
+  assert.deepEqual(auditZarazConfig({ settings: { autoInjectScript: true }, tools: {} }), ["Zaraz autoInjectScript must be false"]);
+  assert.deepEqual(auditZarazConfig({ settings: { autoInjectScript: false }, tools: {} }), []);
+});
 
 function harness(stored = null) {
   const values = new Map();
@@ -81,4 +87,12 @@ test("source contract preserves GTM ID, accessibility, ordering, and removes byp
   assert.match(footer, /data-consent-preferences/);
   assert.doesNotMatch(layout, /googletagmanager\.com\/ns\.html/);
   assert.doesNotMatch(layout, /googletagmanager\.com\/gtm\.js/);
+});
+
+test("production workflow runs the live Zaraz preflight before deploy", async () => {
+  const workflow = await readFile(new URL("../.github/workflows/deploy.yml", import.meta.url), "utf8");
+  const zarazPreflight = workflow.indexOf("npm run verify:consent:release");
+  const deploy = workflow.indexOf("cloudflare/wrangler-action@v3");
+  assert.ok(zarazPreflight > 0 && zarazPreflight < deploy);
+  assert.match(workflow, /CLOUDFLARE_ZONE_ID: 7102a31aa58d6acf0145f56f0fb6463d/);
 });
