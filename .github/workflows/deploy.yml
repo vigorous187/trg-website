@@ -63,7 +63,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4"
-          command: pages deploy dist --project-name=torontorestaurantgrowth --branch=main --commit-hash=${{ inputs.source_commit }} --commit-dirty=true
+          command: pages deploy dist --project-name=torontorestaurantgrowth --branch=main --commit-hash=${{ inputs.source_commit }} --commit-dirty=false
 
       - name: Verify production critically
         id: production_verify
