@@ -14,7 +14,7 @@
     "seo:sync-mystic": "node ./scripts/sync-mystic-seo-report.mjs",
     "seo:guidelines:init": "node ./scripts/seo-init-guideline-baseline.mjs",
     "seo:guidelines:check": "node ./scripts/seo-check-guideline-baseline.mjs",
-    "test:measurement-contract": "node --test ./scripts/test-measurement-contract.mjs ./scripts/test-indexnow-submission.mjs ./scripts/consent-contract.test.mjs",
+    "test:measurement-contract": "node --test ./scripts/test-measurement-contract.mjs ./scripts/test-indexnow-submission.mjs ./scripts/consent-contract.test.mjs ./scripts/test-release-receipt-sender.mjs",
     "verify:consent:release": "node ./scripts/verify-zaraz-consent-config.mjs",
     "check:site-quality": "node ./scripts/check-built-site-quality.mjs",
     "verify:synthetic-receipt": "node ./scripts/verify-synthetic-tally-receipt.mjs",

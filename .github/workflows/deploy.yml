@@ -65,13 +65,65 @@ jobs:
           wranglerVersion: "4"
           command: pages deploy dist --project-name=torontorestaurantgrowth --branch=main --commit-hash=${{ inputs.source_commit }} --commit-dirty=false
 
+      - name: Resolve exact successful production deployment ID
+        id: deployed
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          for attempt in {1..12}; do
+            if ! curl --fail-with-body --silent --show-error \
+              --output "$response" \
+              --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/torontorestaurantgrowth"; then
+              sleep 5
+              continue
+            fi
+            if ! jq -e '.success == true' "$response" >/dev/null; then
+              sleep 5
+              continue
+            fi
+            project="$(jq -r '.result.name // empty' "$response")"
+            production_branch="$(jq -r '.result.production_branch // empty' "$response")"
+            deployment_id="$(jq -r '.result.canonical_deployment.id // empty' "$response")"
+            deployment_environment="$(jq -r '.result.canonical_deployment.environment // empty' "$response")"
+            deployment_status="$(jq -r '.result.canonical_deployment.latest_stage.status // empty' "$response")"
+            deployment_branch="$(jq -r '.result.canonical_deployment.deployment_trigger.metadata.branch // empty' "$response")"
+            deployment_sha="$(jq -r '.result.canonical_deployment.deployment_trigger.metadata.commit_hash // empty' "$response")"
+            deployment_dirty="$(jq -r '.result.canonical_deployment.deployment_trigger.metadata | if has("commit_dirty") then (.commit_dirty | tostring) else empty end' "$response")"
+            if [[ "$project" == torontorestaurantgrowth &&
+                  "$production_branch" == main &&
+                  -n "$deployment_id" &&
+                  "$deployment_environment" == production &&
+                  "$deployment_status" == success &&
+                  "$deployment_branch" == main &&
+                  "$deployment_sha" == "${{ inputs.source_commit }}" &&
+                  "$deployment_dirty" == false ]]; then
+              echo "deployment_id=${deployment_id}" >> "$GITHUB_OUTPUT"
+              echo "Cloudflare canonical production identity matches the exact clean candidate."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Timed out waiting for the exact clean production deployment identity" >&2
+          exit 1
+
       - name: Verify production critically
         id: production_verify
-        run: node scripts/post-deploy-safety.mjs verify --expected-commit=${{ inputs.source_commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/post-deploy-safety.mjs verify --expected-commit=${{ inputs.source_commit }}
+          echo "verification_status=passed" >> "$GITHUB_OUTPUT"
+          echo "verified_at=$(node -p 'new Date().toISOString()')" >> "$GITHUB_OUTPUT"
 
       - name: Roll back to last-known-good deployment
         id: rollback
-        if: ${{ failure() && steps.deploy_pages.outcome == 'success' && steps.production_verify.outcome == 'failure' }}
+        if: ${{ failure() && steps.deploy_pages.outcome == 'success' && (steps.deployed.outcome == 'failure' || steps.production_verify.outcome == 'failure') }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -80,6 +132,35 @@ jobs:
       - name: Verify restored production
         if: ${{ always() && steps.rollback.outcome == 'success' }}
         run: node scripts/post-deploy-safety.mjs verify --profile=baseline
+
+      - name: Send exact verified release receipt to Forge dashboard
+        id: release_receipt
+        if: ${{ steps.production_verify.outcome == 'success' }}
+        continue-on-error: true
+        env:
+          RELEASE_RECEIPT_SECRET: ${{ secrets.RELEASE_RECEIPT_SECRET }}
+          RELEASE_CANDIDATE_SHA: ${{ inputs.source_commit }}
+          RELEASE_DEPLOYMENT_ID: ${{ steps.deployed.outputs.deployment_id }}
+          RELEASE_VERIFIED_AT: ${{ steps.production_verify.outputs.verified_at }}
+          RELEASE_VERIFICATION_STATUS: ${{ steps.production_verify.outputs.verification_status }}
+          RELEASE_RECEIPT_OUTPUT: artifacts/release-receipt-sender.json
+        run: node scripts/release-receipt-sender.mjs
+
+      - name: Retain Forge dashboard release sender receipt
+        id: release_receipt_artifact
+        if: ${{ always() && steps.production_verify.outcome == 'success' }}
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: trg-forge-release-receipt-${{ inputs.source_commit }}
+          path: artifacts/release-receipt-sender.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Warn without rolling back a dashboard receipt failure
+        if: ${{ always() && (steps.release_receipt.outcome == 'failure' || steps.release_receipt_artifact.outcome == 'failure') }}
+        shell: bash
+        run: echo "::warning title=Dashboard release receipt failed::Production verification passed, so the healthy release was retained. Inspect the sanitized sender receipt artifact when available."
 
       - name: Submit canonical release URLs to IndexNow
         id: indexnow_submit
