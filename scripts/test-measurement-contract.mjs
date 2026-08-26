@@ -7,6 +7,7 @@ import {
   consumeConfirmedAuditReceipt,
   parseTallySubmissionMessage,
   processTallySubmissionEvent,
+  pushGenerateLeadEvent,
   storeConfirmedAuditReceipt,
 } from "../src/lib/tally-conversion.mjs";
 import { verifySyntheticTallyReceipt } from "./verify-synthetic-tally-receipt.mjs";
@@ -195,6 +196,146 @@ test("trusted callback keeps the business receipt but suppresses measurement wit
   assert.ok(result?.receiptStored);
   assert.equal(result.analyticsEvent, null);
   assert.equal(dataLayer.length, 0);
+});
+
+function processTrusted(event, overrides = {}) {
+  const source = event.source ?? {};
+  return processTallySubmissionEvent(
+    { ...event, source },
+    {
+      expectedSource: source,
+      formId: AUDIT_FORM_ID,
+      confirmsAudit: true,
+      storage: memoryStorage(),
+      pageClaims: new Set(),
+      dataLayer: [],
+      measurementConsent: true,
+      pagePath: "/contact/",
+      ...overrides,
+    },
+  );
+}
+
+test("generate_lead is pushed only after a trusted Tally success, never before", () => {
+  const dataLayer = [];
+  const storage = memoryStorage();
+  const pageClaims = new Set();
+  const source = {};
+  const options = {
+    expectedSource: source,
+    formId: AUDIT_FORM_ID,
+    formName: "Book a Free Google Audit",
+    confirmsAudit: true,
+    storage,
+    pageClaims,
+    dataLayer,
+    measurementConsent: true,
+    pagePath: "/contact/",
+  };
+
+  const beforeSuccess = [
+    {
+      origin: "https://tally.so",
+      source,
+      data: JSON.stringify({
+        event: "Tally.FormLoaded",
+        payload: { formId: AUDIT_FORM_ID },
+      }),
+    },
+    {
+      origin: "https://tally.so",
+      source,
+      data: JSON.stringify({
+        event: "Tally.FormPageView",
+        payload: { formId: AUDIT_FORM_ID, page: 1 },
+      }),
+    },
+    {
+      origin: "https://tally.so",
+      source,
+      data: JSON.stringify({
+        event: "Tally.FormSubmitted",
+        payload: { id: "bad", formId: AUDIT_FORM_ID },
+      }),
+    },
+  ];
+
+  for (const event of beforeSuccess) {
+    assert.equal(processTallySubmissionEvent(event, options), null);
+  }
+  assert.equal(dataLayer.length, 0);
+
+  const success = processTallySubmissionEvent({ ...tallyEvent(), source }, options);
+  assert.equal(success?.analyticsEvent?.event, "generate_lead");
+  assert.equal(dataLayer.length, 1);
+  assert.deepEqual(dataLayer[0], {
+    event: "generate_lead",
+    form_id: AUDIT_FORM_ID,
+    form_name: "Book a Free Google Audit",
+    submission_id: "submission_abc123",
+    event_id: "submission_abc123.generate_lead",
+    lead_source: "tally_embed",
+    page_path: "/contact/",
+  });
+
+  assert.equal(
+    processTallySubmissionEvent({ ...tallyEvent(), source }, options),
+    null,
+  );
+  assert.equal(dataLayer.length, 1);
+});
+
+test("generate_lead tracking no-ops if dataLayer is missing and still stores the receipt", () => {
+  const source = {};
+  const storage = memoryStorage();
+  const result = processTallySubmissionEvent(
+    { ...tallyEvent(), source },
+    {
+      expectedSource: source,
+      formId: AUDIT_FORM_ID,
+      confirmsAudit: true,
+      storage,
+      pageClaims: new Set(),
+      measurementConsent: true,
+      pagePath: "/contact/",
+    },
+  );
+  assert.equal(result?.analyticsEvent, null);
+  assert.equal(result?.receiptStored, true);
+  assert.equal(pushGenerateLeadEvent(undefined, { event: "generate_lead" }), false);
+  assert.equal(pushGenerateLeadEvent(null, { event: "generate_lead" }), false);
+});
+
+test("generate_lead tracking hook never fetches, submits a lead, or calls gtag", async () => {
+  const fetchCalls = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (...args) => {
+    fetchCalls.push(args);
+    return Promise.resolve(new Response("unexpected fetch", { status: 500 }));
+  };
+
+  try {
+    const dataLayer = [];
+    const result = processTrusted(tallyEvent(), { dataLayer });
+    assert.equal(result?.analyticsEvent?.event, "generate_lead");
+    assert.equal(dataLayer.length, 1);
+    assert.equal(fetchCalls.length, 0);
+  } finally {
+    if (originalFetch) globalThis.fetch = originalFetch;
+    else delete globalThis.fetch;
+  }
+
+  const [conversionSource, embedSource] = await Promise.all([
+    readFile(new URL("../src/lib/tally-conversion.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../src/components/TallyEmbed.astro", import.meta.url), "utf8"),
+  ]);
+  assert.doesNotMatch(conversionSource, /\bfetch\s*\(/);
+  assert.doesNotMatch(conversionSource, /\bgtag\s*\(/);
+  assert.doesNotMatch(conversionSource, /sendBeacon/);
+  assert.doesNotMatch(embedSource, /\bfetch\s*\(/);
+  assert.doesNotMatch(embedSource, /gtag\s*\(\s*['"]event['"]/);
+  assert.doesNotMatch(embedSource, /dataLayer\s*=\s*.*dataLayer\s*\|\|\s*\[\]/);
+  assert.match(embedSource, /Tally\.FormSubmitted|processTallySubmissionEvent/);
 });
 
 test("IndexNow source key is exact", async () => {

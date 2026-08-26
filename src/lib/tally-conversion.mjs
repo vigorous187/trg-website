@@ -68,6 +68,12 @@ export function buildGenerateLeadEvent(submission, context) {
   };
 }
 
+export function pushGenerateLeadEvent(dataLayer, analyticsEvent) {
+  if (!analyticsEvent || !Array.isArray(dataLayer)) return false;
+  dataLayer.push(analyticsEvent);
+  return true;
+}
+
 export function processTallySubmissionEvent(
   event,
   {
@@ -84,7 +90,7 @@ export function processTallySubmissionEvent(
   } = {},
 ) {
   if (!expectedSource || event?.source !== expectedSource) return null;
-  if (!pageClaims || !Array.isArray(dataLayer)) return null;
+  if (!pageClaims) return null;
 
   const submission = parseTallySubmissionMessage(event, {
     allowedFormIds: [formId],
@@ -100,9 +106,15 @@ export function processTallySubmissionEvent(
     formName,
     pagePath,
   });
-  if (measurementConsent) dataLayer.push(analyticsEvent);
+  const pushed =
+    measurementConsent === true &&
+    pushGenerateLeadEvent(dataLayer, analyticsEvent);
 
-  return { submission, analyticsEvent: measurementConsent ? analyticsEvent : null, receiptStored };
+  return {
+    submission,
+    analyticsEvent: pushed ? analyticsEvent : null,
+    receiptStored,
+  };
 }
 
 export function storeConfirmedAuditReceipt(storage, submission, now = Date.now()) {
