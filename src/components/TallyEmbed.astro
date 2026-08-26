@@ -70,7 +70,6 @@ const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Goo
       const analyticsWindow = window as Window & {
         dataLayer?: Record<string, unknown>[];
       };
-      analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
       processTallySubmissionEvent(event, {
         expectedSource: frame.contentWindow,
         formId,
