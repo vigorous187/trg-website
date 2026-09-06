@@ -99,15 +99,22 @@ export function processTallySubmissionEvent(
   if (!claimTallySubmission(storage, submission.submissionId)) return null;
 
   pageClaims.add(submission.submissionId);
-  const receiptStored = confirmsAudit
-    ? storeConfirmedAuditReceipt(storage, submission, now)
-    : false;
   const analyticsEvent = buildGenerateLeadEvent(submission, {
     formName,
     pagePath,
   });
+  const receiptStored = confirmsAudit
+    ? storeConfirmedAuditReceipt(storage, submission, now, {
+        formName: analyticsEvent.form_name,
+        pagePath,
+        measurementConsent: measurementConsent === true,
+      })
+    : false;
+  // Tally redirects audit submissions immediately. Send from the destination
+  // receipt instead, so navigation cannot discard Google's queued request.
   const pushed =
     measurementConsent === true &&
+    (!confirmsAudit || !receiptStored) &&
     pushGenerateLeadEvent(dataLayer, analyticsEvent);
 
   return {
@@ -117,12 +124,13 @@ export function processTallySubmissionEvent(
   };
 }
 
-export function storeConfirmedAuditReceipt(storage, submission, now = Date.now()) {
+export function storeConfirmedAuditReceipt(storage, submission, now = Date.now(), context = {}) {
   if (!storage || !submission) return false;
   try {
     storage.setItem(
       RECEIPT_KEY,
       JSON.stringify({
+        ...context,
         submissionId: submission.submissionId,
         formId: submission.formId,
         confirmedAt: now,
@@ -138,6 +146,7 @@ export function consumeConfirmedAuditReceipt(
   storage,
   allowedFormId,
   now = Date.now(),
+  { dataLayer, measurementConsent = false } = {},
 ) {
   if (!storage) return null;
   let raw;
@@ -151,13 +160,19 @@ export function consumeConfirmedAuditReceipt(
 
   try {
     const receipt = JSON.parse(raw);
-    return receipt?.formId === allowedFormId &&
+    const valid = receipt?.formId === allowedFormId &&
       SUBMISSION_ID_PATTERN.test(receipt?.submissionId || "") &&
       Number.isFinite(receipt?.confirmedAt) &&
       now - receipt.confirmedAt >= 0 &&
-      now - receipt.confirmedAt <= RECEIPT_MAX_AGE_MS
-      ? receipt
-      : null;
+      now - receipt.confirmedAt <= RECEIPT_MAX_AGE_MS;
+    if (!valid) return null;
+    if (receipt.measurementConsent === true && measurementConsent === true) {
+      pushGenerateLeadEvent(dataLayer, buildGenerateLeadEvent(receipt, {
+        formName: receipt.formName,
+        pagePath: receipt.pagePath,
+      }));
+    }
+    return receipt;
   } catch {
     return null;
   }
