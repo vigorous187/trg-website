@@ -41,6 +41,11 @@ const auditFormId = resolveTallyFormId('audit', import.meta.env);
     const receipt = consumeConfirmedAuditReceipt(
       sessionStorage,
       confirmedAudit?.dataset.auditFormId,
+      Date.now(),
+      {
+        dataLayer: (window as Window & { dataLayer?: Record<string, unknown>[] }).dataLayer,
+        measurementConsent: window.__siteConsent?.hasMeasurementConsent() === true,
+      },
     );
     if (receipt) {
       confirmedAudit?.classList.remove('hidden');

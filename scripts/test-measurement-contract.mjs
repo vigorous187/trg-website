@@ -216,7 +216,7 @@ function processTrusted(event, overrides = {}) {
   );
 }
 
-test("generate_lead is pushed only after a trusted Tally success, never before", () => {
+test("audit generate_lead waits for the trusted success receipt after redirect", () => {
   const dataLayer = [];
   const storage = memoryStorage();
   const pageClaims = new Set();
@@ -266,7 +266,12 @@ test("generate_lead is pushed only after a trusted Tally success, never before",
   assert.equal(dataLayer.length, 0);
 
   const success = processTallySubmissionEvent({ ...tallyEvent(), source }, options);
-  assert.equal(success?.analyticsEvent?.event, "generate_lead");
+  assert.equal(success?.analyticsEvent, null);
+  assert.equal(dataLayer.length, 0);
+  assert.ok(consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, Date.now(), {
+    dataLayer,
+    measurementConsent: true,
+  }));
   assert.equal(dataLayer.length, 1);
   assert.deepEqual(dataLayer[0], {
     event: "generate_lead",
@@ -283,6 +288,50 @@ test("generate_lead is pushed only after a trusted Tally success, never before",
     null,
   );
   assert.equal(dataLayer.length, 1);
+  assert.equal(consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, Date.now(), {
+    dataLayer,
+    measurementConsent: true,
+  }), null);
+  assert.equal(dataLayer.length, 1);
+});
+
+test("audit receipt cannot measure denied submissions or consent withdrawn before redirect", () => {
+  for (const [atSubmission, atDestination] of [[false, true], [true, false], [false, false]]) {
+    const storage = memoryStorage();
+    const dataLayer = [];
+    processTrusted(tallyEvent(), { storage, dataLayer, measurementConsent: atSubmission });
+    const receipt = consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, Date.now(), {
+      dataLayer,
+      measurementConsent: atDestination,
+    });
+    assert.ok(receipt, "Business confirmation must still be available");
+    assert.equal(dataLayer.length, 0);
+    assert.equal(consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, Date.now(), {
+      dataLayer,
+      measurementConsent: true,
+    }), null);
+    assert.equal(dataLayer.length, 0, "Later consent must not replay this submission");
+  }
+});
+
+test("resource success still emits immediately and never creates an audit receipt", () => {
+  const storage = memoryStorage();
+  const dataLayer = [];
+  const event = tallyEvent();
+  const message = JSON.parse(event.data);
+  message.payload.formId = LEAD_MAGNET_FORM_ID;
+  event.data = JSON.stringify(message);
+  const result = processTrusted(event, {
+    formId: LEAD_MAGNET_FORM_ID,
+    confirmsAudit: false,
+    storage,
+    dataLayer,
+    pagePath: "/resources/restaurant-seo-checklist/",
+  });
+  assert.equal(result?.analyticsEvent?.event, "generate_lead");
+  assert.equal(dataLayer.length, 1);
+  assert.equal(result.receiptStored, false);
+  assert.equal(consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID), null);
 });
 
 test("generate_lead tracking no-ops if dataLayer is missing and still stores the receipt", () => {
@@ -316,7 +365,7 @@ test("generate_lead tracking hook never fetches, submits a lead, or calls gtag",
 
   try {
     const dataLayer = [];
-    const result = processTrusted(tallyEvent(), { dataLayer });
+    const result = processTrusted(tallyEvent(), { dataLayer, confirmsAudit: false });
     assert.equal(result?.analyticsEvent?.event, "generate_lead");
     assert.equal(dataLayer.length, 1);
     assert.equal(fetchCalls.length, 0);

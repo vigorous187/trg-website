@@ -49,8 +49,15 @@ export function verifySyntheticTallyReceipt({ now = 1_786_647_600_000 } = {}) {
 
   const first = processTallySubmissionEvent(event, options);
   const replay = processTallySubmissionEvent(event, options);
-  const receipt = consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, now + 1);
-  const secondReceipt = consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, now + 1);
+  assert.equal(dataLayer.length, 0, "Audit event must wait until after the redirect");
+  const receipt = consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, now + 1, {
+    dataLayer,
+    measurementConsent: true,
+  });
+  const secondReceipt = consumeConfirmedAuditReceipt(storage, AUDIT_FORM_ID, now + 1, {
+    dataLayer,
+    measurementConsent: true,
+  });
 
   assert.ok(first, "Trusted synthetic callback was not accepted");
   assert.equal(replay, null, "Duplicate synthetic callback was accepted");
