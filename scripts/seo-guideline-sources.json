@@ -3,15 +3,15 @@
   "urls": [
     {
       "id": "helpful-content",
-      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=en"
     },
     {
       "id": "gen-ai-content",
-      "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content"
+      "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content?hl=en"
     },
     {
       "id": "spam-policies",
-      "url": "https://developers.google.com/search/docs/essentials/spam-policies"
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies?hl=en"
     }
   ]
 }

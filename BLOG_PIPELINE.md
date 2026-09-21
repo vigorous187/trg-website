@@ -1,6 +1,6 @@
 # Toronto Restaurant Growth — blog pipeline
 
-Checklist: [~/Developer/shared/docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md](file:///Users/user/Developer/shared/docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md)
+Checklist: [docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md](docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md)
 
 ## Stack
 

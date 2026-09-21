@@ -26,7 +26,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          title="SEO: Google guideline page changed — review checklist"
+          open=$(gh issue list --state open --limit 100 --json number,title \
+            --jq ".[] | select(.title == \"$title\") | .number" | head -n 1)
+          if [ -n "$open" ]; then
+            echo "Open issue #$open already tracks guideline drift. Skipping duplicate."
+            exit 0
+          fi
           gh issue create \
-            --title "SEO: Google guideline page changed — review checklist" \
-            --body "Monthly guideline fingerprint check failed. Review logs in this workflow run. Update shared docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md and repo gate scripts; run npm run seo:guidelines:init and commit automation/guideline-baseline.json." \
+            --title "$title" \
+            --body "Monthly guideline fingerprint check failed. Review logs in this workflow run. Update docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md and repo gate scripts only when a live page changed a rule this repo enforces; run npm run seo:guidelines:init and commit automation/guideline-baseline.json." \
             || true
