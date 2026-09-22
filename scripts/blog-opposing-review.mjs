@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // scripts/blog-opposing-review.mjs
 // Optional adversarial reviewer that ALWAYS runs the uniqueness gate first,
-// then — only if ANTHROPIC_API_KEY is set AND BLOG_LLM_REVIEW=1 — sends a
-// concise summary of post titles + body openings to Anthropic Messages API
-// and prints the review. Review is informational; it never fails the build.
+// then — only if OPENAI_API_KEY is set AND BLOG_LLM_REVIEW=1 — sends a
+// concise summary of post titles + body openings to the OpenAI Chat
+// Completions API and prints the review. Review is informational; it never fails the build.
 import { spawnSync } from "node:child_process";
 import { readFile, readdir, stat } from "node:fs/promises";
 import { join, extname, basename } from "node:path";
@@ -60,40 +60,43 @@ function fmField(fm, key) {
   return m ? m[1].trim() : "";
 }
 
-async function callAnthropic(summary) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+async function callOpenAI(summary) {
+  const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return;
   const body = {
-    model: process.env.BLOG_LLM_MODEL || "claude-sonnet-4-5",
-    max_tokens: 1200,
-    system:
-      "You are a strict editorial reviewer for a small business blog. Read the submitted post titles and body openings. Flag any pair that looks like the same template with swapped nouns. Reward concrete, specific, original content. Be terse. Output sections: SUMMARY, RISKS, REWRITE PRIORITIES.",
+    model: process.env.BLOG_LLM_MODEL || "gpt-5.6-terra",
+    max_completion_tokens: 1200,
+    reasoning_effort: "none",
     messages: [
+      {
+        role: "system",
+        content:
+          "You are a strict editorial reviewer for a small business blog. Read the submitted post titles and body openings. Flag any pair that looks like the same template with swapped nouns. Reward concrete, specific, original content. Be terse. Output sections: SUMMARY, RISKS, REWRITE PRIORITIES.",
+      },
       {
         role: "user",
         content: `Review these blog posts for duplication, template-feel, and editorial quality. Each item shows: slug | title | first 280 chars of body.\n\n${summary}`,
       },
     ],
   };
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
+      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify(body),
   });
   if (!res.ok) {
     const txt = await res.text();
     console.error(
-      `[blog-opposing-review] anthropic ${res.status}: ${txt.slice(0, 500)}`,
+      `[blog-opposing-review] OpenAI API ${res.status}: ${txt.slice(0, 500)}`,
     );
     return;
   }
   const data = await res.json();
-  const text = (data.content || []).map((c) => c.text || "").join("\n");
-  console.log("\n[blog-opposing-review] Anthropic review:\n" + text + "\n");
+  const text = data.choices?.[0]?.message?.content || "";
+  console.log("\n[blog-opposing-review] OpenAI review:\n" + text + "\n");
 }
 
 async function main() {
@@ -109,9 +112,9 @@ async function main() {
     );
     return;
   }
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.OPENAI_API_KEY) {
     console.log(
-      "[blog-opposing-review] ANTHROPIC_API_KEY not set — skipping LLM pass.",
+      "[blog-opposing-review] OPENAI_API_KEY not set — skipping LLM pass.",
     );
     return;
   }
@@ -130,7 +133,7 @@ async function main() {
   }
   if (items.length === 0) return;
   const summary = items.join("\n");
-  await callAnthropic(summary);
+  await callOpenAI(summary);
 }
 
 main().catch((err) => {

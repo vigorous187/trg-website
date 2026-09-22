@@ -33,6 +33,6 @@ jobs:
       - name: Create blog post PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           BLOG_AUTO_GENERATE: "1"
         run: node scripts/blog-open-slot.mjs

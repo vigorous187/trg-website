@@ -9,13 +9,13 @@ Blog posts live in `src/content/blog/*.mdx` (Astro Content Collections). Listing
 ## Automation
 
 - Weekly `blog-automation.yml` — AI-drafted posts from `automation/topic-queue.json`
-- **API key:** GitHub Actions uses repo secret `ANTHROPIC_API_KEY` (set from cc-vault `api-anthropic`). Local runs:
+- **API key:** GitHub Actions uses repo secret `OPENAI_API_KEY`. Local runs:
 
 ```bash
-ANTHROPIC_API_KEY=$(cc-vault get api-anthropic) npm run blog:open-slot
+OPENAI_API_KEY=... npm run blog:open-slot
 ```
 
-- `scripts/blog-generate-body.mjs` — Anthropic body generation with TRG quality gates
+- `scripts/blog-generate-body.mjs` — OpenAI Chat Completions body generation with TRG quality gates. Default model `gpt-5.6-terra`; override with `BLOG_LLM_MODEL`.
 - `scripts/blog-open-slot.mjs` — opens PR; set `BLOG_AUTO_GENERATE=0` for outline-only drafts
 - Weekly `seo-build-health.yml`
 - Monthly `seo-guideline-drift.yml`
@@ -36,7 +36,7 @@ Run after Mystic weekly rankings update, before deploy.
 
 ```bash
 npm run blog:inventory -- --days=90
-npm run blog:open-slot          # local; needs ANTHROPIC_API_KEY for AI body
+npm run blog:open-slot          # local; needs OPENAI_API_KEY for AI body
 npm run seo:sync-mystic
 ```
 
