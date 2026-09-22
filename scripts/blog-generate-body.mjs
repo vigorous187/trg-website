@@ -1,7 +1,8 @@
 /**
- * Generate TRG blog MDX body via Anthropic API (CI + local).
- * Requires ANTHROPIC_API_KEY.
+ * Generate TRG blog MDX body via OpenAI Chat Completions (CI + local).
+ * Requires OPENAI_API_KEY. Override the model with BLOG_LLM_MODEL.
  */
+
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -63,38 +64,53 @@ function validateBody(body, gates) {
   return issues;
 }
 
-async function callAnthropic(system, user, maxTokens = 8192) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+const DEFAULT_BLOG_MODEL = "gpt-5.6-terra";
+
+async function callOpenAI(system, user, maxTokens = 8192) {
+  const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     throw new Error(
-      "ANTHROPIC_API_KEY is not set — add it to GitHub Actions secrets for automated posts.",
+      "OPENAI_API_KEY is not set — add it to GitHub Actions secrets for automated posts.",
     );
   }
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
+      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: process.env.BLOG_LLM_MODEL || "claude-sonnet-4-5",
-      max_tokens: maxTokens,
-      system,
-      messages: [{ role: "user", content: user }],
+      model: process.env.BLOG_LLM_MODEL || DEFAULT_BLOG_MODEL,
+      max_completion_tokens: maxTokens,
+      // Keep the token budget on the article, not hidden reasoning.
+      reasoning_effort: "none",
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: user },
+      ],
     }),
   });
   if (!res.ok) {
     throw new Error(
-      `Anthropic API ${res.status}: ${(await res.text()).slice(0, 400)}`,
+      `OpenAI API ${res.status}: ${(await res.text()).slice(0, 400)}`,
     );
   }
   const data = await res.json();
-  return (data.content || [])
-    .filter((c) => c.type === "text")
-    .map((c) => c.text)
-    .join("\n")
-    .trim();
+  const message = data.choices?.[0]?.message;
+  if (message?.refusal) {
+    throw new Error(
+      `OpenAI API refusal: ${String(message.refusal).slice(0, 400)}`,
+    );
+  }
+  const content = message?.content;
+  const text = Array.isArray(content)
+    ? content
+        .map((part) => (typeof part === "string" ? part : part?.text || ""))
+        .join("\n")
+    : typeof content === "string"
+      ? content
+      : "";
+  return text.trim();
 }
 
 function systemPrompt(brand, domain) {
@@ -151,7 +167,7 @@ Hard requirements:
       attempt > 1
         ? `\n\nPrevious draft failed checks: ${lastIssues.join("; ")}. Fix all of them.`
         : "";
-    body = sanitizeBody(await callAnthropic(system, userPrompt + retry));
+    body = sanitizeBody(await callOpenAI(system, userPrompt + retry));
     lastIssues = validateBody(body, gates);
     if (lastIssues.length === 0) break;
     console.log(

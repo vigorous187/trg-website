@@ -1,6 +1,6 @@
 /**
  * TRG blog slot — opens PR from automation/topic-queue.json.
- * When BLOG_AUTO_GENERATE=1 (default in CI), drafts full body via Anthropic.
+ * When BLOG_AUTO_GENERATE=1 (default in CI), drafts full body via OpenAI.
  */
 import { readFile, writeFile, mkdir, access } from "node:fs/promises";
 import path from "node:path";
