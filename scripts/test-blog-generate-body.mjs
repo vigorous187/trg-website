@@ -44,10 +44,46 @@ test("blog body generation uses OpenAI chat completions without a live key", asy
 
     process.env.OPENAI_API_KEY = "test-openai-key";
     globalThis.fetch = async () =>
-      new Response("invalid api key", { status: 401, statusText: "Unauthorized" });
+      new Response(
+        JSON.stringify({
+          error: { type: "invalid_request_error", message: "invalid api key" },
+        }),
+        { status: 401, headers: { "content-type": "application/json" } },
+      );
     await assert.rejects(
       () => generateBlogBody({ slug: "test-slug", title: "Test title" }),
-      /OpenAI API 401/,
+      /OpenAI authentication failed \(401\).*OPENAI_API_KEY/,
+    );
+
+    globalThis.fetch = async () =>
+      new Response(
+        JSON.stringify({
+          error: {
+            type: "insufficient_quota",
+            code: "insufficient_quota",
+            message: "You have no credits remaining. Add credits to continue.",
+          },
+        }),
+        { status: 429, headers: { "content-type": "application/json" } },
+      );
+    await assert.rejects(
+      () => generateBlogBody({ slug: "test-slug", title: "Test title" }),
+      /OpenAI billing quota is exhausted \(429\).*fund the OpenAI Platform/,
+    );
+
+    globalThis.fetch = async () =>
+      new Response(
+        JSON.stringify({
+          error: {
+            code: "model_not_found",
+            message: "The model does not exist or you do not have access.",
+          },
+        }),
+        { status: 404, headers: { "content-type": "application/json" } },
+      );
+    await assert.rejects(
+      () => generateBlogBody({ slug: "test-slug", title: "Test title" }),
+      /OpenAI model access failed for gpt-4\.1-mini \(404\).*BLOG_LLM_MODEL/,
     );
 
     const body = draftBody();
@@ -79,8 +115,8 @@ test("blog body generation uses OpenAI chat completions without a live key", asy
       "Bearer test-openai-key",
     );
     const payload = JSON.parse(calls[0].options.body);
-    assert.equal(payload.model, "gpt-5.6-terra");
-    assert.equal(payload.reasoning_effort, "none");
+    assert.equal(payload.model, "gpt-4.1-mini");
+    assert.equal("reasoning_effort" in payload, false);
     assert.equal(payload.max_completion_tokens, 8192);
     assert.deepEqual(
       payload.messages.map((message) => message.role),

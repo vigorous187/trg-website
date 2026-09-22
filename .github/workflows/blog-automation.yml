@@ -34,5 +34,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BLOG_LLM_MODEL: ${{ vars.BLOG_LLM_MODEL }}
           BLOG_AUTO_GENERATE: "1"
         run: node scripts/blog-open-slot.mjs
