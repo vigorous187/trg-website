@@ -64,7 +64,48 @@ function validateBody(body, gates) {
   return issues;
 }
 
-const DEFAULT_BLOG_MODEL = "gpt-5.6-terra";
+const DEFAULT_BLOG_MODEL = "gpt-4.1-mini";
+
+async function openAIError(res, model) {
+  let error = {};
+  try {
+    error = (await res.json()).error || {};
+  } catch {
+    // Keep the fallback generic rather than echoing an unstructured response.
+  }
+
+  const code = String(error.code || error.type || "");
+  const message = String(error.message || "");
+  if (res.status === 401) {
+    return new Error(
+      "OpenAI authentication failed (401) — verify the OPENAI_API_KEY secret and API project access.",
+    );
+  }
+  if (
+    code === "model_not_found" ||
+    /model.+(?:access|exist|found|permission)/i.test(message) ||
+    res.status === 404
+  ) {
+    return new Error(
+      `OpenAI model access failed for ${model} (${res.status}) — verify BLOG_LLM_MODEL and that the API project can use this model.`,
+    );
+  }
+  if (
+    res.status === 429 &&
+    (code === "insufficient_quota" ||
+      /(?:credit|quota|billing)/i.test(message))
+  ) {
+    return new Error(
+      "OpenAI billing quota is exhausted (429) — fund the OpenAI Platform API project and retry.",
+    );
+  }
+  if (res.status === 429) {
+    return new Error("OpenAI rate limit exceeded (429) — retry later.");
+  }
+  return new Error(
+    `OpenAI API request failed (${res.status}${code ? `, ${code}` : ""}).`,
+  );
+}
 
 async function callOpenAI(system, user, maxTokens = 8192) {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -73,6 +114,7 @@ async function callOpenAI(system, user, maxTokens = 8192) {
       "OPENAI_API_KEY is not set — add it to GitHub Actions secrets for automated posts.",
     );
   }
+  const model = process.env.BLOG_LLM_MODEL || DEFAULT_BLOG_MODEL;
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -80,10 +122,8 @@ async function callOpenAI(system, user, maxTokens = 8192) {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: process.env.BLOG_LLM_MODEL || DEFAULT_BLOG_MODEL,
+      model,
       max_completion_tokens: maxTokens,
-      // Keep the token budget on the article, not hidden reasoning.
-      reasoning_effort: "none",
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
@@ -91,9 +131,7 @@ async function callOpenAI(system, user, maxTokens = 8192) {
     }),
   });
   if (!res.ok) {
-    throw new Error(
-      `OpenAI API ${res.status}: ${(await res.text()).slice(0, 400)}`,
-    );
+    throw await openAIError(res, model);
   }
   const data = await res.json();
   const message = data.choices?.[0]?.message;
