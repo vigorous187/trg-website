@@ -19,19 +19,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Validate dispatch SHA before checkout
+        shell: bash
+        env:
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo 'Invalid full commit SHA' >&2; exit 1; }
       - name: Check out the exact authorized source commit
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.source_commit }}
           fetch-depth: 0
+          persist-credentials: false
       - name: Verify exact source identity and current main tip
+        env:
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
         shell: bash
         run: |
           set -euo pipefail
-          [[ "${{ inputs.source_commit }}" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$SOURCE_COMMIT" =~ ^[0-9a-f]{40}$ ]]
           git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
-          test "$(git rev-parse HEAD)" = "${{ inputs.source_commit }}"
-          test "$(git rev-parse origin/main)" = "${{ inputs.source_commit }}"
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test "$(git rev-parse origin/main)" = "$SOURCE_COMMIT"
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -71,6 +81,7 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
         run: |
           set -euo pipefail
           response="$(mktemp)"
@@ -101,7 +112,7 @@ jobs:
                   "$deployment_environment" == production &&
                   "$deployment_status" == success &&
                   "$deployment_branch" == main &&
-                  "$deployment_sha" == "${{ inputs.source_commit }}" &&
+                  "$deployment_sha" == "$SOURCE_COMMIT" &&
                   "$deployment_dirty" == false ]]; then
               echo "deployment_id=${deployment_id}" >> "$GITHUB_OUTPUT"
               echo "Cloudflare canonical production identity matches the exact clean candidate."
@@ -114,10 +125,12 @@ jobs:
 
       - name: Verify production critically
         id: production_verify
+        env:
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
         shell: bash
         run: |
           set -euo pipefail
-          node scripts/post-deploy-safety.mjs verify --expected-commit=${{ inputs.source_commit }}
+          node scripts/post-deploy-safety.mjs verify "--expected-commit=$SOURCE_COMMIT"
           echo "verification_status=passed" >> "$GITHUB_OUTPUT"
           echo "verified_at=$(node -p 'new Date().toISOString()')" >> "$GITHUB_OUTPUT"
 
