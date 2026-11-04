@@ -86,6 +86,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   </head>
   <body class="m-0 bg-cream p-0 font-body text-ink antialiased">
+<!--email_off-->
     <Navbar />
     <slot />
     <Footer />
@@ -103,5 +104,6 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
         });
       });
     </script>
-  </body>
+  <!--/email_off-->
+</body>
 </html>
