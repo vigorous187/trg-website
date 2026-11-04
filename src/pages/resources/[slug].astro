@@ -28,9 +28,13 @@ const magnet = leadMagnets[key];
 const content = resourceContent[key];
 const embedUrl = getLeadMagnetEmbedUrl(import.meta.env, key);
 const formId = resolveTallyFormId('leadMagnet', import.meta.env);
+const documentTitle =
+  key === "grandOpening"
+    ? "Restaurant Grand Opening Timeline | TRG"
+    : `${magnet.title} — Toronto Restaurant Growth`;
 ---
 
-<BaseLayout title={`${magnet.title} — Toronto Restaurant Growth`} description={magnet.metaDescription}>
+<BaseLayout title={documentTitle} description={magnet.metaDescription}>
   <main>
     <PageIntro eyebrow={content.eyebrow} title={magnet.title} description={content.intro} />
 

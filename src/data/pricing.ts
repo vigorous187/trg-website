@@ -97,7 +97,7 @@ export const intakeToTier: {
   },
   {
     option: "Grand Opening Marketing",
-    note: "Project-based launch campaigns — separate from the monthly retainer. Often transitions to Growth after opening.",
+    note: "Project-based launch campaigns: 8 weeks before opening and 4 weeks after. Ongoing support is an optional separate monthly retainer.",
   },
 ];
 
@@ -105,11 +105,11 @@ export const intakeToTier: {
 export const projectAddOns = {
   grandOpening: {
     fullCampaignLabel: "$3,500–$6,500",
-    fullCampaignNote: "12-week campaign (8 weeks pre-opening + 4 weeks post)",
+    fullCampaignNote: "12-week campaign (8 weeks before opening + 4 weeks after opening, including opening week)",
     openingWeekLabel: "from $1,500",
     openingWeekNote: "Standalone opening week coverage",
     transitionNote:
-      "Most clients transition to Growth (and optionally the content add-on) after launch.",
+      "After the launch package ends, ongoing support is available through a separate, optional monthly retainer. Growth and the content add-on are agreed separately.",
   },
   websiteOnly: {
     singleLocationLabel: "from $2,500",

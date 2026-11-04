@@ -50,7 +50,7 @@ export const resourceContent: Record<LeadMagnetKey, ResourceContent> = {
     key: "grandOpening",
     eyebrow: "Free resource",
     intro:
-      "Opening week marketing fails when digital setup starts too late. This 90-day timeline covers what to do before, during, and after launch.",
+      "Opening week marketing fails when digital setup starts too late. This timeline covers preparation from 90 days before opening through opening week.",
     previewTitle: "Preview — first milestones",
     previewItems: [
       "90 days out: Register domain, create GBP (even unverified), open social accounts",

@@ -11,6 +11,7 @@ import {
   resolveTallyFormId,
   trgContactEmail,
 } from '../data/tally';
+import { sitePhone } from '../data/branding';
 
 const trustItems = [
   '100% Free — No Credit Card',
@@ -178,6 +179,12 @@ const faqs = [
               class="mt-3 inline-block text-sm font-semibold text-ink no-underline hover:text-cta"
             >
               {trgContactEmail}
+            </a>
+            <a
+              href={`tel:${sitePhone.tel}`}
+              class="mt-3 inline-block text-sm font-semibold text-ink no-underline hover:text-cta"
+            >
+              {sitePhone.display}
             </a>
             <p class="mt-4 text-xs text-ink-muted">Service area: Greater Toronto Area</p>
           </div>

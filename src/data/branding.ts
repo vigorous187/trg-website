@@ -2,6 +2,12 @@
 
 export const siteName = "Toronto Restaurant Growth";
 
+export const sitePhone = {
+  display: "(647) 788-8806",
+  tel: "+16477888806",
+  schema: "+1-647-788-8806",
+} as const;
+
 export const trgLogo = {
   /** Circular TRG mark — favicons, schema, compact uses */
   mark: "/trg-logo-mark.png",
