@@ -1,5 +1,7 @@
 /** Single source for nav + footer links (redesign scaffold). */
 
+import { sitePhone } from "./branding";
+
 export const ctaNav = {
   label: "Book a Free Google Audit",
   href: "/contact/",
@@ -74,5 +76,9 @@ export const footerContact = [
   {
     label: "hello@torontorestaurantgrowth.ca",
     href: "mailto:hello@torontorestaurantgrowth.ca",
+  },
+  {
+    label: sitePhone.display,
+    href: `tel:${sitePhone.tel}`,
   },
 ] as const;

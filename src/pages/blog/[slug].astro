@@ -19,10 +19,45 @@ const formatted = new Date(post.data.publishDate).toLocaleDateString('en-CA', {
   month: 'long',
   day: 'numeric',
 });
+
+// Document <title> only. PageIntro keeps post.data.title as the H1.
+const metaTitleOverrides: Record<string, string> = {
+  "expand-your-reach-restaurant-marketing-strategies-across-toronto-brampton-mississauga":
+    "Restaurant Marketing Across the GTA | TRG",
+  "google-ads-local-campaign-restaurants":
+    "Local Google Ads for Restaurants | Toronto Restaurant Growth",
+  "grand-opening-success-specialized-marketing-torontos-halal-restaurants":
+    "Halal Restaurant Grand Opening | Toronto Restaurant Growth",
+  "halal-restaurant-marketing-gta":
+    "Halal Restaurant Marketing GTA | Toronto Restaurant Growth",
+  "instagram-reels-restaurant-promo-2026":
+    "Instagram Reels for Restaurants | Toronto Restaurant Growth",
+  "mastering-online-presence-restaurant-website-design-google-reviews-toronto":
+    "Website Design & Google Reviews | Toronto Restaurant Growth",
+  "tiktok-google-reviews-engagement-toronto-restaurants-social-media":
+    "TikTok & Google Reviews Toronto | Toronto Restaurant Growth",
+  "toronto-restaurant-marketing-local-seo-google-maps":
+    "Local SEO & Google Maps Toronto | Toronto Restaurant Growth",
+  "toronto-restaurants-rank-google-maps":
+    "Google Maps SEO for Restaurants | Toronto Restaurant Growth",
+  "why-your-restaurant-not-showing-on-google":
+    "Restaurant Not Showing on Google | Toronto Restaurant Growth",
+};
+
+const slug = post.id.replace(/\.mdx?$/, "");
+const withBrand = `${post.data.title} | Toronto Restaurant Growth`;
+const withShortBrand = `${post.data.title} | TRG`;
+const documentTitle =
+  metaTitleOverrides[slug] ??
+  (withBrand.length <= 60
+    ? withBrand
+    : withShortBrand.length <= 60
+      ? withShortBrand
+      : withBrand);
 ---
 
 <BaseLayout
-  title={`${post.data.title} | Toronto Restaurant Growth`}
+  title={documentTitle}
   description={post.data.description}
 >
   <main>
