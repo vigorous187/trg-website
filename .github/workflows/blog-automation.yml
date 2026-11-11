@@ -30,7 +30,10 @@ jobs:
         run: |
           git config user.email "hello@torontorestaurantgrowth.ca"
           git config user.name "TRG Blog Automation"
-      - name: Create blog post PR
+      # One PR per topic. The generator skips a published slug or any existing
+      # PR for that slug, and reuses an automation/blog branch instead of
+      # opening a second one. Week-prefixed branch names caused the duplicates.
+      - name: Create or reuse one blog post PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
