@@ -16,7 +16,7 @@ OPENAI_API_KEY=... npm run blog:open-slot
 ```
 
 - `scripts/blog-generate-body.mjs` — OpenAI Chat Completions body generation with TRG quality gates. Default model `gpt-5.6-terra`; override with `BLOG_LLM_MODEL`.
-- `scripts/blog-open-slot.mjs` — opens PR; set `BLOG_AUTO_GENERATE=0` for outline-only drafts
+- `scripts/blog-open-slot.mjs` — opens one PR per topic. Skips a slug that is already published or already has a pull request, and reuses an existing `automation/blog/` branch instead of opening another. Set `BLOG_AUTO_GENERATE=0` for outline-only drafts.
 - Weekly `seo-build-health.yml`
 - Monthly `seo-guideline-drift.yml`
 
