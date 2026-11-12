@@ -8,6 +8,18 @@ export const sitePhone = {
   schema: "+1-647-788-8806",
 } as const;
 
+/** Public profiles already linked from the contact page. */
+export const siteProfiles = [
+  {
+    label: "TikTok · @torontorestaurantgrowth",
+    href: "https://tiktok.com/@torontorestaurantgrowth",
+  },
+  {
+    label: "Instagram · @torontorestaurantgrowth",
+    href: "https://instagram.com/torontorestaurantgrowth",
+  },
+] as const;
+
 export const trgLogo = {
   /** Circular TRG mark — favicons, schema, compact uses */
   mark: "/trg-logo-mark.png",
