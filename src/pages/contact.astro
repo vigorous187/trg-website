@@ -11,7 +11,7 @@ import {
   resolveTallyFormId,
   trgContactEmail,
 } from '../data/tally';
-import { sitePhone } from '../data/branding';
+import { sitePhone, siteProfiles } from '../data/branding';
 
 const trustItems = [
   '100% Free — No Credit Card',
@@ -192,12 +192,11 @@ const faqs = [
           <div class="trg-card">
             <h3 class="font-heading text-lg text-ink">Follow our work</h3>
             <div class="mt-4 flex flex-col gap-2">
-              <a href="https://tiktok.com/@torontorestaurantgrowth" class="trg-link-card text-sm" target="_blank" rel="noopener">
-                TikTok · @torontorestaurantgrowth
-              </a>
-              <a href="https://instagram.com/torontorestaurantgrowth" class="trg-link-card text-sm" target="_blank" rel="noopener">
-                Instagram · @torontorestaurantgrowth
-              </a>
+              {siteProfiles.map((profile) => (
+                <a href={profile.href} class="trg-link-card text-sm" target="_blank" rel="noopener">
+                  {profile.label}
+                </a>
+              ))}
             </div>
           </div>
         </aside>
