@@ -503,18 +503,19 @@ test("rollback targets the current successful production deployment", () => {
 test("production workflow releases only the exact current main tip", async () => {
   const workflow = await readFile(".github/workflows/deploy.yml", "utf8");
 
-  assert.match(workflow, /\[\[ "\$\{\{ inputs\.source_commit \}\}" =~ \^\[0-9a-f\]\{40\}\$ \]\]/);
+  assert.match(workflow, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
+  assert.match(workflow, /\[\[ "\$SOURCE_COMMIT" =~ \^\[0-9a-f\]\{40\}\$ \]\]/);
   assert.match(
     workflow,
     /\+refs\/heads\/main:refs\/remotes\/origin\/main/,
   );
   assert.match(
     workflow,
-    /test "\$\(git rev-parse HEAD\)" = "\$\{\{ inputs\.source_commit \}\}"/,
+    /test "\$\(git rev-parse HEAD\)" = "\$SOURCE_COMMIT"/,
   );
   assert.match(
     workflow,
-    /test "\$\(git rev-parse origin\/main\)" = "\$\{\{ inputs\.source_commit \}\}"/,
+    /test "\$\(git rev-parse origin\/main\)" = "\$SOURCE_COMMIT"/,
   );
   assert.doesNotMatch(workflow, /merge-base --is-ancestor/);
 
