@@ -173,13 +173,8 @@ const faqs = [
 
           <div class="trg-card mb-6 bg-surface">
             <h3 class="font-heading text-lg text-ink">Prefer email?</h3>
-            <p class="mt-3 text-sm text-ink-muted">Response within one business day.</p>
-            <a
-              href={`mailto:${trgContactEmail}`}
-              class="mt-3 inline-block text-sm font-semibold text-ink no-underline hover:text-cta"
-            >
-              {trgContactEmail}
-            </a>
+            <p class="mt-3 text-sm text-ink-muted">Response within one business day. Copy the address below, or use the form on this page.</p>
+            <p class="mt-3 text-sm font-semibold text-ink">{trgContactEmail}</p>
             <a
               href={`tel:${sitePhone.tel}`}
               class="mt-3 inline-block text-sm font-semibold text-ink no-underline hover:text-cta"

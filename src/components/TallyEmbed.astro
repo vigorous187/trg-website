@@ -18,7 +18,6 @@ const {
   minHeight = '640px',
   class: className = '',
 } = Astro.props;
-const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Google Audit request')}`;
 ---
 
 {embedUrl ? (
@@ -87,11 +86,8 @@ const mailto = `mailto:${trgContactEmail}?subject=${encodeURIComponent('Free Goo
   <div class="rounded-xl border border-dashed border-stone-border bg-surface p-8 text-center">
     <p class="font-heading text-lg text-ink">Form not configured</p>
     <p class="mt-2 text-sm text-ink-muted">
-      Email us directly at{' '}
-      <a href={mailto} class="font-semibold text-cta no-underline hover:text-cta-hover">
-        {trgContactEmail}
-      </a>
-      .
+      Email us directly at <span class="font-semibold text-ink">{trgContactEmail}</span>, or use the{' '}
+      <a href="/contact/" class="font-semibold text-cta no-underline hover:text-cta-hover">contact form</a>.
     </p>
   </div>
 )}
