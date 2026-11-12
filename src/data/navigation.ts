@@ -74,8 +74,8 @@ export const footerResources = [
 
 export const footerContact = [
   {
-    label: "hello@torontorestaurantgrowth.ca",
-    href: "mailto:hello@torontorestaurantgrowth.ca",
+    label: "Email us",
+    href: "/contact/",
   },
   {
     label: sitePhone.display,
