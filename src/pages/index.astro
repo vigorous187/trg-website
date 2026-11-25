@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ClientLogo from '../components/ClientLogo.astro';
 import { ctaNav } from '../data/navigation';
 import { crabBoilProof, mysticProof, contentReachAddOn } from '../data/client-proof';
+import { contentAddOn, growthPlan, pricingTerms } from '../data/pricing';
 
 const clientSpotlights = [crabBoilProof, mysticProof];
 
@@ -74,7 +75,7 @@ const contentReach = [...crabBoilProof.contentReach, ...contentReachAddOn];
 ---
 
 <BaseLayout
-  title="Restaurant Marketing Agency Toronto | Toronto Restaurant Growth"
+  title="Restaurant Marketing Agency Toronto | Local SEO & Maps"
   description="Restaurant marketing agency Toronto for independent restaurants. Websites, Google Maps SEO, reviews, and ads. Month-to-month, with social and video as add-ons."
 >
   <main>
@@ -288,6 +289,25 @@ const contentReach = [...crabBoilProof.contentReach, ...contentReachAddOn];
         <h2 class="font-heading text-3xl text-ink sm:text-4xl">Restaurant marketing Toronto operators use to fill more covers.</h2>
         <p class="mt-6 text-base leading-relaxed text-ink-muted">
           Independent restaurants don't need vanity metrics. They need more calls, direction requests, reservations, and reviews — the signals that turn local searches into full tables. We start with the website, Google Business Profile, local rankings, and review journey, then focus the first improvements on the weakest part of that path. Neighbourhoods compete differently, so restaurant marketing Toronto plans follow your location, cuisine, current visibility, and capacity. Start with a free Google audit to see what should change first; social and video remain optional add-ons when the search foundation is working.
+        </p>
+      </div>
+    </section>
+
+    <!-- Decision guide -->
+    <section class="bg-white py-20 lg:py-28">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <p class="section-label mb-3">Before you hire</p>
+        <h2 class="font-heading text-3xl text-ink sm:text-4xl">What to know about hiring a restaurant marketing agency in Toronto</h2>
+        <p class="mt-6 text-base leading-relaxed text-ink-muted">
+          Toronto Restaurant Growth works exclusively with independent restaurants across Toronto and the GTA — single-room neighbourhood spots, halal kitchens, multi-location operators, and new openings. We work only with restaurants, so every workflow is built around covers, phone calls, direction requests, and table bookings.
+        </p>
+        <ul class="mt-6 space-y-4 text-base leading-relaxed text-ink-muted">
+          <li><strong class="text-ink">Core Growth plan ({growthPlan.monthlyLabel} + {growthPlan.setupLabel}):</strong> Google Business Profile optimization, restaurant website design, local SEO, review management, Google Ads management, and monthly reporting on a {pricingTerms.billing} term ({pricingTerms.cancellationNoticeDays} days' notice).</li>
+          <li><strong class="text-ink">Optional Social &amp; Video add-on ({contentAddOn.monthlyLabel}):</strong> On-site short-form production, TikTok, and Instagram Reels through Jayden Aj's Forge content team — kept separate so kitchens that only need Google visibility do not pay for video.</li>
+          <li><strong class="text-ink">Local Toronto &amp; GTA reality:</strong> Ranking in downtown Toronto operates on a tight block-by-block radius, while corridors in Scarborough, Brampton, Mississauga, North York, and Etobicoke reward clean GBP categories, consistent reviews, and HTML menus rather than PDFs.</li>
+        </ul>
+        <p class="mt-6 text-base leading-relaxed text-ink-muted">
+          <strong class="text-ink">Next step:</strong> <a href="/contact/" class="font-semibold text-cta no-underline hover:text-cta-hover">Book a Free Google Audit</a> (15 minutes). We inspect your Business Profile, website, and review velocity and show you the exact gaps before you spend a dollar.
         </p>
       </div>
     </section>

@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import { contentAddOn, growthPlan, pricingTerms } from '../../data/pricing';
 ---
 
 <BaseLayout
   lang="es-CA"
-  title="SEO para Restaurantes Toronto | Más Reservas desde Google"
-  description="SEO para restaurantes Toronto: visibilidad en Google Maps, reseñas y búsqueda local. Solicite una auditoría gratuita y descubra qué cambiar primero."
+  title="SEO y Marketing Digital para Restaurantes Toronto | TRG"
+  description="SEO y marketing digital para restaurantes en Toronto y el GTA. Google Maps, reseñas, diseño web y anuncios. Plan mensual sin contratos largos. Auditoría gratis."
 >
 
   <main>
@@ -63,6 +64,17 @@ import PageIntro from '../../components/PageIntro.astro';
         <p>
           Como agencia de marketing especializada en restaurantes, conectamos su sitio con su Perfil de Empresa de Google, sus reseñas y sus campañas estacionales. El objetivo no es tráfico vacío: son llamadas, solicitudes de direcciones y reservas que se miden cada mes.
         </p>
+      </div>
+    </section>
+
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>Marketing digital para restaurantes Toronto: qué incluye y cómo empezar</h2>
+        <p>
+          El <strong>marketing digital para restaurantes en Toronto</strong> funciona cuando conecta cuatro piezas: su sitio web, su Perfil de Empresa de Google (Google Maps), sus reseñas y campañas locales en Google Ads. Nuestro plan principal Growth ({growthPlan.monthlyLabel.replace("/month", " CAD/mes")} más {growthPlan.setupLabel.replace(" setup", " de implementación")}, mes a mes con aviso de {pricingTerms.cancellationNoticeDays} días) cubre exactamente esa base técnica y local. Si además busca producción de video para TikTok e Instagram Reels, ofrecemos un servicio adicional opcional ({contentAddOn.monthlyLabel.replace("/month", "/mes")}).
+        </p>
+        <h3>Preguntas frecuentes</h3>
+        <p><strong>¿Trabajan solo con restaurantes latinos o hispanos en Toronto?</strong> Trabajamos con todo tipo de restaurantes independientes en Toronto y el GTA — incluyendo restaurantes mexicanos, colombianos, peruanos, españoles y cocina fusión con atención bilingüe en español e inglés.</p>
+        <p><strong>¿Qué revisa la auditoría gratuita de Google?</strong> Analizamos su perfil de Google Maps, categorías, velocidad móvil de su sitio, consistencia de dirección/teléfono (NAP) y reseñas frente a los tres primeros competidores de su zona.</p>
       </div>
     </section>
 
