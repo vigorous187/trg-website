@@ -1,18 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import { contentAddOn, growthPlan, pricingTerms } from '../../data/pricing';
+
+const frMoney = new Intl.NumberFormat("fr-CA");
 ---
 
 <BaseLayout
   lang="fr-CA"
-  title="SEO pour Restaurants Toronto | Agence Marketing | TRG"
-  description="SEO pour restaurants à Toronto et dans le GTA. Optimisation Google Maps, fiche Google Business, avis Google et référencement local pour remplir vos tables."
+  title="SEO & Marketing Digital pour Restaurants Toronto | TRG"
+  description="Agence marketing restaurant Toronto : SEO local, Google Maps, avis Google, site web et publicité pour restaurants indépendants du GTA. Audit gratuit."
 >
 
   <main>
 
     <PageIntro
-      title="SEO pour Restaurants à Toronto"
+      title="SEO et Marketing Digital pour Restaurants à Toronto"
       description="Nous aidons les restaurants indépendants de Toronto, Brampton, Scarborough et Mississauga à apparaître sur Google Maps, obtenir des avis et transformer les recherches locales en réservations."
       ctaLabel="Réserver un Audit Google Gratuit"
       ctaHref="/contact/"
@@ -60,6 +63,17 @@ import PageIntro from '../../components/PageIntro.astro';
         <p>
           Nous relions votre site à votre fiche Google Business, à vos avis et à vos campagnes saisonnières. L'objectif n'est pas du trafic vide : ce sont des appels, des demandes d'itinéraire et des réservations mesurables mois après mois.
         </p>
+      </div>
+    </section>
+
+    <section class="bg-surface py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>Agence marketing restaurant Toronto : nos services et tarifs</h2>
+        <p>
+          Notre forfait principal <strong>Growth</strong> ({growthPlan.monthly}&nbsp;$/mois + {frMoney.format(growthPlan.setup)}&nbsp;$ de mise en place, mois par mois avec préavis de {pricingTerms.cancellationNoticeDays} jours) réunit le <strong>SEO pour restaurants à Toronto</strong>, l'optimisation Google Maps, la gestion des avis, la refonte web et Google Ads. Pour les restaurants souhaitant ajouter la production vidéo TikTok et Instagram Reels sur place, un module complémentaire Social &amp; Vidéo est disponible séparément ({frMoney.format(contentAddOn.monthly)}&nbsp;$/mois).
+        </p>
+        <h3>Questions fréquentes</h3>
+        <p><strong>Pourquoi choisir une agence dédiée uniquement aux restaurants?</strong> Les recherches locales de restauration fonctionnent par proximité de quartier, rapidité des avis et clarté du menu HTML — des signaux très différents d'une entreprise générale.</p>
+        <p><strong>Que comprend l'audit Google gratuit?</strong> Une revue de 15 minutes de votre fiche Google Business, de votre site mobile et de vos avis face aux trois premiers établissements de votre secteur.</p>
       </div>
     </section>
 

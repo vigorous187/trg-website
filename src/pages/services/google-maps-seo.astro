@@ -1,24 +1,35 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { servicePricingFaqs } from '../../data/pricing';
+import { growthPlan, pricingTerms, servicePricingFaqs } from '../../data/pricing';
 import PageIntro from '../../components/PageIntro.astro';
 import { sitePhone } from '../../data/branding';
 ---
 
 <BaseLayout
-  title="Restaurant SEO Agency Toronto | Toronto Restaurant Growth"
-  description="Restaurant SEO agency for independent restaurants in Toronto and the GTA. Business Profile, citations, website SEO, reviews, and monthly reporting."
+  title="Restaurant SEO Toronto & Google Maps Agency | TRG"
+  description="Restaurant SEO Toronto & Google Maps ranking services for independent GTA restaurants. Business Profile optimization, citations, local pages, and reviews."
 >
 
   <main>
 
     <PageIntro
       eyebrow="Restaurant SEO"
-      title="Restaurant SEO Agency for Toronto Restaurants"
+      title="Restaurant SEO Toronto & Google Maps Ranking Services"
       description="Toronto Restaurant Growth works only with independent restaurants. Restaurant SEO here means the Google Business Profile, directory listings, website pages, and reviews that help nearby diners find a specific room in Toronto or the GTA."
       ctaLabel="Book a Free Google Audit"
       ctaHref="/contact/"
     />
+
+    <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2>What to know about restaurant SEO in Toronto</h2>
+        <p>
+          As a dedicated <strong>restaurant SEO agency in Toronto</strong>, we build local visibility for independent dining rooms, takeout counters, and multi-location GTA groups that rely on Google Maps and non-branded searches ("near me", cuisine + neighbourhood) rather than sending every order through delivery apps.
+        </p>
+        <p>
+          <strong>Decision process &amp; local fit:</strong> We start with a free 15-minute audit of your Google Business Profile, citations, and website. Downtown Toronto blocks require tighter proximity signals, review recency, and secondary GBP categories, whereas Scarborough, Brampton, and Mississauga corridors respond quickly when your HTML menu, neighbourhood pages, and name, address, and phone match your Maps listing. Included in TRG Growth ({growthPlan.monthlyLabel}, {pricingTerms.billing}, {growthPlan.setupLabel}). <a href="/contact/">Book your Free Google Audit</a> or call <a href={`tel:${sitePhone.tel}`}>{sitePhone.display}</a>.
+        </p>
+      </div>
+    </section>
 
     <section class="bg-white py-16 sm:py-20 lg:py-24"><div class="trg-prose mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <h2>What restaurant SEO includes</h2>

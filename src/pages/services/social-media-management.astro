@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { servicePricingFaqs } from '../../data/pricing';
+import { contentAddOn, growthPlan, servicePricingFaqs } from '../../data/pricing';
 import PageIntro from '../../components/PageIntro.astro';
 ---
 
 <BaseLayout
-  title="Restaurant Social Media Management | TRG"
+  title="Restaurant Social Media Management Toronto | TRG"
   description="Social and video content add-on for Toronto restaurants — $3,000/month through Jayden Aj. TikTok, Reels, and on-site production. Not included in core TRG plans."
 >
 
@@ -91,6 +91,11 @@ import PageIntro from '../../components/PageIntro.astro';
         <h3>Monthly Performance Reports</h3>
         <p>
           Plain-English reports showing what worked, what didn't, and what we're doing next month. Reach, engagement, follower growth, and most importantly: which content drove website visits and reservation requests.
+        </p>
+
+        <h3>When to add social &amp; video vs. starting with Google</h3>
+        <p>
+          If your Google Business Profile is incomplete or your website is missing menus and hours, fix that foundation first through our core <a href="/services/google-maps-seo/">Google Maps &amp; SEO</a> plan ({growthPlan.monthlyLabel}). Once local search captures ready-to-dine traffic, the {contentAddOn.monthlyLabel} Social &amp; Video Content add-on through Jayden Aj brings on-site filming, Reels, and TikTok storytelling to expand reach across Toronto and the GTA.
         </p>
       </div>
     </section>
